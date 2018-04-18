@@ -46,3 +46,5 @@ Thumbs.db
 *.~vsd
 
 Research Resources/
+
+./environment.ts

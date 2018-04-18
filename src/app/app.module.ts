@@ -37,7 +37,8 @@ import {
 // Custom Components
 import { AppComponent } from './app.component';
 
-
+// Custom Services
+import { GithubApiService } from './services/github-api.service';
 
 
 @NgModule({
@@ -90,7 +91,7 @@ import { AppComponent } from './app.component';
     MatProgressSpinnerModule,
     MatNativeDateModule
   ],
-  providers: [],
+  providers: [ GithubApiService ],
   bootstrap: [AppComponent]
 })
 export class AppModule {
