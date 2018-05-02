@@ -9,7 +9,6 @@ enum EventType {
     Watch
 }
 
-
 @Injectable()
 export class GithubApiService {
     client;
@@ -24,7 +23,7 @@ export class GithubApiService {
         return this.client.get('/users/tkottke90/events', {}, (err, status, body, headers) => {
             console.log(`Type: ${typeof body}\nCount: ${body.length}`);
 
-            for (let i = 0; i < body.length || i < 4; i++) {
+            for (let i = 0; (i < body.length && i < 6); i++) {
 
 
                 const dat = {
@@ -34,23 +33,35 @@ export class GithubApiService {
 
                 switch (body[i]['type']) {
                     case 'CreateEvent':
-                        this.events.push(new CreateEvent());
+                        this.events.push(new CreateEvent(dat.Timestamp, dat.Repo));
                         break;
                     case 'DeleteEvent':
                         break;
                     case 'IssuesEvent':
-                        this.events.push(new IssuesEvent());
+                        this.events.push(
+                            new IssuesEvent(dat.Timestamp,
+                                            dat.Repo, body[i]['action'],
+                                            body[i]['issue']['title'],
+                                            body[i]['issue']['url']));
                         break;
                     case 'PushEvent':
-                        this.events.push(new PushEvent());
+                        const commits: Array<Object> = [];
+                        const cmtArr = body[i]['payload']['commits'];
+
+                        for (let j = 0; j < cmtArr.length; j++) {
+                            const commitObj = {
+                                'ID': cmtArr[j]['sha'].slice(0, 6),
+                                'Message': cmtArr[j]['message'],
+                                'URL': cmtArr[j]['url'],
+                            };
+
+                            commits.push(commitObj);
+                        }
+                        this.events.push(new PushEvent(dat.Timestamp, dat.Repo, body[i]['payload']['ref'].split('/')[2], commits));
                         break;
                     case 'WatchEvent':
                         break;
                 }
-
-                console.log(this.events);
-
-                console.log(dat);
             }
           });
     }
@@ -58,42 +69,84 @@ export class GithubApiService {
 
 class GithubEventData {
     Date: Date;
-    EventType: EventType;
     Repo: String;
+    message: String;
+
+
+    constructor (
+        d: Date,
+        r: String
+    ) {
+        this.Date = d;
+        this.Repo = r;
+    }
 }
 
 
 class CreateEvent extends GithubEventData {
-    Date = new Date();
-    EventType = EventType.Create;
-    Repo = '';
+    constructor (
+        date: Date,
+        repo: String
+    ) {
+        super(date, repo);
+        this.message = `Thomas created new repo called ${repo.split('/')[1]}`;
+
+        console.log(this.message);
+    }
 
 }
 
-class PushEvent implements GithubEventData {
-    Date = new Date();
-    EventType = EventType.Push;
-    Repo = '';
+
+
+class PushEvent extends GithubEventData {
+    commits: Array<String> = [];
+
+    constructor (
+        date: Date,
+        repo: String,
+        branch: String,
+        com: Array<Object>
+    ) {
+        super(date, repo);
+        this.message = `Thomas pushed to ${branch} at ${repo}`;
+        console.log(this.message);
+        for (const c of com) {
+            this.commits.push(`${c['ID']} ${c['Message']}`);
+            console.log(`    ${c['ID']} ${c['Message']}`);
+        }
+    }
 
 }
 
-class IssuesEvent implements GithubEventData {
-    Date = new Date();
-    EventType = EventType.Push;
-    Repo = '';
+class IssuesEvent extends GithubEventData {
+    constructor (
+        date: Date,
+        repo: String,
+        action: String,
+        title: String,
+        url: String
+    ) {
+        super(date, repo);
+    }
 
 }
 
-class DeleteEvent implements GithubEventData {
-    Date = new Date();
-    EventType = EventType.Push;
-    Repo = '';
+class DeleteEvent extends GithubEventData {
+    constructor (
+        date: Date,
+        repo: String
+    ) {
+        super(date, repo);
+    }
 
 }
 
-class WatchEvent implements GithubEventData {
-    Date = new Date();
-    EventType = EventType.Push;
-    Repo = '';
+class WatchEvent extends GithubEventData {
+    constructor (
+        date: Date,
+        repo: String
+    ) {
+        super(date, repo);
+    }
 
 }
