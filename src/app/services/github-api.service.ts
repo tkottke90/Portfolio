@@ -25,25 +25,15 @@ export class GithubApiService {
 
             for (let i = 0; (i < body.length && i < 6); i++) {
 
-
-                const dat = {
-                    'Timestamp': body[i]['created_at'],
-                    'Repo': body[i]['repo']['name'],
-                };
-
                 switch (body[i]['type']) {
                     case 'CreateEvent':
-                        this.events.push(new CreateEvent(dat.Timestamp, dat.Repo, body[i]));
+                        this.events.push(new CreateEvent(body[i]));
                         break;
                     case 'DeleteEvent':
                         break;
                     case 'IssuesEvent':
                         this.events.push(
-                            new IssuesEvent(dat.Timestamp,
-                                            dat.Repo, body[i]['action'],
-                                            body[i]['issue']['title'],
-                                            body[i]['issue']['url'],
-                                            body[i]));
+                            new IssuesEvent(body[i]));
                         break;
                     case 'PushEvent':
                         const commits: Array<Object> = [];
@@ -58,7 +48,7 @@ export class GithubApiService {
 
                             commits.push(commitObj);
                         }
-                        this.events.push(new PushEvent(dat.Timestamp, dat.Repo, body[i]['payload']['ref'].split('/')[2], commits, body[i]));
+                        this.events.push(new PushEvent(body[i]));
                         break;
                     case 'WatchEvent':
                         break;
@@ -68,7 +58,23 @@ export class GithubApiService {
     }
 }
 
-class GithubEventData {
+export class GithubCommit {
+    ID: String;
+    Message: String;
+    URL: String;
+
+    constructor(
+        id: String,
+        msg: String,
+        url: String
+    ) {
+        this.ID = id;
+        this.Message = msg;
+        this.URL = url;
+    }
+}
+
+export class GithubEventData {
     Date: Date;
     Repo: String;
     objectInstance: Object;
@@ -77,25 +83,21 @@ class GithubEventData {
 
 
     constructor (
-        d: Date,
-        r: String,
         o: Object
     ) {
-        this.Date = d;
-        this.Repo = r;
         this.objectInstance = o;
+        this.Date = o['created_at'];
+        this.Repo = o['repo']['name'];
     }
 }
 
 
-class CreateEvent extends GithubEventData {
+export class CreateEvent extends GithubEventData {
     constructor (
-        date: Date,
-        repo: String,
         instance: Object
     ) {
-        super(date, repo, instance);
-        this.message = `Thomas created new repo called ${repo.split('/')[1]}`;
+        super(instance);
+        this.message = `Thomas created new repo called ${instance['repo']['name'].split('/')[1]}`;
         this.objectInstance = instance;
 
         console.log(this.message);
@@ -105,44 +107,52 @@ class CreateEvent extends GithubEventData {
 
 
 
-class PushEvent extends GithubEventData {
+export class PushEvent extends GithubEventData {
     commits: Array<String> = [];
 
     constructor (
-        date: Date,
-        repo: String,
-        branch: String,
-        com: Array<Object>,
         instance: Object
     ) {
-        super(date, repo, instance);
-        this.message = `Thomas pushed to ${branch} at ${repo}`;
-        console.log(this.message);
-        for (const c of com) {
-            this.commits.push(`${c['ID']} ${c['Message']}`);
-            console.log(`    ${c['ID']} ${c['Message']}`);
+        super(instance);
+        const payload = instance['payload'];
+        const commits: Array<Object> = [];
+
+        this.message = `Thomas pushed to ${this.getBranch(payload['ref'])} at ${this.Repo}`;
+
+        for (let c = 0; c < payload['commits'].length; c++) {
+            const ID =  payload['commits'][c]['sha'].slice(0, 6);
+            const Message =  payload['commits'][c]['message'];
+            const URL = payload['commits'][c]['url'];
+
+            const newCommit = `${ID} ${Message}`;
+
+            commits.push(newCommit);
+
         }
+
+        console.log(this.message);
+    }
+
+    getBranch(ref: String): String {
+        const splitStr = ref.split('/');
+        return splitStr[splitStr.length - 1];
     }
 
 }
 
-class IssuesEvent extends GithubEventData {
+export class IssuesEvent extends GithubEventData {
     issueTitle: String = '';
     issueText: String = '';
 
     issueUrl: String = '';
 
     constructor (
-        date: Date,
-        repo: String,
-        action: String,
-        url: String,
         instance: Object
     ) {
-        super(date, repo, instance);
-        const issue = instance['issue'];
+        super(instance);
+        const issue = instance['payload'];
 
-        this.message = `Thomas ${issue['action']} an issue in ${instance['repository']['name']}`;
+        this.message = `Thomas ${issue['action']} an issue in ${instance['repo']['name']}`;
         this.issueTitle = issue['title'];
         this.issueText = issue['body'];
         this.issueUrl = issue['url'];
@@ -152,24 +162,20 @@ class IssuesEvent extends GithubEventData {
 
 }
 
-class DeleteEvent extends GithubEventData {
+export class DeleteEvent extends GithubEventData {
     constructor (
-        date: Date,
-        repo: String,
         instance: Object
     ) {
-        super(date, repo, instance);
+        super(instance);
     }
 
 }
 
-class WatchEvent extends GithubEventData {
+export class WatchEvent extends GithubEventData {
     constructor (
-        date: Date,
-        repo: String,
         instance: Object
     ) {
-        super(date, repo, instance);
+        super(instance);
     }
 
 }
