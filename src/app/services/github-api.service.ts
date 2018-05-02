@@ -33,7 +33,7 @@ export class GithubApiService {
 
                 switch (body[i]['type']) {
                     case 'CreateEvent':
-                        this.events.push(new CreateEvent(dat.Timestamp, dat.Repo));
+                        this.events.push(new CreateEvent(dat.Timestamp, dat.Repo, body[i]));
                         break;
                     case 'DeleteEvent':
                         break;
@@ -42,7 +42,8 @@ export class GithubApiService {
                             new IssuesEvent(dat.Timestamp,
                                             dat.Repo, body[i]['action'],
                                             body[i]['issue']['title'],
-                                            body[i]['issue']['url']));
+                                            body[i]['issue']['url'],
+                                            body[i]));
                         break;
                     case 'PushEvent':
                         const commits: Array<Object> = [];
@@ -57,7 +58,7 @@ export class GithubApiService {
 
                             commits.push(commitObj);
                         }
-                        this.events.push(new PushEvent(dat.Timestamp, dat.Repo, body[i]['payload']['ref'].split('/')[2], commits));
+                        this.events.push(new PushEvent(dat.Timestamp, dat.Repo, body[i]['payload']['ref'].split('/')[2], commits, body[i]));
                         break;
                     case 'WatchEvent':
                         break;
@@ -70,15 +71,19 @@ export class GithubApiService {
 class GithubEventData {
     Date: Date;
     Repo: String;
+    objectInstance: Object;
+
     message: String;
 
 
     constructor (
         d: Date,
-        r: String
+        r: String,
+        o: Object
     ) {
         this.Date = d;
         this.Repo = r;
+        this.objectInstance = o;
     }
 }
 
@@ -86,10 +91,12 @@ class GithubEventData {
 class CreateEvent extends GithubEventData {
     constructor (
         date: Date,
-        repo: String
+        repo: String,
+        instance: Object
     ) {
-        super(date, repo);
+        super(date, repo, instance);
         this.message = `Thomas created new repo called ${repo.split('/')[1]}`;
+        this.objectInstance = instance;
 
         console.log(this.message);
     }
@@ -105,9 +112,10 @@ class PushEvent extends GithubEventData {
         date: Date,
         repo: String,
         branch: String,
-        com: Array<Object>
+        com: Array<Object>,
+        instance: Object
     ) {
-        super(date, repo);
+        super(date, repo, instance);
         this.message = `Thomas pushed to ${branch} at ${repo}`;
         console.log(this.message);
         for (const c of com) {
@@ -119,14 +127,27 @@ class PushEvent extends GithubEventData {
 }
 
 class IssuesEvent extends GithubEventData {
+    issueTitle: String = '';
+    issueText: String = '';
+
+    issueUrl: String = '';
+
     constructor (
         date: Date,
         repo: String,
         action: String,
-        title: String,
-        url: String
+        url: String,
+        instance: Object
     ) {
-        super(date, repo);
+        super(date, repo, instance);
+        const issue = instance['issue'];
+
+        this.message = `Thomas ${issue['action']} an issue in ${instance['repository']['name']}`;
+        this.issueTitle = issue['title'];
+        this.issueText = issue['body'];
+        this.issueUrl = issue['url'];
+
+        console.log(this.message);
     }
 
 }
@@ -134,9 +155,10 @@ class IssuesEvent extends GithubEventData {
 class DeleteEvent extends GithubEventData {
     constructor (
         date: Date,
-        repo: String
+        repo: String,
+        instance: Object
     ) {
-        super(date, repo);
+        super(date, repo, instance);
     }
 
 }
@@ -144,9 +166,10 @@ class DeleteEvent extends GithubEventData {
 class WatchEvent extends GithubEventData {
     constructor (
         date: Date,
-        repo: String
+        repo: String,
+        instance: Object
     ) {
-        super(date, repo);
+        super(date, repo, instance);
     }
 
 }
