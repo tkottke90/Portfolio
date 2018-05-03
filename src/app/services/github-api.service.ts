@@ -1,14 +1,6 @@
 import { Injectable } from '@angular/core';
 import * as Github from 'octonode';
 
-enum EventType {
-    Create,
-    Delete,
-    Issues,
-    Push,
-    Watch
-}
-
 @Injectable()
 export class GithubApiService {
     client;
@@ -32,22 +24,11 @@ export class GithubApiService {
                     case 'DeleteEvent':
                         break;
                     case 'IssuesEvent':
-                        this.events.push(
-                            new IssuesEvent(body[i]));
+                        this.events.push(new IssuesEvent(body[i]));
+                        break;
+                    case 'IssuesCommentEvent':
                         break;
                     case 'PushEvent':
-                        const commits: Array<Object> = [];
-                        const cmtArr = body[i]['payload']['commits'];
-
-                        for (let j = 0; j < cmtArr.length; j++) {
-                            const commitObj = {
-                                'ID': cmtArr[j]['sha'].slice(0, 6),
-                                'Message': cmtArr[j]['message'],
-                                'URL': cmtArr[j]['url'],
-                            };
-
-                            commits.push(commitObj);
-                        }
                         this.events.push(new PushEvent(body[i]));
                         break;
                     case 'WatchEvent':
@@ -60,8 +41,10 @@ export class GithubApiService {
 
 export class GithubCommit {
     ID: String;
-    Message: String;
+    Notes: String;
     URL: String;
+
+    OutputMsg: String;
 
     constructor(
         id: String,
@@ -69,8 +52,10 @@ export class GithubCommit {
         url: String
     ) {
         this.ID = id;
-        this.Message = msg;
+        this.Notes = msg;
         this.URL = url;
+
+        this.OutputMsg = `${this.ID} ${this.Notes}`;
     }
 }
 
@@ -106,9 +91,8 @@ export class CreateEvent extends GithubEventData {
 }
 
 
-
 export class PushEvent extends GithubEventData {
-    commits: Array<String> = [];
+    commits: Array<GithubCommit> = [];
 
     constructor (
         instance: Object
@@ -118,19 +102,19 @@ export class PushEvent extends GithubEventData {
         const commits: Array<Object> = [];
 
         this.message = `Thomas pushed to ${this.getBranch(payload['ref'])} at ${this.Repo}`;
+        console.log(this.message);
 
         for (let c = 0; c < payload['commits'].length; c++) {
             const ID =  payload['commits'][c]['sha'].slice(0, 6);
             const Message =  payload['commits'][c]['message'];
             const URL = payload['commits'][c]['url'];
 
-            const newCommit = `${ID} ${Message}`;
+            const newCommit: GithubCommit = new GithubCommit(ID, Message, URL);
+            commits.push(new GithubCommit(ID, Message, URL));
 
-            commits.push(newCommit);
-
+            console.log(`   ${new GithubCommit(ID, Message, URL).OutputMsg}`);
         }
 
-        console.log(this.message);
     }
 
     getBranch(ref: String): String {
@@ -150,14 +134,15 @@ export class IssuesEvent extends GithubEventData {
         instance: Object
     ) {
         super(instance);
-        const issue = instance['payload'];
+        const payload = instance['payload'];
 
-        this.message = `Thomas ${issue['action']} an issue in ${instance['repo']['name']}`;
-        this.issueTitle = issue['title'];
-        this.issueText = issue['body'];
-        this.issueUrl = issue['url'];
+        this.message = `Thomas ${payload['action']} an issue in ${instance['repo']['name']}`;
+        this.issueTitle = payload['issue']['title'];
+        this.issueText = payload['issue']['body'];
+        this.issueUrl = payload['issue']['url'];
 
         console.log(this.message);
+        console.log(`   ${this.issueTitle}\n    ${this.issueText}`);
     }
 
 }
