@@ -2,59 +2,67 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpHandler } from '@angular/common/http';
 import * as Github from 'octonode';
 import { DebuggerService } from './debugger.service';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 @Injectable()
 export class GithubApiService {
     client;
-    events: Array<GithubEventData> = new Array();
+    events: BehaviorSubject<Array<GithubEventData>> = new BehaviorSubject([]);
 
     constructor( private http: HttpClient ) {
         this.client = Github.client();
     }
 
-    async getActivity(): Promise<any> {
-        await this.client.get('/users/tkottke90/events', {}, async (err, status, body, headers) => {
-            if (err) { console.error(`Error: ${err}`); }
-            console.log(`Type: ${typeof body}\nCount: ${body.length}`);
+    getActivity(): Promise<any> {
+        return new Promise((resolve, reject) => {
+            this.client.get('/users/tkottke90/events', {}, async (err, status, body, headers) => {
+                if (err) { console.error(`Error: ${err}`); reject(err); }
+                console.log(`Type: ${typeof body}\nCount: ${body.length}`);
 
-            for (let i = 0; (i < body.length && i < 6); i++) {
+                const newEvents = new Array<GithubEventData>();
 
-                switch (body[i]['type']) {
-                    case 'CreateEvent':
-                        this.events.push(new CreateEvent(body[i]));
-                        break;
-                    case 'DeleteEvent':
-                        break;
-                    case 'IssuesEvent':
-                        await this.http.get(body[i]['payload']['issue']['url']).toPromise().then( res => {
-                            this.events.push(new IssuesEvent(body[i], res['html_url']));
-                        }).catch( issuesErr => {
-                            this.events.push(new IssuesEvent(body[i], ''));
-                            // TODO - Add Firebase/Express Function to Handle Error Logging
-                        });
-                        break;
-                    case 'IssuesCommentEvent':
-                        break;
-                    case 'PushEvent':
-                        const payload = body[i]['payload'];
-                        const commits: Array<GithubCommit> = [];
+                for (let i = 0; (i < body.length && i < 6); i++) {
 
-                        for (let c = 0; c < payload['commits'].length; c++) {
-                            const ID =  payload['commits'][c]['sha'].slice(0, 6);
-                            const Message =  payload['commits'][c]['message'];
-                            await this.http.get(payload['commits'][c]['url']).toPromise().then(res => {
-                                commits.push(new GithubCommit(ID, Message, res['html_url']));
-                            }).catch( pushErr => {
-                                commits.push(new GithubCommit(ID, Message, ''));
+                    switch (body[i]['type']) {
+                        case 'CreateEvent':
+                            newEvents.push(new CreateEvent(body[i]));
+                            break;
+                        case 'DeleteEvent':
+                            break;
+                        case 'IssuesEvent':
+                            await this.http.get(body[i]['payload']['issue']['url']).toPromise().then( res => {
+                                newEvents.push(new IssuesEvent(body[i], res['html_url']));
+                            }).catch( issuesErr => {
+                                newEvents.push(new IssuesEvent(body[i], ''));
                                 // TODO - Add Firebase/Express Function to Handle Error Logging
                             });
-                        }
-                        this.events.push(new PushEvent(body[i], commits));
-                        break;
-                    case 'WatchEvent':
-                        break;
+                            break;
+                        case 'IssuesCommentEvent':
+                            break;
+                        case 'PushEvent':
+                            const payload = body[i]['payload'];
+                            const commits: Array<GithubCommit> = [];
+
+                            for (let c = 0; c < payload['commits'].length; c++) {
+                                const ID =  payload['commits'][c]['sha'].slice(0, 6);
+                                const Message =  payload['commits'][c]['message'];
+                                await this.http.get(payload['commits'][c]['url']).toPromise().then(res => {
+                                    commits.push(new GithubCommit(ID, Message, res['html_url']));
+                                }).catch( pushErr => {
+                                    commits.push(new GithubCommit(ID, Message, ''));
+                                    // TODO - Add Firebase/Express Function to Handle Error Logging
+                                });
+                            }
+                            newEvents.push(new PushEvent(body[i], commits));
+                            break;
+                        case 'WatchEvent':
+                            break;
+                    }
                 }
-            }
+
+                this.events.next(newEvents);
+                resolve('done');
+            });
         });
     }
 }
@@ -117,7 +125,7 @@ export class CreateEvent extends GithubEventData {
         this.message = `Thomas created new repo called ${instance['repo']['name'].split('/')[1]}`;
         this.objectInstance = instance;
 
-        // console.log(this.message);
+        console.log(this.message);
     }
 
 }
@@ -136,7 +144,7 @@ export class PushEvent extends GithubEventData {
         const commits: Array<Object> = com;
 
         this.message = `Thomas pushed to ${this.getBranch(payload['ref'])} at ${this.Repo}`;
-        // console.log(this.message);
+        console.log(this.message);
     }
 
     getBranch(ref: String): String {
@@ -165,7 +173,7 @@ export class IssuesEvent extends GithubEventData {
         this.issueText = payload['issue']['body'];
         this.issueUrl = gitURL;
 
-        // console.log(this.message);
+        console.log(this.message);
         // console.log(`   ${this.issueTitle}\n    ${this.issueText.substring(0, 30)}`);
         // console.log(`   ${this.issueUrl}`);
     }

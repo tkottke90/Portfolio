@@ -17,11 +17,16 @@ export class GithubEventComponent {
     action_icon: String;
     header: String;
 
+    
+
     @Input()
-    event (event: GithubEventData) {
+    set event (event: GithubEventData) {
+        console.log(event);
         this.date = this.genTimelineStr(new Date(event.Date));
         this.header = event.message;
         this.action_icon = event.action_icon;
+
+        console.log(`Date: ${this.date}\nIcon: ${this.action_icon}\nHeader: ${this.header}`);
 
         if (event['commits']) {
             console.log(`has commits`);
