@@ -3,16 +3,6 @@ import { HttpClient, HttpHeaders, HttpHandler } from '@angular/common/http';
 import * as Github from 'octonode';
 import { DebuggerService } from './debugger.service';
 
-export enum EventTypes {
-    CreateEvent,
-    DeleteEvent,
-    IssuesEvent,
-    IssuesCommentEvent,
-    MergeEvent,
-    PushEvent,
-    WatchEvent
-}
-
 @Injectable()
 export class GithubApiService {
     client;
@@ -71,6 +61,16 @@ export class GithubApiService {
     }
 }
 
+const eventIcons = {
+    Create: 'pencil',
+    Comment: 'forum',
+    Delete: 'delete-forever',
+    Issue: 'clipboard-alert',
+    Merge: 'source-merge',
+    Push: 'arrow-up-bold-hexagon-outline',
+    Watch: 'eye'
+};
+
 export class GithubCommit {
     ID: String;
     Notes: String;
@@ -92,7 +92,7 @@ export class GithubCommit {
 }
 
 export class GithubEventData {
-    Type: EventTypes;
+    action_icon: String;
     Date: Date;
     Repo: String;
     objectInstance: Object;
@@ -115,7 +115,7 @@ export class CreateEvent extends GithubEventData {
         instance: Object
     ) {
         super(instance);
-        this.Type = EventTypes.CreateEvent;
+        this.action_icon = eventIcons.Create;
         this.message = `Thomas created new repo called ${instance['repo']['name'].split('/')[1]}`;
         this.objectInstance = instance;
 
@@ -133,7 +133,7 @@ export class PushEvent extends GithubEventData {
         com: Array<GithubCommit>
     ) {
         super(instance);
-        this.Type = EventTypes.PushEvent;
+        this.action_icon = eventIcons.Push;
         const payload = instance['payload'];
         const commits: Array<Object> = com;
 
@@ -159,7 +159,7 @@ export class IssuesEvent extends GithubEventData {
         gitURL: string
     ) {
         super(instance);
-        this.Type = EventTypes.IssuesEvent;
+        this.action_icon = eventIcons.Issue;
         const payload = instance['payload'];
 
         this.message = `Thomas ${payload['action']} an issue in ${instance['repo']['name']}`;
@@ -179,7 +179,7 @@ export class DeleteEvent extends GithubEventData {
         instance: Object
     ) {
         super(instance);
-        this.Type = EventTypes.DeleteEvent;
+        this.action_icon = eventIcons.Delete;
     }
 
 }
@@ -189,7 +189,7 @@ export class WatchEvent extends GithubEventData {
         instance: Object
     ) {
         super(instance);
-        this.Type = EventTypes.WatchEvent;
+        this.action_icon = eventIcons.Watch;
     }
 
 }

@@ -7,16 +7,6 @@ import { GithubApiService,
          PushEvent,
          WatchEvent } from '../../services/github-api.service';
 
-const eventIcons = {
-    Create: 'pencil',
-    Comment: 'forum',
-    Delete: 'delete-forever',
-    Issue: 'clipboard-alert',
-    Merge: 'source-merge',
-    Push: 'arrow-up-bold-hexagon-outline',
-    Watch: 'eye'
-};
-
 @Component({
     selector: 'app-github-event',
     templateUrl: './github-event.component.html',
@@ -31,6 +21,7 @@ export class GithubEventComponent {
     event (event: GithubEventData) {
         this.date = this.genTimelineStr(new Date(event.Date));
         this.header = event.message;
+        this.action_icon = event.action_icon;
     }
 
     genTimelineStr(date: Date): string {
