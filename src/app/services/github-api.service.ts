@@ -151,9 +151,9 @@ export class IssuesEvent extends GithubEventData {
         this.issueText = payload['issue']['body'];
         this.issueUrl = gitURL;
 
-        console.log(this.message);
-        console.log(`   ${this.issueTitle}\n    ${this.issueText.substring(0, 30)}`);
-        console.log(`   ${this.issueUrl}`);
+        // console.log(this.message);
+        // console.log(`   ${this.issueTitle}\n    ${this.issueText.substring(0, 30)}`);
+        // console.log(`   ${this.issueUrl}`);
     }
 
 }
