@@ -3,6 +3,16 @@ import { HttpClient, HttpHeaders, HttpHandler } from '@angular/common/http';
 import * as Github from 'octonode';
 import { DebuggerService } from './debugger.service';
 
+export enum EventTypes {
+    CreateEvent,
+    DeleteEvent,
+    IssuesEvent,
+    IssuesCommentEvent,
+    MergeEvent,
+    PushEvent,
+    WatchEvent
+}
+
 @Injectable()
 export class GithubApiService {
     client;
@@ -54,6 +64,8 @@ export class GithubApiService {
                     case 'WatchEvent':
                         break;
                 }
+
+                console.log(typeof this.events[this.events.length - 1]);
             }
         });
     }
@@ -80,6 +92,7 @@ export class GithubCommit {
 }
 
 export class GithubEventData {
+    Type: EventTypes;
     Date: Date;
     Repo: String;
     objectInstance: Object;
@@ -102,6 +115,7 @@ export class CreateEvent extends GithubEventData {
         instance: Object
     ) {
         super(instance);
+        this.Type = EventTypes.CreateEvent;
         this.message = `Thomas created new repo called ${instance['repo']['name'].split('/')[1]}`;
         this.objectInstance = instance;
 
@@ -119,6 +133,7 @@ export class PushEvent extends GithubEventData {
         com: Array<GithubCommit>
     ) {
         super(instance);
+        this.Type = EventTypes.PushEvent;
         const payload = instance['payload'];
         const commits: Array<Object> = com;
 
@@ -144,6 +159,7 @@ export class IssuesEvent extends GithubEventData {
         gitURL: string
     ) {
         super(instance);
+        this.Type = EventTypes.IssuesEvent;
         const payload = instance['payload'];
 
         this.message = `Thomas ${payload['action']} an issue in ${instance['repo']['name']}`;
@@ -163,6 +179,7 @@ export class DeleteEvent extends GithubEventData {
         instance: Object
     ) {
         super(instance);
+        this.Type = EventTypes.DeleteEvent;
     }
 
 }
@@ -172,6 +189,7 @@ export class WatchEvent extends GithubEventData {
         instance: Object
     ) {
         super(instance);
+        this.Type = EventTypes.WatchEvent;
     }
 
 }
