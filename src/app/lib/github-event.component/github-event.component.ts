@@ -7,6 +7,16 @@ import { GithubApiService,
          PushEvent,
          WatchEvent } from '../../services/github-api.service';
 
+const eventIcons = {
+    Create: 'pencil',
+    Comment: 'forum',
+    Delete: 'delete-forever',
+    Issue: 'clipboard-alert',
+    Merge: 'source-merge',
+    Push: 'arrow-up-bold-hexagon-outline',
+    Watch: 'eye'
+};
+
 @Component({
     selector: 'app-github-event',
     templateUrl: './github-event.component.html',
