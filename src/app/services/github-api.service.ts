@@ -25,7 +25,9 @@ export class GithubApiService {
 
                     switch (body[i]['type']) {
                         case 'CreateEvent':
-                            newEvents.push(new CreateEvent(body[i]));
+                            await this.http.get(body[i]['repo']['url']).toPromise().then( res => {
+                                newEvents.push(new CreateEvent(body[i], res['html_url']));
+                            });
                             break;
                         case 'DeleteEvent':
                             break;
@@ -118,11 +120,12 @@ export class GithubEventData {
 
 export class CreateEvent extends GithubEventData {
     constructor (
-        instance: Object
+        instance: Object,
+        gitURL: string
     ) {
         super(instance);
         this.action_icon = eventIcons.Create;
-        this.message = `Thomas created new repo called ${instance['repo']['name'].split('/')[1]}`;
+        this.message = `Thomas created new repo called <a href="${}">${instance['repo']['name'].split('/')[1]}<a>`;
         this.objectInstance = instance;
 
         console.log(this.message);
