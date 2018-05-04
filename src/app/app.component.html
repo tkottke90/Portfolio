@@ -11,4 +11,6 @@
   <h2>I am a web developer from La Crosse, WI.  I have a passion for problem solving using clean and functional code.</h2>
 </div>
 
-<app-github-event></app-github-event>
+<ul>
+  <li *ngFor='let e of events'>{{ e.message }}</li>
+</ul>

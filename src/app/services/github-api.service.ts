@@ -54,8 +54,6 @@ export class GithubApiService {
                     case 'WatchEvent':
                         break;
                 }
-
-                console.log(typeof this.events[this.events.length - 1]);
             }
         });
     }

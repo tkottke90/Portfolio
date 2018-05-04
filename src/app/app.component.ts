@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { GithubApiService } from './services/github-api.service';
+import { Component, OnInit } from '@angular/core';
+import { GithubApiService, GithubEventData } from './services/github-api.service';
 
 @Component({
   selector: 'app-root',
@@ -8,8 +8,13 @@ import { GithubApiService } from './services/github-api.service';
 })
 export class AppComponent {
   title = 'app';
+  events: Array<GithubEventData>;
 
-  constructor(private ghapi: GithubApiService) {
-    ghapi.getActivity();
+  constructor(private ghapi: GithubApiService) { }
+
+  async OnInit () {
+    await this.ghapi.getActivity();
+    console.log(`Github API Event Count: ${this.ghapi.events.length}`);
+    this.events = this.ghapi.events;
   }
 }

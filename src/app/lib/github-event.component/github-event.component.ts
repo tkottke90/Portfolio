@@ -22,6 +22,10 @@ export class GithubEventComponent {
         this.date = this.genTimelineStr(new Date(event.Date));
         this.header = event.message;
         this.action_icon = event.action_icon;
+
+        if (event['commits']) {
+            console.log(`has commits`);
+        }
     }
 
     genTimelineStr(date: Date): string {
