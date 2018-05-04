@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpHandler } from '@angular/common/http';
 import * as Github from 'octonode';
+import { DebuggerService } from './debugger.service';
 
 @Injectable()
 export class GithubApiService {
     client;
-
     events: Array<GithubEventData> = new Array();
 
     constructor( private http: HttpClient ) {
@@ -26,7 +26,12 @@ export class GithubApiService {
                     case 'DeleteEvent':
                         break;
                     case 'IssuesEvent':
-                        this.events.push(new IssuesEvent(body[i]));
+                        await this.http.get(body[i]['payload']['issue']['url']).toPromise().then( res => {
+                            this.events.push(new IssuesEvent(body[i], res['html_url']));
+                        }).catch( issuesErr => {
+                            this.events.push(new IssuesEvent(body[i], ''));
+                            // TODO - Add Firebase/Express Function to Handle Error Logging
+                        });
                         break;
                     case 'IssuesCommentEvent':
                         break;
@@ -39,6 +44,9 @@ export class GithubApiService {
                             const Message =  payload['commits'][c]['message'];
                             await this.http.get(payload['commits'][c]['url']).toPromise().then(res => {
                                 commits.push(new GithubCommit(ID, Message, res['html_url']));
+                            }).catch( pushErr => {
+                                commits.push(new GithubCommit(ID, Message, ''));
+                                // TODO - Add Firebase/Express Function to Handle Error Logging
                             });
                         }
                         this.events.push(new PushEvent(body[i], commits));
@@ -97,7 +105,7 @@ export class CreateEvent extends GithubEventData {
         this.message = `Thomas created new repo called ${instance['repo']['name'].split('/')[1]}`;
         this.objectInstance = instance;
 
-        console.log(this.message);
+        // console.log(this.message);
     }
 
 }
@@ -115,7 +123,7 @@ export class PushEvent extends GithubEventData {
         const commits: Array<Object> = com;
 
         this.message = `Thomas pushed to ${this.getBranch(payload['ref'])} at ${this.Repo}`;
-        console.log(this.message);
+        // console.log(this.message);
     }
 
     getBranch(ref: String): String {
@@ -132,7 +140,8 @@ export class IssuesEvent extends GithubEventData {
     issueUrl: String = '';
 
     constructor (
-        instance: Object
+        instance: Object,
+        gitURL: string
     ) {
         super(instance);
         const payload = instance['payload'];
@@ -140,10 +149,11 @@ export class IssuesEvent extends GithubEventData {
         this.message = `Thomas ${payload['action']} an issue in ${instance['repo']['name']}`;
         this.issueTitle = payload['issue']['title'];
         this.issueText = payload['issue']['body'];
-        this.issueUrl = payload['issue']['url'];
+        this.issueUrl = gitURL;
 
         console.log(this.message);
-        console.log(`   ${this.issueTitle}\n    ${this.issueText}`);
+        console.log(`   ${this.issueTitle}\n    ${this.issueText.substring(0, 30)}`);
+        console.log(`   ${this.issueUrl}`);
     }
 
 }
