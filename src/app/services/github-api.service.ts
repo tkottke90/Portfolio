@@ -154,11 +154,8 @@ export class PushEvent extends GithubEventData {
         const commits: Array<Object> = com;
         const branch = this.getBranch(payload['ref']);
 
-        if (gitURL != '') {
-            this.message = `Thomas pushed to <a href="${gitURL}/tree/${branch}">${branch}</a> at <a href="${gitURL}">${this.Repo}</a>`;
-        } else {
-            this.message = `Thomas pushed to ${branch} at ${this.Repo}`;
-        }
+        this.message = `Thomas pushed to <a href="${gitURL}/tree/${branch}">${branch}</a> at <a href="${gitURL}">${this.Repo}</a>`;
+
         // console.log(this.message);
     }
 
