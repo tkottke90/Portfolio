@@ -6,7 +6,8 @@ import { GithubApiService,
          DeleteEvent,
          IssuesEvent,
          PushEvent,
-         WatchEvent } from '../../services/github-api.service';
+         WatchEvent,
+         GithubCommit} from '../../services/github-api.service';
 
 @Component({
     selector: 'app-github-event',
@@ -17,21 +18,23 @@ export class GithubEventComponent {
     date: string;
     action_icon: string;
     header: SafeHtml;
+    avatar: string;
+    commits: Array<GithubCommit> = [];
 
     constructor(private sanitizer: DomSanitizer) {}
 
     @Input()
     set event (event: GithubEventData) {
-        console.log(event);
         this.date = this.genTimelineStr(new Date(event.Date));
         this.header = this.sanitizer.sanitize(SecurityContext.HTML, event.message);
-        // this.header = this.sanitizer.bypassSecurityTrustHtml(event.message);
         this.action_icon = event.action_icon;
 
-        console.log(`Date: ${this.date}\nIcon: ${this.action_icon}\nHeader: ${this.header}`);
+        this.avatar = event.objectInstance['actor']['avatar_url'];
+
+        // console.log(`Date: ${this.date}\nIcon: ${this.action_icon}\nHeader: ${this.header}`);
 
         if (event['commits']) {
-            console.log(`has commits`);
+            this.commits = event['commits'];
         }
     }
 
