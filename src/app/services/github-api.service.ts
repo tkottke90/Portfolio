@@ -28,7 +28,7 @@ export class GithubApiService {
                             await this.http.get(body[i]['repo']['url']).toPromise().then( res => {
                                 newEvents.push(new CreateEvent(body[i], res['html_url']));
                             }).catch( createError => {
-                                newEvents.push(new CreateEvent(body[i], ''));
+                                newEvents.push(new CreateEvent(body[i], 'https://github.com/tkottke/404error'));
                             });
                             break;
                         case 'DeleteEvent':
@@ -53,7 +53,7 @@ export class GithubApiService {
                                 await this.http.get(payload['commits'][c]['url']).toPromise().then(res => {
                                     commits.push(new GithubCommit(ID, Message, res['html_url']));
                                 }).catch( pushErr => {
-                                    commits.push(new GithubCommit(ID, Message, ''));
+                                    commits.push(new GithubCommit(ID, Message, 'https://github.com/tkottke/404error'));
                                     // TODO - Add Firebase/Express Function to Handle Error Logging
                                 });
                             }
@@ -100,7 +100,7 @@ export class GithubCommit {
         this.ID = id;
         this.Notes = msg;
         this.URL = url;
-        this.OutputMsg = `${this.ID} ${this.Notes}`;
+        this.OutputMsg = `<a href="${url}>${this.ID}</a> ${this.Notes}`;
     }
 }
 
@@ -134,7 +134,7 @@ export class CreateEvent extends GithubEventData {
         this.message = `Thomas created new repo called <a href="${gitURL}">${instance['repo']['name'].split('/')[1]}<a>`;
         this.objectInstance = instance;
 
-        console.log(this.message);
+        // console.log(this.message);
     }
 
 }
@@ -154,8 +154,12 @@ export class PushEvent extends GithubEventData {
         const commits: Array<Object> = com;
         const branch = this.getBranch(payload['ref']);
 
-        this.message = `Thomas pushed to <a href="${gitURL}/tree/${branch}">${branch}</a> at <a href="${gitURL}">${this.Repo}</a>`;
-        console.log(this.message);
+        if (gitURL != '') {
+            this.message = `Thomas pushed to <a href="${gitURL}/tree/${branch}">${branch}</a> at <a href="${gitURL}">${this.Repo}</a>`;
+        } else {
+            this.message = `Thomas pushed to ${branch} at ${this.Repo}`;
+        }
+        // console.log(this.message);
     }
 
     getBranch(ref: string): string {
