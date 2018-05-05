@@ -1,8 +1,8 @@
 <div class="github-event">
     <div class="header github-event__header">
-        <mat-icon svgIcon="{{ action_icon }}"></mat-icon>
-        <p>{{ date }}</p>
-        <h3>{{ header }}</h3>
+        <mat-icon svgIcon="{{ action_icon }}" #hi></mat-icon>
+        <p #hp></p>
+        <h4 [innerHTML]="header"></h4>
     </div>
     
     <div class="commits-col github-event__commits-col">

@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, ElementRef } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpHandler } from '@angular/common/http';
 import * as Github from 'octonode';
 import { DebuggerService } from './debugger.service';
@@ -57,7 +57,10 @@ export class GithubApiService {
                                     // TODO - Add Firebase/Express Function to Handle Error Logging
                                 });
                             }
-                            newEvents.push(new PushEvent(body[i], commits));
+
+                            await this.http.get(body[i]['repo']['url']).toPromise().then( res => {
+                                newEvents.push(new PushEvent(body[i], res['html_url'], commits));
+                            });
                             break;
                         case 'WatchEvent':
                             break;
@@ -107,7 +110,7 @@ export class GithubEventData {
     Repo: string;
     objectInstance: Object;
 
-    message: string;
+    message;
 
 
     constructor (
@@ -127,6 +130,7 @@ export class CreateEvent extends GithubEventData {
     ) {
         super(instance);
         this.action_icon = eventIcons.Create;
+        console.log(`Create Event Ctor gitURL: ${gitURL}`);
         this.message = `Thomas created new repo called <a href="${gitURL}">${instance['repo']['name'].split('/')[1]}<a>`;
         this.objectInstance = instance;
 
@@ -141,14 +145,16 @@ export class PushEvent extends GithubEventData {
 
     constructor (
         instance: Object,
+        gitURL: string,
         com: Array<GithubCommit>
     ) {
         super(instance);
         this.action_icon = eventIcons.Push;
         const payload = instance['payload'];
         const commits: Array<Object> = com;
+        const branch = this.getBranch(payload['ref']);
 
-        this.message = `Thomas pushed to ${this.getBranch(payload['ref'])} at ${this.Repo}`;
+        this.message = `Thomas pushed to <a href="${gitURL}/tree/${branch}">${branch}</a> at <a href="${gitURL}">${this.Repo}</a>`;
         console.log(this.message);
     }
 

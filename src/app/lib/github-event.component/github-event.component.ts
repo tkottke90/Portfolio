@@ -1,4 +1,5 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, SecurityContext } from '@angular/core';
+import { BrowserModule, DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { GithubApiService,
          GithubEventData,
          CreateEvent,
@@ -13,17 +14,18 @@ import { GithubApiService,
     styleUrls: [ './github-event.component.scss' ]
 })
 export class GithubEventComponent {
-    date: String;
-    action_icon: String;
-    header: String;
+    date: string;
+    action_icon: string;
+    header: SafeHtml;
 
-    
+    constructor(private sanitizer: DomSanitizer) {}
 
     @Input()
     set event (event: GithubEventData) {
         console.log(event);
         this.date = this.genTimelineStr(new Date(event.Date));
-        this.header = event.message;
+        this.header = this.sanitizer.sanitize(SecurityContext.HTML, event.message);
+        // this.header = this.sanitizer.bypassSecurityTrustHtml(event.message);
         this.action_icon = event.action_icon;
 
         console.log(`Date: ${this.date}\nIcon: ${this.action_icon}\nHeader: ${this.header}`);
