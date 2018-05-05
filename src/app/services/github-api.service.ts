@@ -41,8 +41,10 @@ export class GithubApiService {
                                 // TODO - Add Firebase/Express Function to Handle Error Logging
                             });
                             break;
+                        */
+                        case 'CommitCommentEvent':
                         case 'IssuesCommentEvent':
-                            break; */
+                            break;
                         case 'PushEvent':
                             const payload = body[i]['payload'];
                             const commits: Array<GithubCommit> = [];
