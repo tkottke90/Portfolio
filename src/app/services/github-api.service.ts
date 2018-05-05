@@ -27,11 +27,13 @@ export class GithubApiService {
                         case 'CreateEvent':
                             await this.http.get(body[i]['repo']['url']).toPromise().then( res => {
                                 newEvents.push(new CreateEvent(body[i], res['html_url']));
+                            }).catch( createError => {
+                                newEvents.push(new CreateEvent(body[i], ''));
                             });
                             break;
                         case 'DeleteEvent':
                             break;
-                        case 'IssuesEvent':
+                        /* case 'IssuesEvent':
                             await this.http.get(body[i]['payload']['issue']['url']).toPromise().then( res => {
                                 newEvents.push(new IssuesEvent(body[i], res['html_url']));
                             }).catch( issuesErr => {
@@ -40,7 +42,7 @@ export class GithubApiService {
                             });
                             break;
                         case 'IssuesCommentEvent':
-                            break;
+                            break; */
                         case 'PushEvent':
                             const payload = body[i]['payload'];
                             const commits: Array<GithubCommit> = [];
@@ -100,12 +102,12 @@ export class GithubCommit {
 }
 
 export class GithubEventData {
-    action_icon: String;
+    action_icon: string;
     Date: Date;
-    Repo: String;
+    Repo: string;
     objectInstance: Object;
 
-    message: String;
+    message: string;
 
 
     constructor (
@@ -125,7 +127,7 @@ export class CreateEvent extends GithubEventData {
     ) {
         super(instance);
         this.action_icon = eventIcons.Create;
-        this.message = `Thomas created new repo called <a href="${}">${instance['repo']['name'].split('/')[1]}<a>`;
+        this.message = `Thomas created new repo called <a href="${gitURL}">${instance['repo']['name'].split('/')[1]}<a>`;
         this.objectInstance = instance;
 
         console.log(this.message);
@@ -150,7 +152,7 @@ export class PushEvent extends GithubEventData {
         console.log(this.message);
     }
 
-    getBranch(ref: String): String {
+    getBranch(ref: string): string {
         const splitStr = ref.split('/');
         return splitStr[splitStr.length - 1];
     }
@@ -158,10 +160,10 @@ export class PushEvent extends GithubEventData {
 }
 
 export class IssuesEvent extends GithubEventData {
-    issueTitle: String = '';
-    issueText: String = '';
+    issueTitle: string;
+    issueText: string;
 
-    issueUrl: String = '';
+    issueUrl: string;
 
     constructor (
         instance: Object,
