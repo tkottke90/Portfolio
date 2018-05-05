@@ -37,6 +37,7 @@ import {
 // Custom Components
 import { AppComponent } from './app.component';
 import { GithubEventComponent } from './lib/github-event.component/github-event.component';
+import { CommitComponent } from './lib/github-commit.component/github-commit.component';
 
 // Custom Services
 import { GithubApiService } from './services/github-api.service';
@@ -45,6 +46,7 @@ import { GithubApiService } from './services/github-api.service';
 @NgModule({
   declarations: [
     AppComponent,
+    CommitComponent,
     GithubEventComponent
   ],
   imports: [
