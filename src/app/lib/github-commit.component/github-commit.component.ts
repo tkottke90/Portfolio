@@ -13,7 +13,7 @@ export class CommitComponent {
     @Input() avatar: string;
     @Input()
     set commit(commit: GithubCommit ) {
-        this.messageHTML = this.sanitizer.sanitize(SecurityContext.HTML, commit['OutputMsg']);;
+        this.messageHTML = this.sanitizer.sanitize(SecurityContext.HTML, commit['OutputMsg']);
     }
 
     constructor(private sanitizer: DomSanitizer) {}
