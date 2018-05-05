@@ -102,7 +102,7 @@ export class GithubCommit {
         this.ID = id;
         this.Notes = msg;
         this.URL = url;
-        this.OutputMsg = `<a href="${url}">${this.ID}</a> ${this.Notes}`;
+        this.OutputMsg = `<a href="${url}" target="_blank">${this.ID}</a> ${this.Notes}`;
     }
 }
 
@@ -132,7 +132,7 @@ export class CreateEvent extends GithubEventData {
     ) {
         super(instance);
         this.action_icon = eventIcons.Create;
-        this.message = `Thomas created new repo called <a href="${gitURL}">${instance['repo']['name'].split('/')[1]}<a>`;
+        this.message = `Thomas created new repo called <a href="${gitURL}" target="_blank">>${instance['repo']['name'].split('/')[1]}<a>`;
         this.objectInstance = instance;
 
         // console.log(this.message);
@@ -155,7 +155,9 @@ export class PushEvent extends GithubEventData {
         const branch = this.getBranch(payload['ref']);
 
         this.commits = com;
-        this.message = `Thomas pushed to <a href="${gitURL}/tree/${branch}">${branch}</a> at <a href="${gitURL}">${this.Repo}</a>`;
+        this.message =
+            // tslint:disable-next-line:max-line-length
+            `Thomas pushed to <a href="${gitURL}/tree/${branch}" target="_blank">${branch}</a> at <a href="${gitURL}" target="_blank">${this.Repo}</a>`;
 
         // console.log(this.message);
     }
