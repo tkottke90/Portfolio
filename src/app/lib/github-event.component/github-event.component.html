@@ -1,11 +1,11 @@
 <div class="github-event">
     <div class="header github-event__header">
-        <mat-icon svgIcon="{{ action_icon }}" #hi></mat-icon>
-        <p [innerHTML]="date"></p>
-        <h4 [innerHTML]="header"></h4>
+        <mat-icon class="icon header__icon" svgIcon="{{ action_icon }}" #hi></mat-icon>
+        <p class="time header__time" [innerHTML]="date"></p>
+        <h4 class="event-text header__event-text" [innerHTML]="header"></h4>
     </div>
     
-    <div class="commits-col github-event__commits-col">
+    <div *ngIf="commits" class="commits-col github-event__commits-col">
         <app-github-commit *ngFor="let c of commits"
         [avatar]='avatar'
         [commit]='c'></app-github-commit>

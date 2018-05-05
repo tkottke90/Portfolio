@@ -1,0 +1,22 @@
+:host {
+    display: grid;
+
+    grid-template-columns: 2em 1fr;
+
+    & img {
+        grid-column: 1;
+    }
+
+    & p {
+        grid-column: 2;
+    }
+}
+
+
+img {
+    height: 2em;
+}
+
+p {
+    height: 2em;
+}
