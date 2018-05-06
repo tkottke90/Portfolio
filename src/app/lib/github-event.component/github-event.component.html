@@ -5,17 +5,17 @@
         <h4 class="event-text header__event-text" [innerHTML]="header"></h4>
     </div>
     
-    <div *ngIf="commits" class="commits-col github-event__commits-col">
+    <div *ngIf="event_type === 5" class="commits-col github-event__commits-col">
         <app-github-commit *ngFor="let c of commits"
         [avatar]='avatar'
         [commit]='c'></app-github-commit>
     </div>
 
-    <div *ngIf="comment" class="comments github-event__comments">
+    <div *ngIf="event_type == 1" class="comments github-event__comments">
 
     </div>
 
-    <div *ngIf="merge_info" class="merge-info github-event__merge-info">
+    <div *ngIf="event_type == 4" class="merge-info github-event__merge-info">
 
     </div>
 </div>

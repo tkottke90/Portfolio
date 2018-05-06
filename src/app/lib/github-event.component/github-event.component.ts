@@ -17,6 +17,7 @@ import { GithubApiService,
 export class GithubEventComponent {
     date: string;
     action_icon: string;
+    event_type: number;
     header: SafeHtml;
     avatar: string;
     commits: Array<GithubCommit> = [];
@@ -30,10 +31,13 @@ export class GithubEventComponent {
         this.date = this.genTimelineStr(new Date(event.Date));
         this.header = this.sanitizer.sanitize(SecurityContext.HTML, event.message);
         this.action_icon = event.action_icon;
+        this.event_type = event.type;
 
         this.avatar = event.objectInstance['actor']['avatar_url'];
 
         // console.log(`Date: ${this.date}\nIcon: ${this.action_icon}\nHeader: ${this.header}`);
+
+        console.log(event.type);
 
         if (event['commits']) {
             this.commits = event['commits'];
