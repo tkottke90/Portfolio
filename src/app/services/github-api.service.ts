@@ -253,7 +253,7 @@ export class IssuesCommentEvent extends GithubEventData {
 
         this.action_icon = eventIcons.Comment;
         // tslint:disable-next-line:max-line-length
-        this.message = `Thomas commented on an <a href="${comment['html_url']} target="_blank">issue</a> at <a href="https://githoub.com/${this.Repo}" target="_blank">${this.Repo}</a>`;
+        this.message = `Thomas commented on an <a href="${comment['html_url']} target="_blank">issue</a> at <a href="https://github.com/${this.Repo}" target="_blank">${this.Repo}</a>`;
         this.comment = comment['body'];
     }
 
