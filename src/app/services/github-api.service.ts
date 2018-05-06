@@ -9,7 +9,7 @@ export class GithubApiService {
     client;
     events: BehaviorSubject<Array<GithubEventData>> = new BehaviorSubject([]);
 
-    public ServiceError = false;
+    public ServiceError: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
     constructor( private http: HttpClient ) {
         this.client = Github.client();
@@ -19,7 +19,7 @@ export class GithubApiService {
         return new Promise((resolve, reject) => {
             this.client.get('/users/tkottke90/events', {}, async (err, status, body, headers) => {
                 if (err) {
-                    this.ServiceError = true;
+                    this.ServiceError.next(true);
                     // TO-DO Add Firebase Error Log
                     switch (err['headers']['status']) {
                         case '403 Forbidden':
@@ -33,7 +33,7 @@ export class GithubApiService {
                     }
                 } else {
                     console.log(`Type: ${typeof body}\nCount: ${body.length}`);
-                    this.ServiceError = false;
+                    if (this.ServiceError.value) { this.ServiceError.next(false); }
                     const newEvents = new Array<GithubEventData>();
 
                     for (let i = 0; (i < body.length && i < 6); i++) {
@@ -151,6 +151,7 @@ export class GithubEventData {
         this.objectInstance = o;
         this.Date = o['created_at'];
         this.Repo = o['repo']['name'];
+        this.type = t;
     }
 }
 
