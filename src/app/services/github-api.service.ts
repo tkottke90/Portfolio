@@ -165,6 +165,7 @@ export class CommitCommentEvent extends GithubEventData {
         const comment = instance['payload']['comment'];
 
         this.action_icon = eventIcons.Comment;
+
         // tslint:disable-next-line:max-line-length
         this.message = `Thomas commented on a <a href="${comment['html_url']} target="_blank">commit</a> at <a href="https://github.com/${this.Repo}" target="_blank">${this.Repo}</a>`;
         this.comment = comment['body'];
@@ -179,7 +180,7 @@ export class CreateEvent extends GithubEventData {
     ) {
         super(instance, EventTypes.Create);
         this.action_icon = eventIcons.Create;
-        this.message = `Thomas created new repo called <a href="${gitURL}" target="_blank">>${instance['repo']['name'].split('/')[1]}<a>`;
+        this.message = `Thomas created new repo called <a href="${gitURL}" target="_blank">${instance['repo']['name'].split('/')[1]}<a>`;
         this.objectInstance = instance;
 
         // console.log(this.message);
