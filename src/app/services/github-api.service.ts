@@ -36,7 +36,7 @@ export class GithubApiService {
                     if (this.ServiceError.value) { this.ServiceError.next(false); }
                     const newEvents = new Array<GithubEventData>();
 
-                    for (let i = 0; (i < body.length && i < 6); i++) {
+                    for (let i = 0; (i < body.length /* && i < 6 */); i++) {
 
                         switch (body[i]['type']) {
                             case 'CreateEvent':
@@ -48,15 +48,9 @@ export class GithubApiService {
                                 break;
                             case 'DeleteEvent':
                                 break;
-                            /* case 'IssuesEvent':
-                                await this.http.get(body[i]['payload']['issue']['url']).toPromise().then( res => {
-                                    newEvents.push(new IssuesEvent(body[i], res['html_url']));
-                                }).catch( issuesErr => {
-                                    newEvents.push(new IssuesEvent(body[i], ''));
-                                    // TODO - Add Firebase/Express Function to Handle Error Logging
-                                });
+                            case 'IssuesEvent':
+                                newEvents.push(new IssuesEvent(body[i]));
                                 break;
-                            */
                             case 'CommitCommentEvent':
                                 newEvents.push(new CommitCommentEvent(body[i]));
                                 break;
@@ -83,6 +77,7 @@ export class GithubApiService {
                                 });
                                 break;
                             case 'WatchEvent':
+                                newEvents.push(new WatchEvent(body[i]));
                                 break;
                         }
                     }
@@ -225,20 +220,16 @@ export class IssuesEvent extends GithubEventData {
 
     constructor (
         instance: Object,
-        gitURL: string
     ) {
         super(instance, EventTypes.Issue);
         this.action_icon = eventIcons.Issue;
         const payload = instance['payload'];
 
-        this.message = `Thomas ${payload['action']} an issue in ${instance['repo']['name']}`;
-        this.issueTitle = payload['issue']['title'];
-        this.issueText = payload['issue']['body'];
-        this.issueUrl = gitURL;
-
-        console.log(this.message);
-        // console.log(`   ${this.issueTitle}\n    ${this.issueText.substring(0, 30)}`);
-        // console.log(`   ${this.issueUrl}`);
+        // tslint:disable-next-line:max-line-length
+        this.message = `Thomas ${payload['action']} an issue in <a href="https://github.com/${instance['repo']['name']}" target="_blank">${instance['repo']['name']}</a>`;
+        this.issueTitle = `Title: ${payload['issue']['title']}`;
+        this.issueText = `Info: ${payload['issue']['body']}`;
+        this.issueUrl = payload['issue']['html_url'];
     }
 
 }
@@ -276,6 +267,10 @@ export class WatchEvent extends GithubEventData {
     ) {
         super(instance, EventTypes.Watch);
         this.action_icon = eventIcons.Watch;
+        this.type = EventTypes.Watch;
+
+        // tslint:disable-next-line:max-line-length
+        this.message = `Thomas started watching repository <a href="https://github.com/${this.Repo}" target="_blank">${this.Repo}<a>`;
     }
 
 }
