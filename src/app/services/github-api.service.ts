@@ -125,17 +125,28 @@ export class GithubCommit {
     }
 }
 
+export enum EventTypes {
+    Create,
+    Comment,
+    Delete,
+    Issue,
+    Merge,
+    Push,
+    Watch
+}
+
 export class GithubEventData {
     action_icon: string;
     Date: Date;
     Repo: string;
     objectInstance: Object;
-
+    type: EventTypes;
     message;
 
 
     constructor (
-        o: Object
+        o: Object,
+        t: EventTypes
     ) {
         this.objectInstance = o;
         this.Date = o['created_at'];
@@ -148,7 +159,7 @@ export class CommitCommentEvent extends GithubEventData {
     constructor (
         instance: Object
     ) {
-        super(instance);
+        super(instance, EventTypes.Comment);
 
         const comment = instance['payload']['comment'];
 
@@ -165,7 +176,7 @@ export class CreateEvent extends GithubEventData {
         instance: Object,
         gitURL: string
     ) {
-        super(instance);
+        super(instance, EventTypes.Create);
         this.action_icon = eventIcons.Create;
         this.message = `Thomas created new repo called <a href="${gitURL}" target="_blank">>${instance['repo']['name'].split('/')[1]}<a>`;
         this.objectInstance = instance;
@@ -184,7 +195,7 @@ export class PushEvent extends GithubEventData {
         gitURL: string,
         com: Array<GithubCommit>
     ) {
-        super(instance);
+        super(instance, EventTypes.Push);
         this.action_icon = eventIcons.Push;
         const payload = instance['payload'];
         const branch = this.getBranch(payload['ref']);
@@ -214,7 +225,7 @@ export class IssuesEvent extends GithubEventData {
         instance: Object,
         gitURL: string
     ) {
-        super(instance);
+        super(instance, EventTypes.Issue);
         this.action_icon = eventIcons.Issue;
         const payload = instance['payload'];
 
@@ -235,7 +246,7 @@ export class IssuesCommentEvent extends GithubEventData {
     constructor (
         instance: Object
     ) {
-        super(instance);
+        super(instance, EventTypes.Comment);
 
         const comment = instance['payload']['comment'];
 
@@ -251,7 +262,7 @@ export class DeleteEvent extends GithubEventData {
     constructor (
         instance: Object
     ) {
-        super(instance);
+        super(instance, EventTypes.Delete);
         this.action_icon = eventIcons.Delete;
     }
 
@@ -261,7 +272,7 @@ export class WatchEvent extends GithubEventData {
     constructor (
         instance: Object
     ) {
-        super(instance);
+        super(instance, EventTypes.Watch);
         this.action_icon = eventIcons.Watch;
     }
 
