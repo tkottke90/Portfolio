@@ -58,8 +58,10 @@ export class GithubApiService {
                                 break;
                             */
                             case 'CommitCommentEvent':
+                                newEvents.push(new CommitCommentEvent(body[i]));
+                                break;
                             case 'IssuesCommentEvent':
-
+                                newEvents.push(new IssuesCommentEvent(body[i]));
                                 break;
                             case 'PushEvent':
                                 const payload = body[i]['payload'];
@@ -141,6 +143,22 @@ export class GithubEventData {
     }
 }
 
+export class CommitCommentEvent extends GithubEventData {
+    comment: string;
+    constructor (
+        instance: Object
+    ) {
+        super(instance);
+
+        const comment = instance['payload']['comment'];
+
+        this.action_icon = eventIcons.Comment;
+        // tslint:disable-next-line:max-line-length
+        this.message = `Thomas commented on a <a href="${comment['html_url']} target="_blank">commit</a> at <a href="https://githoub.com/${this.Repo}" target="_blank">${this.Repo}</a>`;
+        this.comment = comment['body'];
+    }
+
+}
 
 export class CreateEvent extends GithubEventData {
     constructor (
@@ -208,6 +226,23 @@ export class IssuesEvent extends GithubEventData {
         console.log(this.message);
         // console.log(`   ${this.issueTitle}\n    ${this.issueText.substring(0, 30)}`);
         // console.log(`   ${this.issueUrl}`);
+    }
+
+}
+
+export class IssuesCommentEvent extends GithubEventData {
+    comment: string;
+    constructor (
+        instance: Object
+    ) {
+        super(instance);
+
+        const comment = instance['payload']['comment'];
+
+        this.action_icon = eventIcons.Comment;
+        // tslint:disable-next-line:max-line-length
+        this.message = `Thomas commented on an <a href="${comment['html_url']} target="_blank">issue</a> at <a href="https://githoub.com/${this.Repo}" target="_blank">${this.Repo}</a>`;
+        this.comment = comment['body'];
     }
 
 }
