@@ -1,0 +1,19 @@
+:host {
+    display: grid;
+
+    grid-template-columns: 2em 4em 1fr;
+
+
+}
+
+.user-img {
+    height: 3em;
+
+    grid-column: 2;
+}
+
+.msg {
+    height: 1em;
+    grid-column: 3;
+}
+

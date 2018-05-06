@@ -12,7 +12,9 @@
     </div>
 
     <div *ngIf="event_type == 1" class="comments github-event__comments">
-
+        <app-github-comment
+            [avatar]='avatar'
+            [comment]='comment'></app-github-comment>
     </div>
 
     <div *ngIf="event_type == 4" class="merge-info github-event__merge-info">

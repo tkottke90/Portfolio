@@ -39,8 +39,13 @@ export class GithubEventComponent {
 
         console.log(event.type);
 
-        if (event['commits']) {
-            this.commits = event['commits'];
+        switch (this.event_type) {
+            case 1:
+                this.comment = event['comment'];
+                break;
+            case 5:
+                this.commits = event['commits'];
+                break;
         }
     }
 
