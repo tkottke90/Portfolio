@@ -9,6 +9,8 @@ export class GithubApiService {
     client;
     events: BehaviorSubject<Array<GithubEventData>> = new BehaviorSubject([]);
 
+    public ServiceError = false;
+
     constructor( private http: HttpClient ) {
         this.client = Github.client();
     }
@@ -16,61 +18,76 @@ export class GithubApiService {
     getActivity(): Promise<any> {
         return new Promise((resolve, reject) => {
             this.client.get('/users/tkottke90/events', {}, async (err, status, body, headers) => {
-                if (err) { console.error(`Error: ${err}`); reject(err); }
-                console.log(`Type: ${typeof body}\nCount: ${body.length}`);
-
-                const newEvents = new Array<GithubEventData>();
-
-                for (let i = 0; (i < body.length && i < 6); i++) {
-
-                    switch (body[i]['type']) {
-                        case 'CreateEvent':
-                            await this.http.get(body[i]['repo']['url']).toPromise().then( res => {
-                                newEvents.push(new CreateEvent(body[i], res['html_url']));
-                            }).catch( createError => {
-                                newEvents.push(new CreateEvent(body[i], 'https://github.com/tkottke/404error'));
-                            });
+                if (err) {
+                    this.ServiceError = true;
+                    // TO-DO Add Firebase Error Log
+                    switch (err['headers']['status']) {
+                        case '403 Forbidden':
+                            console.error(`${err['message']}`);
+                            this.events.next([]);
                             break;
-                        case 'DeleteEvent':
-                            break;
-                        /* case 'IssuesEvent':
-                            await this.http.get(body[i]['payload']['issue']['url']).toPromise().then( res => {
-                                newEvents.push(new IssuesEvent(body[i], res['html_url']));
-                            }).catch( issuesErr => {
-                                newEvents.push(new IssuesEvent(body[i], ''));
-                                // TODO - Add Firebase/Express Function to Handle Error Logging
-                            });
-                            break;
-                        */
-                        case 'CommitCommentEvent':
-                        case 'IssuesCommentEvent':
-                            break;
-                        case 'PushEvent':
-                            const payload = body[i]['payload'];
-                            const commits: Array<GithubCommit> = [];
-
-                            for (let c = 0; c < payload['commits'].length; c++) {
-                                const ID =  payload['commits'][c]['sha'].slice(0, 6);
-                                const Message =  payload['commits'][c]['message'];
-                                await this.http.get(payload['commits'][c]['url']).toPromise().then(res => {
-                                    commits.push(new GithubCommit(ID, Message, res['html_url']));
-                                }).catch( pushErr => {
-                                    commits.push(new GithubCommit(ID, Message, 'https://github.com/tkottke/404error'));
-                                    // TODO - Add Firebase/Express Function to Handle Error Logging
-                                });
-                            }
-
-                            await this.http.get(body[i]['repo']['url']).toPromise().then( res => {
-                                newEvents.push(new PushEvent(body[i], res['html_url'], commits));
-                            });
-                            break;
-                        case 'WatchEvent':
+                        default:
+                            console.error(`Error: ${err}`); reject(err);
+                            this.events.next([]);
                             break;
                     }
-                }
+                } else {
+                    console.log(`Type: ${typeof body}\nCount: ${body.length}`);
+                    this.ServiceError = false;
+                    const newEvents = new Array<GithubEventData>();
 
-                this.events.next(newEvents);
-                resolve('done');
+                    for (let i = 0; (i < body.length && i < 6); i++) {
+
+                        switch (body[i]['type']) {
+                            case 'CreateEvent':
+                                await this.http.get(body[i]['repo']['url']).toPromise().then( res => {
+                                    newEvents.push(new CreateEvent(body[i], res['html_url']));
+                                }).catch( createError => {
+                                    newEvents.push(new CreateEvent(body[i], 'https://github.com/tkottke/404error'));
+                                });
+                                break;
+                            case 'DeleteEvent':
+                                break;
+                            /* case 'IssuesEvent':
+                                await this.http.get(body[i]['payload']['issue']['url']).toPromise().then( res => {
+                                    newEvents.push(new IssuesEvent(body[i], res['html_url']));
+                                }).catch( issuesErr => {
+                                    newEvents.push(new IssuesEvent(body[i], ''));
+                                    // TODO - Add Firebase/Express Function to Handle Error Logging
+                                });
+                                break;
+                            */
+                            case 'CommitCommentEvent':
+                            case 'IssuesCommentEvent':
+
+                                break;
+                            case 'PushEvent':
+                                const payload = body[i]['payload'];
+                                const commits: Array<GithubCommit> = [];
+
+                                for (let c = 0; c < payload['commits'].length; c++) {
+                                    const ID =  payload['commits'][c]['sha'].slice(0, 6);
+                                    const Message =  payload['commits'][c]['message'];
+                                    await this.http.get(payload['commits'][c]['url']).toPromise().then(res => {
+                                        commits.push(new GithubCommit(ID, Message, res['html_url']));
+                                    }).catch( pushErr => {
+                                        commits.push(new GithubCommit(ID, Message, 'https://github.com/tkottke/404error'));
+                                        // TODO - Add Firebase/Express Function to Handle Error Logging
+                                    });
+                                }
+
+                                await this.http.get(body[i]['repo']['url']).toPromise().then( res => {
+                                    newEvents.push(new PushEvent(body[i], res['html_url'], commits));
+                                });
+                                break;
+                            case 'WatchEvent':
+                                break;
+                        }
+                    }
+
+                    this.events.next(newEvents);
+                    resolve('done');
+                }
             });
         });
     }
