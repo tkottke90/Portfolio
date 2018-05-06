@@ -20,6 +20,8 @@ export class GithubEventComponent {
     header: SafeHtml;
     avatar: string;
     commits: Array<GithubCommit> = [];
+    comment: string;
+    merge_info: Array<string>;
 
     constructor(private sanitizer: DomSanitizer) {}
 

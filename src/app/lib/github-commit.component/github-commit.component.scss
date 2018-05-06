@@ -1,22 +1,23 @@
 :host {
     display: grid;
 
-    grid-template-columns: 2em 1fr;
+    grid-template-columns: 2em 2em 1fr;
 
-    & img {
-        grid-column: 1;
-    }
-
-    & p {
+    & .user-img {
         grid-column: 2;
     }
+
+    & .msg {
+        grid-column: 3;
+    }
 }
 
 
-img {
-    height: 2em;
+.user-img {
+    height: 1.5em;
 }
 
-p {
+.msg {
     height: 2em;
+    color: rgba(0,0,0,0.87);
 }

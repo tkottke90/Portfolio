@@ -11,11 +11,11 @@
         [commit]='c'></app-github-commit>
     </div>
 
-    <div class="comments github-event__comments">
+    <div *ngIf="comment" class="comments github-event__comments">
 
     </div>
 
-    <div class="merge-info github-event__merge-info">
+    <div *ngIf="merge_info" class="merge-info github-event__merge-info">
 
     </div>
 </div>
