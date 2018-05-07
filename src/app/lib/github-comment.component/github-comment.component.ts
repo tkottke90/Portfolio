@@ -5,7 +5,7 @@ import { GithubCommit } from '../../services/github-api.service';
 @Component({
     selector: 'app-github-comment',
     templateUrl: './github-comment.component.html',
-    styleUrls: [ './github-comment.component.scss' ]
+    styleUrls: [ './github-comment.component.scss', './github-comment.component.mobile.scss' ]
 })
 export class CommentComponent {
     messageHTML: SafeHtml;

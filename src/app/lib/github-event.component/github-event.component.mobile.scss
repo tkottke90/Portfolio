@@ -1,0 +1,15 @@
+@import '../../styles/_variables';
+
+@media (max-width: $breakpoint-phone) {    
+    .time {
+        font-size: 2.75vw;
+    }
+
+    .event-text {
+        font-size: 3.5vw;
+
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+}
