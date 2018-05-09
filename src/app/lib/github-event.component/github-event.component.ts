@@ -21,6 +21,7 @@ export class GithubEventComponent {
     header: SafeHtml;
     avatar: string;
     commits: Array<GithubCommit> = [];
+    moreCommits: SafeHtml;
     comment: string;
     merge_info: Array<string>;
 
@@ -34,10 +35,7 @@ export class GithubEventComponent {
         this.event_type = event.type;
 
         this.avatar = event.objectInstance['actor']['avatar_url'];
-
         // console.log(`Date: ${this.date}\nIcon: ${this.action_icon}\nHeader: ${this.header}`);
-
-        console.log(event.type);
 
         switch (this.event_type) {
             case 1:
@@ -45,6 +43,12 @@ export class GithubEventComponent {
                 break;
             case 5:
                 this.commits = event['commits'];
+                if (event.objectInstance['payload']['commits'].length > 2) {
+                    this.moreCommits = this.sanitizer.sanitize(SecurityContext.HTML,
+                        // tslint:disable-next-line:max-line-length
+                        `<a href="https://github.com/${event.Repo}/commits/${event['myBranch']}" target="_blank">View Additional ${event.objectInstance['payload']['commits'].length - 2} Commits >></a>`);
+                    console.log(this.moreCommits);
+                }
                 break;
         }
     }

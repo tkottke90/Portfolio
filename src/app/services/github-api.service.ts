@@ -2,6 +2,7 @@ import { Injectable, ElementRef } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpHandler } from '@angular/common/http';
 import * as Github from 'octonode';
 import { DebuggerService } from './debugger.service';
+import { FirestoreService } from './firestore.service';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 @Injectable()
@@ -10,6 +11,8 @@ export class GithubApiService {
     events: BehaviorSubject<Array<GithubEventData>> = new BehaviorSubject([]);
 
     public ServiceError: BehaviorSubject<boolean> = new BehaviorSubject(false);
+
+
 
     constructor( private http: HttpClient ) {
         this.client = Github.client();
@@ -32,59 +35,65 @@ export class GithubApiService {
                             break;
                     }
                 } else {
+                    const req_remaining = headers['x-ratelimit-remaining'];
+                    // tslint:disable-next-line:max-line-length
+                    req_remaining > 10 ? console.log(`Requests Remaining: ${req_remaining}`) : console.error(`Low Requests Remaining: ${req_remaining}`);
                     console.log(`Type: ${typeof body}\nCount: ${body.length}`);
                     if (this.ServiceError.value) { this.ServiceError.next(false); }
-                    const newEvents = new Array<GithubEventData>();
+                        const newEvents = new Array<GithubEventData>();
 
-                    for (let i = 0; (i < body.length /* && i < 6 */); i++) {
 
-                        switch (body[i]['type']) {
-                            case 'CreateEvent':
-                                await this.http.get(body[i]['repo']['url']).toPromise().then( res => {
-                                    newEvents.push(new CreateEvent(body[i], res['html_url']));
-                                }).catch( createError => {
-                                    newEvents.push(new CreateEvent(body[i], 'https://github.com/tkottke/404error'));
-                                });
-                                break;
-                            case 'DeleteEvent':
-                                break;
-                            case 'IssuesEvent':
-                                newEvents.push(new IssuesEvent(body[i]));
-                                break;
-                            case 'CommitCommentEvent':
-                                newEvents.push(new CommitCommentEvent(body[i]));
-                                break;
-                            case 'IssuesCommentEvent':
-                                newEvents.push(new IssuesCommentEvent(body[i]));
-                                break;
-                            case 'PushEvent':
-                                const payload = body[i]['payload'];
-                                const commits: Array<GithubCommit> = [];
+                        for (let i = 0; (i < body.length  && i < 6 ); i++) {
 
-                                for (let c = 0; c < payload['commits'].length; c++) {
-                                    const ID =  payload['commits'][c]['sha'].slice(0, 6);
-                                    const Message =  payload['commits'][c]['message'];
-                                    await this.http.get(payload['commits'][c]['url']).toPromise().then(res => {
-                                        commits.push(new GithubCommit(ID, Message, res['html_url']));
-                                    }).catch( pushErr => {
-                                        commits.push(new GithubCommit(ID, Message, 'https://github.com/tkottke/404error'));
-                                        // TODO - Add Firebase/Express Function to Handle Error Logging
+                            switch (body[i]['type']) {
+                                case 'CreateEvent':
+                                    await this.http.get(body[i]['repo']['url']).toPromise().then( res => {
+                                        newEvents.push(new CreateEvent(body[i], res['html_url']));
+                                    }).catch( createError => {
+                                        newEvents.push(new CreateEvent(body[i], 'https://github.com/tkottke/404error'));
                                     });
-                                }
+                                    break;
+                                case 'DeleteEvent':
+                                    break;
+                                case 'IssuesEvent':
+                                    newEvents.push(new IssuesEvent(body[i]));
+                                    break;
+                                case 'CommitCommentEvent':
+                                    newEvents.push(new CommitCommentEvent(body[i]));
+                                    break;
+                                case 'IssuesCommentEvent':
+                                    newEvents.push(new IssuesCommentEvent(body[i]));
+                                    break;
+                                case 'PushEvent':
+                                    const payload = body[i]['payload'];
+                                    const commits: Array<GithubCommit> = [];
 
-                                await this.http.get(body[i]['repo']['url']).toPromise().then( res => {
-                                    newEvents.push(new PushEvent(body[i], res['html_url'], commits));
-                                });
-                                break;
-                            case 'WatchEvent':
-                                newEvents.push(new WatchEvent(body[i]));
-                                break;
+                                    for (let c = 0; c < payload['commits'].length && c < 2; c++) {
+                                        const ID =  payload['commits'][c]['sha'].slice(0, 6);
+                                        const Message =  payload['commits'][c]['message'];
+                                        await this.http.get(payload['commits'][c]['url']).toPromise().then(res => {
+                                            commits.push(new GithubCommit(ID, Message, res['html_url']));
+                                        }).catch( pushErr => {
+                                            commits.push(new GithubCommit(ID, Message, 'https://github.com/tkottke/404error'));
+                                            // TODO - Add Firebase/Express Function to Handle Error Logging
+                                        });
+                                    }
+
+                                    await this.http.get(body[i]['repo']['url']).toPromise().then( res => {
+                                        newEvents.push(new PushEvent(body[i], res['html_url'], commits));
+                                    });
+                                    break;
+                                case 'WatchEvent':
+                                    newEvents.push(new WatchEvent(body[i]));
+                                    break;
+                            }
                         }
-                    }
 
-                    this.events.next(newEvents);
+                        this.events.next(newEvents);
+
+                    }
                     resolve('done');
-                }
+
             });
         });
     }
@@ -186,6 +195,9 @@ export class CreateEvent extends GithubEventData {
 
 export class PushEvent extends GithubEventData {
     commits: Array<GithubCommit> = [];
+    myBranch: string;
+
+    moreCommitsStr: string;
 
     constructor (
         instance: Object,
@@ -195,13 +207,12 @@ export class PushEvent extends GithubEventData {
         super(instance, EventTypes.Push);
         this.action_icon = eventIcons.Push;
         const payload = instance['payload'];
-        const branch = this.getBranch(payload['ref']);
+        this.myBranch = this.getBranch(payload['ref']);
 
         this.commits = com;
         this.message =
             // tslint:disable-next-line:max-line-length
-            `Thomas pushed to <a href="${gitURL}/tree/${branch}" target="_blank">${branch}</a> at <a href="${gitURL}" target="_blank">${this.Repo}</a>`;
-
+            `Thomas pushed to <a href="${gitURL}/tree/${this.myBranch}" target="_blank">${this.myBranch}</a> at <a href="${gitURL}" target="_blank">${this.Repo}</a>`;
         // console.log(this.message);
     }
 
