@@ -53,3 +53,10 @@
 .time {
     color: rgba(0,0,0,0.30);
 }
+
+.commits-col {
+
+    &__more-commits {
+        margin-left: 3em;
+    }
+}

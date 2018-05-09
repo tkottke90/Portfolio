@@ -46,7 +46,7 @@ export class GithubEventComponent {
                 if (event.objectInstance['payload']['commits'].length > 2) {
                     this.moreCommits = this.sanitizer.sanitize(SecurityContext.HTML,
                         // tslint:disable-next-line:max-line-length
-                        `<a href="https://github.com/${event.Repo}/commits/${event['myBranch']}" target="_blank">View Additional ${event.objectInstance['payload']['commits'].length - 2} Commits >></a>`);
+                        `<a href="https://github.com/${event.Repo}/commits/${event['myBranch']}" target="_blank">View additional ${event.objectInstance['payload']['commits'].length - 2} commits >></a>`);
                     console.log(this.moreCommits);
                 }
                 break;
