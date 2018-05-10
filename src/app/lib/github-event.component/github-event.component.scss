@@ -1,8 +1,41 @@
+@import '../../styles/_variables.scss';
+@import '../../styles/_theme.scss';
+
 .github-event {
     display: grid;
-    margin-bottom: 1em;
+    margin-left: 2em;
+    padding: 0 1em 2.5em 1em;
 
     grid-template-rows: 3em 1fr;
+
+    position: relative;
+
+    border-left: 3px solid mat-color($portfolio-primary, 900);
+    
+    &::before,
+    &::after {
+        position: absolute;
+        box-sizing: border-box;
+        content: '';
+        background-color: mat-color($portfolio-primary, 300);
+        border: 3px solid mat-color($portfolio-primary, 900);
+        border-radius: 50%;
+
+        width: 1em;
+        height: 1em;
+    }
+
+
+    &::before {
+        top: -0.5em;
+        left: -0.6em;        
+    }
+
+    &::after {
+        bottom: 0.75em;
+        left: 0.5em;
+    }
+
 
     &__header {
         grid-row: 1;
@@ -54,8 +87,25 @@
     color: rgba(0,0,0,0.30);
 }
 
-.commits-col {
+.commits-col,
+.comments,
+.merge-info {
+    position: relative;
 
+    &::after {
+        content: '';
+        position: absolute;
+
+        width: 2em;
+
+        border: 2px solid mat-color($portfolio-primary, 900);
+
+        transform: rotate(45deg);
+    }
+
+}
+
+.commits-col {
     &__more-commits {
         margin-left: 3em;
     }

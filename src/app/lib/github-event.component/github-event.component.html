@@ -6,7 +6,7 @@
     </div>
     
     <div *ngIf="event_type === 5" class="commits-col github-event__commits-col">
-        <app-github-commit *ngFor="let c of commits"
+        <app-github-commit  *ngFor="let c of commits"
         [avatar]='avatar'
         [commit]='c'></app-github-commit>
         <div class="more-commits commits-col__more-commits" [innerHTML]="moreCommits"></div>

@@ -1,7 +1,45 @@
 @import './styles/_variables.scss';
+@import './styles/_theme.scss';
 
 .content {
     background-image: url("..\assets\a-computer-on-a-white-desk-in-a-forest-sweden-BAAR61.jpg");
     height: 600px;
 }
 
+.Intro {
+    margin-bottom: 1em;
+}
+
+.psudo-test {
+    width: 50%;
+    margin-left: 2em;
+    padding: 0 1em 3em 1em;
+
+    position: relative;
+
+    border-left: 3px solid mat-color($portfolio-primary, 900);
+    
+    &::before,
+    &::after {
+        position: absolute;
+        box-sizing: border-box;
+        content: '';
+        background-color: mat-color($portfolio-primary, 500);
+        border: 3px solid mat-color($portfolio-primary, 900);
+        border-radius: 50%;
+
+        width: 1em;
+        height: 1em;
+    }
+
+
+    &::before {
+        top: -0.5em;
+        left: -0.6em;        
+    }
+
+    &::after {
+        bottom: 0.75em;
+        left: 0.5em;
+    }
+}
