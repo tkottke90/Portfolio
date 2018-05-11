@@ -5,6 +5,8 @@
         <h4 class="event-text header__event-text" [innerHTML]="header"></h4>
     </div>
     
+    
+
     <div *ngIf="event_type === 5" class="commits-col github-event__commits-col">
         <app-github-commit  *ngFor="let c of commits"
         [avatar]='avatar'
@@ -23,4 +25,6 @@
     <div *ngIf="event_type == 4" class="merge-info github-event__merge-info">
 
     </div>
+
+    <div class="connect-line"></div>
 </div>

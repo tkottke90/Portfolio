@@ -3,7 +3,7 @@
 
 .github-event {
     display: grid;
-    margin-left: 2em;
+    margin-left: 1em;
     padding: 0 1em 2.5em 1em;
 
     grid-template-rows: 3em 1fr;
@@ -14,10 +14,11 @@
     
     &::before,
     &::after {
+        
+        content: '';
         position: absolute;
         box-sizing: border-box;
-        content: '';
-        background-color: mat-color($portfolio-primary, 300);
+        background-color: mat-color($portfolio-primary, 200);
         border: 3px solid mat-color($portfolio-primary, 900);
         border-radius: 50%;
 
@@ -96,11 +97,15 @@
         content: '';
         position: absolute;
 
-        width: 2em;
+        width: 1em;
 
         border: 2px solid mat-color($portfolio-primary, 900);
+        background-color: mat-color($portfolio-primary, 900);
 
         transform: rotate(45deg);
+
+        left: -1.25em;
+        bottom: -0.75em;
     }
 
 }
