@@ -11,8 +11,11 @@
   <h2>I am a web developer from La Crosse, WI.  I have a passion for problem solving using clean and functional code.</h2>
 </div>
 
- <app-github-event *ngFor="let e of events"  [event]="e"></app-github-event>
-<!--
+<div class="github-events">
+ <app-github-event *ngFor="let e of events; let last = last;" [ngClass]="{ last: lastEvent }"  [event]="e"></app-github-event>
+</div>
+
+ <!--
 <div class="psudo-test"><p>Lorem ipsum dolor sit amet, eos mucius aliquip no, per solum placerat dignissim ex. Id eum ridens semper instructior, et volutpat suavitate reformidans pri. An mei nisl mazim expetendis, graeco delicatissimi et per, sumo brute eum cu. Et detraxit legendos mel, ea invenire sadipscing definitionem has. Usu ne duis apeirian nominati. </p></div>
 <div class="psudo-test"><p>Lorem ipsum dolor sit amet, eos mucius aliquip no, per solum placerat dignissim ex. Id eum ridens semper instructior, et volutpat suavitate reformidans pri. An mei nisl mazim expetendis, graeco delicatissimi et per, sumo brute eum cu. Et detraxit legendos mel, ea invenire sadipscing definitionem has. Usu ne duis apeirian nominati. </p></div>
 

@@ -1,5 +1,4 @@
-@import '../../styles/_variables.scss';
-@import '../../styles/_theme.scss';
+@import '../../styles/base.scss';
 
 .github-event {
     display: grid;
@@ -86,6 +85,21 @@
 
 .time {
     color: rgba(0,0,0,0.30);
+
+    @include media($breakpoint-phone){
+        font-style: 2.75em;
+    }
+}
+
+.event-text {
+
+    @include media($breakpoint-phone){
+        font-size: 3.5vw;
+
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
 }
 
 .commits-col,
@@ -113,5 +127,10 @@
 .commits-col {
     &__more-commits {
         margin-left: 3em;
+
+        @include media($breakpoint-phone){
+            margin-top: 1%;
+            font-size: 3.5vw;
+        }
     }
 }

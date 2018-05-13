@@ -12,7 +12,7 @@ import { GithubApiService,
 @Component({
     selector: 'app-github-event',
     templateUrl: './github-event.component.html',
-    styleUrls: [ './github-event.component.scss', './github-event.component.mobile.scss' ]
+    styleUrls: [ './github-event.component.scss' ]
 })
 export class GithubEventComponent {
     date: string;
