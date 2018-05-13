@@ -55,12 +55,12 @@ export class GithubEventComponent {
 
     genTimelineStr(date: Date): string {
         let diff = Date.now() - date.getTime();
-
+        
         const days = Math.floor( diff / (1000 * 60 * 60 * 24 ));
         diff -=  days * (1000 * 60 * 60 * 24);
         const hours = Math.floor( diff / (1000 * 60 * 60 ));
         diff -= hours * (1000 * 60 * 60);
-        const mins = Math.floor( diff / 1000 * 60 );
+        const mins = Math.floor( diff / (1000 * 60) );
         diff -= mins * (1000 * 60);
         const secs = Math.floor( diff / 1000 );
         diff -= secs * (1000);
