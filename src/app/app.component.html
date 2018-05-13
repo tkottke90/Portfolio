@@ -12,7 +12,7 @@
 </div>
 
 <div class="github-events">
- <app-github-event *ngFor="let e of events; let last = last;" [ngClass]="{ last: lastEvent }"  [event]="e"></app-github-event>
+ <app-github-event *ngFor="let e of events; let first = first; let last = last;" [event]="e"></app-github-event>
 </div>
 
  <!--
