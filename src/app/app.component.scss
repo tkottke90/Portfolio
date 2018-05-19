@@ -1,5 +1,4 @@
-@import './styles/_variables.scss';
-@import './styles/_theme.scss';
+@import './styles/base.scss';
 
 //github-events
 
@@ -9,6 +8,10 @@
     grid-template-rows: 6em 1fr;
 
     overflow-y: scroll;
+
+    @include media($breakpoint-phone){
+        max-height: 300px;
+    }
 
 
     &__githubuser {
@@ -44,11 +47,15 @@
     }
 }
 
+.github-logo {
+    padding: 0.3em;
+}
+
 .users-name {
-    padding-left: 1em;
+    padding-left: 1%;
 }
 
 .user-link {
-    padding-left: 1em;
+    padding-left: 5%;
 }
 // event-wrapper

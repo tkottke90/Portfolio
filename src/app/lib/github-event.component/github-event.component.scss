@@ -124,7 +124,7 @@
     color: rgba(0,0,0,0.30);
 
     @include media($breakpoint-phone){
-        font-style: 2.75em;
+        font-size: 4vw;
     }
 }
 
