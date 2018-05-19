@@ -1,7 +1,7 @@
 :host {
     display: grid;
 
-    grid-template-columns: 2em 2em 1fr;
+    grid-template-columns: 2rem 2rem 1fr;
 
     & .user-img {
         grid-column: 2;
@@ -24,4 +24,13 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+
+    line-height: 24px;
+    font-size: 0.75em;
+
+    & a {
+        font-size: 0.75em;
+    }
+
+    
 }

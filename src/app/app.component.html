@@ -15,8 +15,15 @@
       <h4 class="user-link githubuser__user-link"><a href="http://github.com/tkottke90" target="_blank">tkottke90</a></h4>
     </div>
     <div class="event-wrapper github-events__event-wrapper">
-      <app-github-event *ngFor="let e of events; first as first; last as last; " 
-        [ngClass]="{ isFirst : first, isMiddle : !first && !last, isLast : last }"  
+      <app-github-event 
+        *ngFor="let e of events; 
+                first as first; 
+                last as last; " 
+        [ngClass]="{ 
+          isFirst : first, 
+          isMiddle : !first && !last, 
+          isLast : last 
+        }"  
         [event]="e" ></app-github-event>
     </div>
   </mat-card>

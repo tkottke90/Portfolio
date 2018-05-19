@@ -5,7 +5,7 @@ import { GithubCommit } from '../../services/github-api.service';
 @Component({
     selector: 'app-github-commit',
     templateUrl: './github-commit.component.html',
-    styleUrls: [ './github-commit.component.scss', './github-commit.component.mobile.scss' ]
+    styleUrls: [ './github-commit.component.scss' ]
 })
 export class CommitComponent {
     messageHTML: SafeHtml;

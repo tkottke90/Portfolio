@@ -19,7 +19,7 @@
     margin-left: 1em;
     
 
-    grid-template-rows: 3em 1fr;
+    grid-template-rows: 1fr 5rem;
 
     position: relative;
 
@@ -97,7 +97,7 @@
 .header {
     display: grid;
 
-    grid-template-rows: 1.5em 2em;
+    grid-template-rows: 1fr 2em;
     grid-template-columns: 2em 1fr;
 
     &__icon {
@@ -117,25 +117,35 @@
 }
 
 .icon {
-    color:rgba(0,0,0,0.30);
+    color:rgba(0,0,0,0.50);
 }
 
 .time {
-    color: rgba(0,0,0,0.30);
+    color: rgba(0,0,0,0.50);
 
     @include media($breakpoint-phone){
-        font-size: 4vw;
+        font-size: 0.75rem;
     }
 }
 
 .event-text {
 
-    @include media($breakpoint-phone){
-        font-size: 3.5vw;
+    font-size: 1rem;
 
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
+    & a {
+        font-size: 1rem;
+    }
+
+    @include media($breakpoint-phone){
+        font-size: 0.8rem;
+
+        & a {
+            font-size: 0.8rem;
+        }
+
+        // white-space: nowrap;
+        // overflow: hidden;
+        // text-overflow: ellipsis;
     }
 }
 
@@ -165,9 +175,10 @@
     &__more-commits {
         margin-left: 3em;
 
+        font-size: 0.75rem;
+
         @include media($breakpoint-phone){
             margin-top: 1%;
-            font-size: 3.5vw;
         }
     }
 }
