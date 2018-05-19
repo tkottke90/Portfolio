@@ -19,7 +19,7 @@
     margin-left: 1em;
     
 
-    grid-template-rows: 1fr 5rem;
+    grid-template-rows: 3.5rem 1fr;
 
     position: relative;
 
@@ -123,9 +123,8 @@
 .time {
     color: rgba(0,0,0,0.50);
 
-    @include media($breakpoint-phone){
-        font-size: 0.75rem;
-    }
+    font-size: 0.75rem;
+    line-height: 24px;
 }
 
 .event-text {
