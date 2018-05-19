@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { GithubApiService, GithubEventData } from '../../services/github-api.service';
 
 @Component({
   selector: 'app-github-feed',
@@ -7,9 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GithubFeedComponent implements OnInit {
 
-  constructor() { }
+  events: Array<GithubEventData>;
 
-  ngOnInit() {
+  constructor(private ghapi: GithubApiService) { }
+
+  async ngOnInit () {
+    console.log(`ngOnInit Fired`);
+    await this.ghapi.getActivity().then( () => {
+      this.ghapi.events.subscribe({
+        next: (v) => this.events = v
+      });
+    }).catch( err => console.error(err) );
   }
 
 }

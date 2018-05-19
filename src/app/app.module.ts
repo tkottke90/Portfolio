@@ -42,7 +42,7 @@ import { CommentComponent } from './lib/github-comment.component/github-comment.
 
 // Custom Services
 import { GithubApiService } from './services/github-api.service';
-import { GithubFeedComponent } from './github-feed/github-feed.component';
+import { GithubFeedComponent } from './lib/github-feed/github-feed.component';
 
 
 @NgModule({

@@ -6,27 +6,7 @@
     <h2>Contact</h2>
   </mat-toolbar>
 <div class="content">
-  <mat-card class="github-events">
-    <div class="githubuser github-events__githubuser">
-      
-      <img class="github-logo githubuser__github-logo" src="../assets/GitHub-Mark-120px-plus.png"  href="https://github.com/"  alt="User Img">
-      
-      <h2 class="users-name githubuser__users-name" >Thomas Kottke</h2>
-      <h4 class="user-link githubuser__user-link"><a href="http://github.com/tkottke90" target="_blank">tkottke90</a></h4>
-    </div>
-    <div class="event-wrapper github-events__event-wrapper">
-      <app-github-event 
-        *ngFor="let e of events; 
-                first as first; 
-                last as last; " 
-        [ngClass]="{ 
-          isFirst : first, 
-          isMiddle : !first && !last, 
-          isLast : last 
-        }"  
-        [event]="e" ></app-github-event>
-    </div>
-  </mat-card>
+    <app-github-feed></app-github-feed>
 </div>
  <!--
 <div class="psudo-test"><p>Lorem ipsum dolor sit amet, eos mucius aliquip no, per solum placerat dignissim ex. Id eum ridens semper instructior, et volutpat suavitate reformidans pri. An mei nisl mazim expetendis, graeco delicatissimi et per, sumo brute eum cu. Et detraxit legendos mel, ea invenire sadipscing definitionem has. Usu ne duis apeirian nominati. </p></div>
