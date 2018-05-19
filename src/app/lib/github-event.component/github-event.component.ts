@@ -47,7 +47,6 @@ export class GithubEventComponent {
                     this.moreCommits = this.sanitizer.sanitize(SecurityContext.HTML,
                         // tslint:disable-next-line:max-line-length
                         `<a href="https://github.com/${event.Repo}/commits/${event['myBranch']}" target="_blank">View additional ${event.objectInstance['payload']['commits'].length - 2} commits >></a>`);
-                    console.log(this.moreCommits);
                 }
                 break;
         }
@@ -55,7 +54,6 @@ export class GithubEventComponent {
 
     genTimelineStr(date: Date): string {
         let diff = Date.now() - date.getTime();
-        
         const days = Math.floor( diff / (1000 * 60 * 60 * 24 ));
         diff -=  days * (1000 * 60 * 60 * 24);
         const hours = Math.floor( diff / (1000 * 60 * 60 ));
