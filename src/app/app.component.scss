@@ -1,21 +1,15 @@
 @import './styles/_variables.scss';
 @import './styles/_theme.scss';
 
-.content {
-    background-image: url("..\assets\a-computer-on-a-white-desk-in-a-forest-sweden-BAAR61.jpg");
-    height: 600px;
-}
-
-.Intro {
-    margin-bottom: 1em;
-}
-
 //github-events
 
 .github-events {
 
     display: grid;
-    grid-template-rows: 5em 1fr;
+    grid-template-rows: 6em 1fr;
+
+    overflow-y: scroll;
+
 
     &__githubuser {
         grid-row: 1;
@@ -33,7 +27,7 @@
     grid-template-rows: 2em 1fr;
     grid-template-columns: 5em 1fr;
 
-    &__user-img {
+    &__github-logo {
         grid-row: 1/2;
         grid-column: 1;
         width: 100%;
@@ -50,22 +44,18 @@
     }
 }
 
+.github-logo {
+    padding: 0.05em;
+    border: 3px solid mat-color($portfolio-primary, 900);
+    border-radius: 50%;
+
+}
+
+.users-name {
+    padding-left: 1em;
+}
+
+.user-link {
+    padding-left: 1em;
+}
 // event-wrapper
-
-.event-wrapper {
-    overflow-y: scroll;
-}
-
-.test { height: 10px; width: 100%; }
-
-app-github-event {
-    & .isFirst { background-color: blue; }
-}
-
-// footer
-
-footer {
-    width: 100%;
-    height: 50px;
-    background-color: mat-color($portfolio-primary);
-}
