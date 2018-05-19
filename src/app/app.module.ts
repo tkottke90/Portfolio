@@ -42,6 +42,7 @@ import { CommentComponent } from './lib/github-comment.component/github-comment.
 
 // Custom Services
 import { GithubApiService } from './services/github-api.service';
+import { GithubFeedComponent } from './github-feed/github-feed.component';
 
 
 @NgModule({
@@ -49,7 +50,8 @@ import { GithubApiService } from './services/github-api.service';
     AppComponent,
     CommentComponent,
     CommitComponent,
-    GithubEventComponent
+    GithubEventComponent,
+    GithubFeedComponent
   ],
   imports: [
     BrowserModule,
