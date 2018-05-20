@@ -1,12 +1,208 @@
 @import './styles/base.scss';
 
+$line-outline: 3px solid mat-color($portfolio-primary, 900);    
 
 .content {
     display: flex;
     justify-content: center;
+    flex-direction: column;
 }
 
-//github-events
+.projects {
+
+    min-width: 400px;
+    margin: 2rem 0 0 2rem;
+
+    display: grid;
+    grid-template-rows: 4rem 1fr;
+
+    &__header {
+        grid-row: 1;
+    }
+
+    &__collection {
+        grid-row: 2;
+    }
+}
+
+.header {
+
+    position: relative;
+
+    border-left: $line-outline;
+    border-bottom: $line-outline;
+
+    padding: 1rem;
+
+    &::before {
+        position: absolute;
+
+        content: '';
+        width: 2rem;
+        height: 2rem;
+
+        background-color: mat-color($portfolio-primary);
+        border: $line-outline;  
+        border-radius: 50%;
+
+        left: -1.3rem;
+        top: -1rem;
+        
+    }
+
+    &::after {
+        content: '';
+        position: absolute;
+        width: 1.5rem;
+        height: 1.5rem;
+        background-color: mat-color($portfolio-primary);
+        border: $line-outline;
+        border-radius: 50%;
+
+        top: 2.9rem;
+        left: -1rem;
+    }
+}
+
+.collection {
+
+    display:flex;
+    justify-content: start;
+
+    flex-direction: column;
+
+    padding-top: 2.5rem;
+    padding-left: 2rem;
+
+    border-left: $line-outline;
+
+}
+
+.project {
+    
+    width: 80%;
+
+    margin: 1rem;
+    position: relative;
+
+    &:hover {
 
 
-// event-wrapper
+        &::before {
+            background-color: mat-color($portfolio-accent);
+            border-color: mat-color($portfolio-primary);
+        }
+
+        & mat-card-header {
+
+
+            &::before, &::after {
+                background-color: mat-color($portfolio-accent);
+                border-color: mat-color($portfolio-primary);
+            }
+    
+    
+        }
+    }
+
+    &::before {
+        content: '';
+        position: absolute;
+        width: 1.5rem;
+        height: 1.5rem;
+        background-color: mat-color($portfolio-primary);
+        border: $line-outline;
+        border-radius: 50%;
+
+        top: -0.75rem;
+        left: -0.75rem;
+        z-index: -1;
+
+        transition: 1s;
+
+    }
+
+
+
+}
+
+.project2 {
+    
+    width: 75%;
+
+    margin: 1rem;
+    position: relative;
+
+    &:hover {
+        
+        &::before {
+            background-color: mat-color($portfolio-accent);
+            border-color: mat-color($portfolio-accent, 900);
+        }
+
+        & mat-card-header {
+            
+            &::before, 
+            &::after {
+                background-color: mat-color($portfolio-accent);
+                border-color: mat-color($portfolio-accent, 900);
+            }
+        }
+    }
+
+    &::before {
+        content: '';
+        position: absolute;
+        width: 1.5rem;
+        height: 1.5rem;
+        background-color: mat-color($portfolio-primary);
+        opacity: 25%;
+        border: $line-outline;
+        border-radius: 50%;
+
+        top: -0.75rem;
+        left: -0.75rem;
+
+        transition: 1s;
+
+    }
+
+}
+
+.project,
+.project2 {
+    & mat-card-header::before {
+        content: '';
+        position: absolute;
+
+        width: 3em;
+
+        border: 2px solid mat-color($portfolio-primary, 900);
+        border-radius: 5%;
+        background-color: mat-color($portfolio-primary, 900);
+
+        transform: rotate(45deg);
+
+        left: -2.5rem;
+        top: -1rem;
+
+        z-index: -2;
+    }
+
+    & mat-card-header::after {
+        content: '';
+        position: absolute;
+
+        width: 0.9rem;
+
+        border: 2px solid mat-color($portfolio-primary, 900);
+        border-radius: 5%;
+        background-color: mat-color($portfolio-primary, 900);
+
+        left: -3rem;
+        top: -2.05rem;
+
+        z-index: -2;
+    }
+
+}
