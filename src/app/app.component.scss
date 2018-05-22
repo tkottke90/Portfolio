@@ -1,17 +1,24 @@
 @import './styles/base.scss';
 
-$line-outline: 3px solid mat-color($portfolio-primary, 900);    
+// $line-outline: 3px solid mat-color($portfolio-primary, 900);    
 
 .content {
+    width: 100%;
     display: flex;
-    justify-content: center;
+    //align-items: center;
     flex-direction: column;
+
+    max-width: 750px;
+    margin: 1rem auto 0 auto;
+    //padding: 0 1rem 0 1rem;
+
+
 }
 
 .projects {
 
     min-width: 400px;
-    margin: 2rem 0 0 2rem;
+    margin: 0 0 0 2rem;
 
     display: grid;
     grid-template-rows: 4rem 1fr;
@@ -38,14 +45,14 @@ $line-outline: 3px solid mat-color($portfolio-primary, 900);
         position: absolute;
 
         content: '';
-        width: 2rem;
-        height: 2rem;
+        width: 1rem;
+        height: 1rem;
 
-        background-color: mat-color($portfolio-primary);
+        background-color: mat-color($portfolio-primary, 200);
         border: $line-outline;  
         border-radius: 50%;
 
-        left: -1.3rem;
+        left: -0.75rem;
         top: -1rem;
         
     }
@@ -53,14 +60,14 @@ $line-outline: 3px solid mat-color($portfolio-primary, 900);
     &::after {
         content: '';
         position: absolute;
-        width: 1.5rem;
-        height: 1.5rem;
-        background-color: mat-color($portfolio-primary);
+        width: 1rem;
+        height: 1rem;
+        background-color: mat-color($portfolio-primary, 200);
         border: $line-outline;
         border-radius: 50%;
 
-        top: 2.9rem;
-        left: -1rem;
+        bottom: -0.6rem;
+        left: -0.75rem;
     }
 }
 
@@ -90,7 +97,7 @@ $line-outline: 3px solid mat-color($portfolio-primary, 900);
 
         &::before {
             background-color: mat-color($portfolio-accent);
-            border-color: mat-color($portfolio-primary);
+            border-color: mat-color($portfolio-primary, 200);
         }
 
         & mat-card-header {
@@ -110,7 +117,7 @@ $line-outline: 3px solid mat-color($portfolio-primary, 900);
         position: absolute;
         width: 1.5rem;
         height: 1.5rem;
-        background-color: mat-color($portfolio-primary);
+        background-color: mat-color($portfolio-primary, 200);
         border: $line-outline;
         border-radius: 50%;
 
@@ -153,9 +160,9 @@ $line-outline: 3px solid mat-color($portfolio-primary, 900);
     &::before {
         content: '';
         position: absolute;
-        width: 1.5rem;
-        height: 1.5rem;
-        background-color: mat-color($portfolio-primary);
+        width: 1rem;
+        height: 1rem;
+        background-color: mat-color($portfolio-primary, 200);
         opacity: 25%;
         border: $line-outline;
         border-radius: 50%;
@@ -163,7 +170,7 @@ $line-outline: 3px solid mat-color($portfolio-primary, 900);
         top: -0.75rem;
         left: -0.75rem;
 
-        transition: 1s;
+        transition: 1.5s ease-out;
 
     }
 
@@ -185,6 +192,7 @@ $line-outline: 3px solid mat-color($portfolio-primary, 900);
 
         left: -2.5rem;
         top: -1rem;
+        transition: 1.5s ease-out;
 
         z-index: -2;
     }
@@ -201,6 +209,7 @@ $line-outline: 3px solid mat-color($portfolio-primary, 900);
 
         left: -3rem;
         top: -2.05rem;
+        transition: 1s ease-out;
 
         z-index: -2;
     }

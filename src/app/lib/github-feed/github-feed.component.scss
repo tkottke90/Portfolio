@@ -1,5 +1,51 @@
 @import '../../styles/base.scss';
 
+$line-outline: 3px solid mat-color($portfolio-primary, 900);   
+
+.feed-wrapper {
+    margin: 0 0 0 2rem;
+
+    border-left: $line-outline;
+    padding-bottom: 1rem;
+}
+
+.feed-header {
+    position: relative;
+
+    border-bottom: $line-outline;
+
+    padding: 1rem;
+
+    &::before {
+        position: absolute;
+
+        content: "";
+        width: 1rem;
+        height: 1rem;
+
+        background-color: mat-color($portfolio-primary, 200);
+        border: $line-outline;  
+        border-radius: 50%;
+
+        left: -0.75rem;
+        top: -1rem;
+        
+    }
+
+    &::after {
+        content: '';
+        position: absolute;
+        width: 1rem;
+        height: 1rem;
+        background-color: mat-color($portfolio-primary, 200);
+        border: $line-outline;
+        border-radius: 50%;
+
+        left: -0.75rem;
+        bottom: -0.75rem;
+    }
+}
+
 .github-events {
 
     display: grid;
@@ -7,13 +53,13 @@
 
     overflow-y: scroll;
 
-    max-width: 1024px;
+    max-width: 600px;
+    margin: 0 auto;
 
     @include media($breakpoint-phone){
         max-height: 300px;
         margin: 1rem;
     }
-
 
     &__githubuser {
         grid-row: 1;
