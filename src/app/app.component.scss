@@ -188,10 +188,10 @@
         border-radius: 5%;
         background-color: mat-color($portfolio-primary, 900);
 
-        transform: rotate(45deg);
+        transform: rotate(-45deg);
 
         left: -2.5rem;
-        top: -1rem;
+        top: 0.5rem;
         transition: 1.5s ease-out;
 
         z-index: -2;
@@ -208,7 +208,7 @@
         background-color: mat-color($portfolio-primary, 900);
 
         left: -3rem;
-        top: -2.05rem;
+        top: 1.575rem;
         transition: 1s ease-out;
 
         z-index: -2;
