@@ -3,16 +3,14 @@
 $line-outline: 3px solid mat-color($portfolio-primary, 900);   
 
 .feed-wrapper {
-    margin: 1rem 0 0 2rem;
-
-    border-left: $line-outline;
+    margin: 1rem 0 3rem 2rem;
     padding-bottom: 1rem;
 }
 
 .feed-header {
     position: relative;
 
-    border-bottom: $line-outline;
+    border-left: $line-outline;
 
     padding: 1rem;
 
