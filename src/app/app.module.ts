@@ -44,6 +44,7 @@ import { ProjectContainerComponent } from './lib/project-container/project-conta
 
 // Custom Services
 import { GithubApiService } from './services/github-api.service';
+import { ProjectCardComponent } from './lib/project-card/project-card.component';
 
 
 @NgModule({
@@ -53,7 +54,8 @@ import { GithubApiService } from './services/github-api.service';
     CommitComponent,
     GithubEventComponent,
     GithubFeedComponent,
-    ProjectContainerComponent
+    ProjectContainerComponent,
+    ProjectCardComponent
   ],
   imports: [
     BrowserModule,
