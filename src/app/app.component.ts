@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FirestoreService, Project } from './services/firestore.service';
 
 @Component({
   selector: 'app-root',
@@ -8,7 +9,17 @@ import { Component, OnInit } from '@angular/core';
 export class AppComponent implements OnInit {
   title = 'app';
 
-  constructor() { }
+  projects: Project[];
 
-  ngOnInit () { }
+  constructor(private AF: FirestoreService) { }
+
+  ngOnInit () {
+
+    this.AF.projects.subscribe(
+      (projects) => {
+        console.log(projects);
+      }
+    );
+
+   }
 }

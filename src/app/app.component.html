@@ -13,38 +13,9 @@
     <h1 class="header projects__header">Sample Work</h1>
     <div class="collection  projects__collection">
 
-      <mat-card class="project2">
-        <mat-card-header>  
-          <h3 class="title project__title">Best Project Name</h3>
-        </mat-card-header>
-        <mat-card-content>
-          <p class="desc project__desc">This is a description of the project</p>
-        </mat-card-content>
-        <mat-card-actions>
-          <button mat-button class="details project__details" >Details</button>
-          <button mat-button class="link project__link">Github</button>
-        </mat-card-actions>
-      </mat-card>
-
-      <mat-card class="project2">
-          <mat-card-header>  
-            <h3 class="title project__title">Other Best Project Name</h3>
-          </mat-card-header>
-          <mat-card-content>
-            <p class="desc project__desc">This is a description of the project</p>
-          </mat-card-content>
-          <mat-card-actions>
-            <button mat-button class="details project__details" >Details</button>
-            <button mat-button class="link project__link">Github</button>
-          </mat-card-actions>
-        </mat-card>
+      <app-project-card *ngFor="let p of projects" [project]="p"></app-project-card>
 
     </div>
   </div>
 
 </div>
- <!--
-<div class="psudo-test"><p>Lorem ipsum dolor sit amet, eos mucius aliquip no, per solum placerat dignissim ex. Id eum ridens semper instructior, et volutpat suavitate reformidans pri. An mei nisl mazim expetendis, graeco delicatissimi et per, sumo brute eum cu. Et detraxit legendos mel, ea invenire sadipscing definitionem has. Usu ne duis apeirian nominati. </p></div>
-<div class="psudo-test"><p>Lorem ipsum dolor sit amet, eos mucius aliquip no, per solum placerat dignissim ex. Id eum ridens semper instructior, et volutpat suavitate reformidans pri. An mei nisl mazim expetendis, graeco delicatissimi et per, sumo brute eum cu. Et detraxit legendos mel, ea invenire sadipscing definitionem has. Usu ne duis apeirian nominati. </p></div>
-
--->

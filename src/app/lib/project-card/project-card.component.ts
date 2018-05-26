@@ -9,14 +9,12 @@ import { Project } from '../../services/firestore.service';
 })
 export class ProjectCardComponent implements OnInit {
 
-  @Input()
-  set project (project: Project) {
-
-  }
+  @Input() project: Project;
 
   constructor() { }
 
   ngOnInit() {
+
   }
 
 }
