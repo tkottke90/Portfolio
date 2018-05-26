@@ -39,10 +39,11 @@ import { AppComponent } from './app.component';
 import { GithubEventComponent } from './lib/github-event.component/github-event.component';
 import { CommitComponent } from './lib/github-commit.component/github-commit.component';
 import { CommentComponent } from './lib/github-comment.component/github-comment.component';
+import { GithubFeedComponent } from './lib/github-feed/github-feed.component';
+import { ProjectContainerComponent } from './lib/project-container/project-container.component';
 
 // Custom Services
 import { GithubApiService } from './services/github-api.service';
-import { GithubFeedComponent } from './lib/github-feed/github-feed.component';
 
 
 @NgModule({
@@ -51,7 +52,8 @@ import { GithubFeedComponent } from './lib/github-feed/github-feed.component';
     CommentComponent,
     CommitComponent,
     GithubEventComponent,
-    GithubFeedComponent
+    GithubFeedComponent,
+    ProjectContainerComponent
   ],
   imports: [
     BrowserModule,
