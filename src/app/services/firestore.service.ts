@@ -7,16 +7,39 @@ export class FirestoreService {
 
     DBROOT = '';
 
-    constructor(public AFstore: AngularFirestore) {
 
+
+    testA = new Project();
+
+    constructor(public AFstore: AngularFirestore) {
+        this.testSetup();
+
+        AFstore.collection('Projects').ref.get().then(snapshot => {
+            snapshot.forEach(doc => {
+
+            });
+        });
+    }
+
+    testSetup() {
+        this.testA.id = 1;
+        this.testA.name = 'Personal Portfolio';
+        this.testA.description = 'This project to display my web design and development work for potential employers';
+        this.testA.url.source = 'https://github.com/tkottke90/Portfolio';
+        this.testA.url.project = 'https://op-7f877.firebaseapp.com/';
+        this.testA.addData('Languages', 'Typescript, HTML5, SASS');
+        this.testA.addData('Framework', 'Angular 5');
+        this.testA.addData('Hosting', 'Firebase');
 
     }
 
 }
 
+
 export class Project {
-    id: string;
+    id: number;
     name: string;
+    description: string;
 
     url: {
         project: string;
