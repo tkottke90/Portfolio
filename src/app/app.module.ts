@@ -39,11 +39,12 @@ import { AppComponent } from './app.component';
 import { GithubEventComponent } from './lib/github-event.component/github-event.component';
 import { CommitComponent } from './lib/github-commit.component/github-commit.component';
 import { CommentComponent } from './lib/github-comment.component/github-comment.component';
+import { FrameAboutComponent } from './frames/frame-about/frame-about.component';
+
 
 // Custom Services
 import { GithubApiService } from './services/github-api.service';
 import { GithubFeedComponent } from './lib/github-feed/github-feed.component';
-
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import { GithubFeedComponent } from './lib/github-feed/github-feed.component';
     CommentComponent,
     CommitComponent,
     GithubEventComponent,
-    GithubFeedComponent
+    GithubFeedComponent,
+    FrameAboutComponent
   ],
   imports: [
     BrowserModule,
