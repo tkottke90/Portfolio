@@ -11,7 +11,7 @@
   
   <div class="projects">
     <h1 class="header projects__header">Sample Work</h1>
-    <div class="collection  projects__collection">
+    <div *ngIf="projects"  class="collection  projects__collection">
 
       <app-project-card *ngFor="let p of projects" [project]="p"></app-project-card>
 

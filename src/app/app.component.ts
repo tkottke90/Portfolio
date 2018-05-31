@@ -9,7 +9,7 @@ import { FirestoreService, Project } from './services/firestore.service';
 export class AppComponent implements OnInit {
   title = 'app';
 
-  projects: Project[];
+  projects: Project[] = [];
 
   constructor(private AF: FirestoreService) { }
 
@@ -17,9 +17,9 @@ export class AppComponent implements OnInit {
 
     this.AF.projects.subscribe(
       (projects) => {
+        this.projects = projects;
         console.log(projects);
       }
     );
-
    }
 }
