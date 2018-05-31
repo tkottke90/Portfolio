@@ -13,8 +13,10 @@ export class ProjectCardComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
+  ngOnInit() { console.log(this.project.URLs.source); }
 
+  onNavigate(url: string) {
+    console.log(`navigate to: `);
   }
 
 }

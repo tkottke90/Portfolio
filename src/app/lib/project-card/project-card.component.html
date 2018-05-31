@@ -7,6 +7,6 @@
   </mat-card-content>
   <mat-card-actions>
     <button mat-button class="details project__details" >Details</button>
-    <button mat-button class="link project__link">Github</button>
+    <a *ngIf="project.URLs.source" mat-button  href="{{ project.URLs.source }}" target="_blank" class="link project__link">Github</a>
   </mat-card-actions>
 </mat-card>

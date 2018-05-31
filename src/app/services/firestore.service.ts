@@ -30,6 +30,8 @@ export class FirestoreService {
         });
     }
 
+    addData() {}  // TO-DO Add interface to allow me to add/delete projects via a UI on the site
+
 }
 
 
