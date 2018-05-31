@@ -78,3 +78,33 @@
     }
 
 }
+
+mat-card-header {
+    padding-bottom: 1rem
+}
+
+.mat-card-text {
+    display: none;
+}
+
+.title {
+    color: mat-color($portfolio-primary, 900);
+}
+
+.icon-conatiner {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.project-icon {
+    
+}
+
+mat-card-actions {
+    @include media($breakpoint-phone) {
+        display: flex;
+        flex-direction: column;
+        justify-content: start;
+    }
+}
