@@ -1,0 +1,14 @@
+{
+    "Angular2": "angular",
+    "Create": "pencil",
+    "Comment" : "forum",
+    "Delete": "delete-forever",
+    "Github" : "github-circle",
+    "HTML5" : "language-html5",
+    "Issue" : "clipboard-alert",
+    "Merge" : "source-merge",
+    "Push": "arrow-up-bold-hexagon-outline",
+    "SASS": "sass",
+    "Typescript": "language-typescript",
+    "Watch": "eye"
+}
