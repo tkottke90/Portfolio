@@ -37,7 +37,7 @@
         top: -0.75rem;
         left: -0.75rem;
 
-        transition: 1.5s ease-out;
+        transition: 500ms ease-out;
 
     }
 
@@ -55,7 +55,7 @@
 
         left: -2.5rem;
         top: 0.5rem;
-        transition: 1.5s ease-out;
+        transition: 500ms ease-out;
 
         z-index: -2;
     }
@@ -72,7 +72,7 @@
 
         left: -3rem;
         top: 1.575rem;
-        transition: 1s ease-out;
+        transition: 500ms ease-out;
 
         z-index: -2;
     }
@@ -97,14 +97,17 @@ mat-card-header {
     justify-content: space-evenly;
 }
 
-.project-icon {
-    
-}
-
 mat-card-actions {
+    display: flex;
+    justify-content: space-evenly;
+
     @include media($breakpoint-phone) {
         display: flex;
         flex-direction: column;
         justify-content: start;
     }
+}
+
+mat-card-actions .mat-button {
+    color: mat-color($portfolio-accent, 900);
 }
