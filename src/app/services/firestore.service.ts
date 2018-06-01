@@ -47,6 +47,8 @@ export interface Project {
 
     Images: string[];
 
+    Icons: object;
+
     Data: object;
 }
 
@@ -60,6 +62,8 @@ export class NewProject implements Project {
     };
 
     Images: string[];
+
+    Icons: object;
 
     Data: object;
 

@@ -11,12 +11,13 @@ export class ProjectCardComponent implements OnInit {
 
   @Input() project: Project;
 
+  icons: string[] = [];
+
   constructor() { }
 
-  ngOnInit() { console.log(this.project.URLs.source); }
-
-  onNavigate(url: string) {
-    console.log(`navigate to: `);
+  ngOnInit() {
+    this.icons = Object.keys(this.project.Icons);
   }
+
 
 }
