@@ -31,6 +31,7 @@ import {
   MatSidenavModule,
   MatSlideToggleModule,
   MatStepperModule,
+  MatTooltip,
   MatProgressSpinnerModule,
   MatNativeDateModule} from '@angular/material';
 
@@ -101,6 +102,7 @@ import { FirestoreService } from './services/firestore.service';
     MatSidenavModule,
     MatSlideToggleModule,
     MatStepperModule,
+    MatTooltip,
     MatProgressSpinnerModule,
     MatNativeDateModule
   ],
