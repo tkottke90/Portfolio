@@ -43,7 +43,7 @@ export class GithubApiService {
                         const newEvents = new Array<GithubEventData>();
 
 
-                        for (let i = 0; (i < body.length  && i < 6 ); i++) {
+                        for (let i = 0; (i < body.length  && i < 30 ); i++) {
 
                             switch (body[i]['type']) {
                                 case 'CreateEvent':
@@ -184,10 +184,28 @@ export class CreateEvent extends GithubEventData {
     ) {
         super(instance, EventTypes.Create);
         this.action_icon = eventIcons.Create;
-        this.message = `Thomas created new repo called <a href="${gitURL}" target="_blank">${instance['repo']['name'].split('/')[1]}<a>`;
+        this.message = this.genMessage(gitURL);
         this.objectInstance = instance;
 
         // console.log(this.message);
+    }
+
+    genMessage(URL) {
+        switch (this.objectInstance['payload']['ref_type']) {
+            case 'repository':
+                // tslint:disable-next-line:max-line-length
+                return `Thomas created new repo called <a href="${URL}" target="_blank">${this.objectInstance['repo']['name'].split('/')[1]}<a>`;
+            case 'branch':
+                const branchName = this.objectInstance['payload']['ref'];
+                // tslint:disable-next-line:max-line-length
+                return `Thomas created <a href="${URL}/tree/${branchName}" target="blank">${branchName}</a> in <a href="${URL} target="_blank">${this.objectInstance['repo']['name'].split('/')[1]}<a>`;
+            case 'tag':
+                const tag = this.objectInstance['payload']['ref'];
+                // tslint:disable-next-line:max-line-length
+                return `Thomas created tag [${tag}] for <a href="${URL} target="_blank">${this.objectInstance['repo']['name'].split('/')[1]}<a>`;
+            default:
+                return `Error in CreateEvent`;
+        }
     }
 
 }
