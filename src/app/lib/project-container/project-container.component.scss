@@ -18,6 +18,10 @@
 
         max-width: 935px;
     }
+
+    @include between($breakpoint-phone, $breakpoint-project-grid){
+        max-width: 600px;
+    }
 }
 
 .header {
