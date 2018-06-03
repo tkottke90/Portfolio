@@ -4,6 +4,13 @@
     }
 }
 
+@mixin between($widthA, $widthB){
+    @media screen and (min-width: $widthA)
+                  and (max-width: $widthB) {
+        @content
+    }
+}
+
 @mixin big-media($width) {
     @media not screen and (max-width: $width) {
         @content;
