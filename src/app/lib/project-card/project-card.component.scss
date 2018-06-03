@@ -33,10 +33,23 @@
         opacity: 25%;
         border: $line-outline;
         border-radius: 50%;
-
+        
         top: -0.75rem;
         left: -0.75rem;
+    
+        @include big-media($breakpoint-project-grid) {
+            :host.isEven & {
+                top: -0.75rem;
+                left: -0.75rem;
+            }
+    
+            :host.isOdd & {
+                top: -0.75rem;
+                left: 19.5rem;
+            }
+        }
 
+        
         transition: 500ms ease-out;
 
     }
@@ -55,6 +68,17 @@
 
         left: -2.5rem;
         top: 0.5rem;
+
+        @include big-media($breakpoint-project-grid) {
+            :host.isEven & {
+                left: -2.5rem;
+            }
+    
+            :host.isOdd & {
+                left: 19.25rem;
+                transform: rotate(45deg);
+            }
+        }
         transition: 500ms ease-out;
 
         z-index: -2;
@@ -72,6 +96,16 @@
 
         left: -3rem;
         top: 1.575rem;
+
+        @include big-media($breakpoint-project-grid) {
+            :host.isEven & {
+                left: -3rem;
+            }
+    
+            :host.isOdd & {
+                left: 22rem;
+            }
+        }
         transition: 500ms ease-out;
 
         z-index: -2;

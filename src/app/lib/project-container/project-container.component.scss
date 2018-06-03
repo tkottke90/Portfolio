@@ -36,7 +36,7 @@
         background-color: mat-color($portfolio-primary, 200);
         border: $line-outline;  
         border-radius: 50%;
-
+        
         left: -0.75rem;
         top: -1rem;
         
@@ -61,10 +61,11 @@
     display:flex;
     justify-content: start;
 
-    flex-direction: column;
+    flex-wrap: wrap;
 
     padding-top: 2.5rem;
     padding-left: 2rem;
+    padding-right: 2rem;
 
     border-left: $line-outline;
 

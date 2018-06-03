@@ -2,7 +2,10 @@
     <h1 class="header projects__header">Sample Work</h1>
     <div *ngIf="projects"  class="collection  projects__collection">
 
-      <app-project-card *ngFor="let p of projects" [project]="p"></app-project-card>
+      <app-project-card *ngFor="let p of projects; even as isEven; odd as isOdd" 
+                        [project]="p"
+                        [ngClass]="{ isEven: isEven, isOdd : isOdd }">
+      </app-project-card>
 
     </div>
   </div>
