@@ -1,0 +1,8 @@
+<button matButton (click)="toggleView();">Swap</button>
+
+<div class="panelA" [@PanelAStates]="this.panelA">
+    <app-github-feed></app-github-feed>
+    <app-project-container></app-project-container>
+</div>
+
+<div class="panelB" [@PanelBStates]="this.panelB">This is Panel B</div>
