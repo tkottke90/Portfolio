@@ -29,6 +29,7 @@ import { ProjectDisplayService } from '../../services/project.display';
                 transform: 'translateX(100%)',
                 opacity: 0
             })),
+            transition(':enter', animate('500ms ease-in-out')),
             transition('active => inactive', animate('500ms ease-in-out')),
             transition('inactive => active', animate('500ms ease-in-out'))
         ]),
@@ -61,5 +62,7 @@ export class WorkFrameComponent {
     setView(pA: boolean) {
         this.panelA = pA ? 'active' : 'inactive';
         this.panelB = pA ? 'inactive' : 'active';
+
+        if (!pA) { window.scrollTo(0, 0); }
     }
 }
