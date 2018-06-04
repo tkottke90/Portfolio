@@ -22,10 +22,12 @@ import { ProjectDisplayService } from '../../services/project.display';
         ]),
         trigger('PanelBStates', [
             state('active', style({
-                transform: 'translateX(0)'
+                transform: 'translateX(0)',
+                opacity: 1
             })),
             state('inactive', style({
-                transform: 'translateX(100%)'
+                transform: 'translateX(100%)',
+                opacity: 0
             })),
             transition('active => inactive', animate('500ms ease-in-out')),
             transition('inactive => active', animate('500ms ease-in-out'))
