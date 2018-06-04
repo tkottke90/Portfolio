@@ -49,6 +49,7 @@ import { WorkFrameComponent } from './frames/work.frame.component/work.frame.com
 // Custom Services
 import { GithubApiService } from './services/github-api.service';
 import { FirestoreService } from './services/firestore.service';
+import { ProjectDisplayService } from './services/project.display';
 
 @NgModule({
   declarations: [
@@ -108,7 +109,7 @@ import { FirestoreService } from './services/firestore.service';
     MatProgressSpinnerModule,
     MatNativeDateModule
   ],
-  providers: [ GithubApiService, FirestoreService ],
+  providers: [ GithubApiService, FirestoreService, ProjectDisplayService ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

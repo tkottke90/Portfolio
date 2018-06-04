@@ -1,5 +1,8 @@
 import { Component, trigger, state, style, animate, transition } from '@angular/core';
 
+import { Project, NewProject } from '../../services/firestore.service';
+import { ProjectDisplayService } from '../../services/project.display';
+
 @Component({
     selector: 'app-work-frame',
     templateUrl: './work.frame.component.html',
@@ -19,11 +22,10 @@ import { Component, trigger, state, style, animate, transition } from '@angular/
         ]),
         trigger('PanelBStates', [
             state('active', style({
-                transform: 'translateX(0)',
+                transform: 'translateX(0)'
             })),
             state('inactive', style({
-                transform: 'translateX(100%)',
-                
+                transform: 'translateX(100%)'
             })),
             transition('active => inactive', animate('500ms ease-in-out')),
             transition('inactive => active', animate('500ms ease-in-out'))
@@ -35,13 +37,27 @@ export class WorkFrameComponent {
     panelA = 'active';
     panelB = 'inactive';
 
+    selectedProject: Project;
 
-    toggleView() {
-        this.panelA = this.panelA == 'active' ? 'inactive' : 'active';
-        this.panelB = this.panelB == 'active' ? 'inactive' : 'active';
+    constructor(private pds: ProjectDisplayService) {
+        pds.project.subscribe(
+            nextProject => {
+                this.selectedProject = nextProject;
+                this.setView(nextProject === null);
+            },
+            err => {
+                console.log(`Error in pds subscription [Work.Frame.Component]\n${err}`);
+                pds.project.unsubscribe();
+            });
     }
 
-    viewDetails(details: Project) {
+    toggleView() {
+        this.panelA = this.panelA === 'active' ? 'inactive' : 'active';
+        this.panelB = this.panelB === 'active' ? 'inactive' : 'active';
+    }
 
+    setView(pA: boolean) {
+        this.panelA = pA ? 'active' : 'inactive';
+        this.panelB = pA ? 'inactive' : 'active';
     }
 }

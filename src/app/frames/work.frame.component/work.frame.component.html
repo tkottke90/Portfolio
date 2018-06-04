@@ -5,4 +5,7 @@
     <app-project-container></app-project-container>
 </div>
 
-<div class="panelB" [@PanelBStates]="this.panelB">This is Panel B</div>
+<div class="panelB" [@PanelBStates]="this.panelB" *ngIf="selectedProject" >{{ this.selectedProject.Name }}</div>
+<div class="panelB--empty" [@PanelBStates]="this.panelB" *ngIf="!selectedProject">
+    No Project Selected
+</div>
