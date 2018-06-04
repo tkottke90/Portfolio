@@ -43,6 +43,7 @@ import { CommentComponent } from './lib/github-comment.component/github-comment.
 import { GithubFeedComponent } from './lib/github-feed/github-feed.component';
 import { ProjectContainerComponent } from './lib/project-container/project-container.component';
 import { ProjectCardComponent } from './lib/project-card/project-card.component';
+import { WorkFrameComponent } from './frames/work.frame.component/work.frame.component';
 
 
 // Custom Services
@@ -57,7 +58,8 @@ import { FirestoreService } from './services/firestore.service';
     GithubEventComponent,
     GithubFeedComponent,
     ProjectContainerComponent,
-    ProjectCardComponent
+    ProjectCardComponent,
+    WorkFrameComponent
   ],
   imports: [
     BrowserModule,
