@@ -1,11 +1,21 @@
-<button matButton (click)="toggleView();">Swap</button>
 
-<div class="panelA" [@PanelAStates]="this.panelA">
-    <app-github-feed></app-github-feed>
-    <app-project-container></app-project-container>
-</div>
+    <div class="panelA work-frame__panelA" [@LeftPanel]="this.LeftPanel">
+        <app-github-feed></app-github-feed>
+        <app-project-container></app-project-container>
+    </div>
 
-<div class="panelB" [@PanelBStates]="this.panelB" *ngIf="selectedProject" >{{ this.selectedProject.Name }}</div>
-<div class="panelB--empty" [@PanelBStates]="this.panelB" *ngIf="!selectedProject">
-    No Project Selected
-</div>
+    <div class="panelB work-frame__panelB" [@RightPanel]="this.RightPanel" *ngIf="selectedProject" >
+        <button class="back panelB__back" (click)="setView(true)"  mat-button>
+            <mat-icon class="back-icon" svgIcon="arrow-left"></mat-icon> Back
+        </button>
+        
+        <div class="project-header panelB__project-header">
+            <h1>{{ selectedProject.Name }}</h1>
+            <p>{{ selectedProject.Description }}</p>
+        </div>
+        
+        <div class="details-container panelB__details-container">
+            <div class="images details-container__images"></div>
+            <div class="extra details-container__extra"></div>
+        </div>
+    </div>

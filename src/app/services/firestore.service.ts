@@ -23,6 +23,8 @@ export class FirestoreService {
                 projData.firebaseID = doc.id;
                 updatedProjects.push(projData);
             });
+
+            this.projects.next(updatedProjects);
         });
     }
 

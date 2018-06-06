@@ -8,7 +8,7 @@ import { ProjectDisplayService } from '../../services/project.display';
     templateUrl: './work.frame.component.html',
     styleUrls: [ './work.frame.component.scss' ],
     animations: [
-        trigger('PanelAStates', [
+        trigger('LeftPanel', [
             state('active', style({
                 transform: 'translateX(0)',
                 opacity: 1
@@ -20,7 +20,7 @@ import { ProjectDisplayService } from '../../services/project.display';
             transition('active => inactive', animate('500ms ease-in-out')),
             transition('inactive => active', animate('500ms ease-in-out'))
         ]),
-        trigger('PanelBStates', [
+        trigger('RightPanel', [
             state('active', style({
                 transform: 'translateX(0)',
                 opacity: 1
@@ -37,8 +37,8 @@ import { ProjectDisplayService } from '../../services/project.display';
 })
 export class WorkFrameComponent {
 
-    panelA = 'active';
-    panelB = 'inactive';
+    LeftPanel = 'active';
+    RightPanel = 'inactive';
 
     selectedProject: Project;
 
@@ -55,13 +55,13 @@ export class WorkFrameComponent {
     }
 
     toggleView() {
-        this.panelA = this.panelA === 'active' ? 'inactive' : 'active';
-        this.panelB = this.panelB === 'active' ? 'inactive' : 'active';
+        this.LeftPanel = this.LeftPanel === 'active' ? 'inactive' : 'active';
+        this.RightPanel = this.RightPanel === 'active' ? 'inactive' : 'active';
     }
 
     setView(pA: boolean) {
-        this.panelA = pA ? 'active' : 'inactive';
-        this.panelB = pA ? 'inactive' : 'active';
+        this.LeftPanel = pA ? 'active' : 'inactive';
+        this.RightPanel = pA ? 'inactive' : 'active';
 
         if (!pA) { window.scrollTo(0, 0); }
     }

@@ -2,6 +2,10 @@
 
 // $line-outline: 3px solid mat-color($portfolio-primary, 900);    
 
+:host {
+    overflow: hidden;
+}
+
 .content {
     display: flex;
     //align-items: center;
