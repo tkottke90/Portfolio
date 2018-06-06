@@ -4,17 +4,20 @@
         <app-project-container></app-project-container>
     </div>
 
-    <div class="panelB work-frame__panelB" [@RightPanel]="this.RightPanel" *ngIf="selectedProject" >
-        <button class="back panelB__back" (click)="setView(true)"  mat-button>
+    <div class="panelB work-frame__panelB" [@RightPanel]="this.RightPanel">
+        <button class="back panelB__back" 
+                (click)="setView(true)" 
+                mat-button
+                [disabled]="this.RightPanel == 'inactive'">
             <mat-icon class="back-icon" svgIcon="arrow-left"></mat-icon> Back
         </button>
         
-        <div class="project-header panelB__project-header">
-            <h1>{{ selectedProject.Name }}</h1>
-            <p>{{ selectedProject.Description }}</p>
+        <div class="project-header panelB__project-header" *ngIf="this.selectedProject">
+            <h1 class="name project-header__name">{{ selectedProject.Name }}</h1>
+            <p class="desc project-header__desc">{{ selectedProject.Description }}</p>
         </div>
         
-        <div class="details-container panelB__details-container">
+        <div class="details-container panelB__details-container" *ngIf="this.selectedProject">
             <div class="images details-container__images"></div>
             <div class="extra details-container__extra"></div>
         </div>

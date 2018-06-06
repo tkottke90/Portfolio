@@ -1,6 +1,70 @@
 @import '../../styles/base.scss';
 
+
+
 .panelA,
 .panelB {
     position: absolute;
+}
+
+.panelB {
+    display: grid;
+
+    grid-template-rows: 3rem 1fr 2fr;
+    grid-template-columns: 3rem 1fr;
+
+    &__back {
+        grid-row: 1;
+        grid-column: 1;
+    }
+
+    &__project-header {
+        grid-row: 2;
+        grid-column: 2;
+        margin-top: 1rem;
+    }
+
+    &__details-container {
+        grid-row: 3;
+        grid-column: 2;
+    }
+
+}
+
+.back {
+    color: mat-color($portfolio-accent, 900)
+}
+
+.project-header {
+
+    &__name {
+        margin-bottom: 1rem;
+    }
+}
+
+.name {
+
+    border-left: $line-outline;
+
+    &::before {
+        position: absolute;
+
+        content: '';
+        width: 1rem;
+        height: 1rem;
+
+        background-color: mat-color($portfolio-primary, 200);
+        border: $line-outline;  
+        border-radius: 50%;
+    }
+
+    &::after {
+        content: '';
+        position: absolute;
+        width: 1rem;
+        height: 1rem;
+        background-color: mat-color($portfolio-primary, 200);
+        border: $line-outline;
+        border-radius: 50%;
+    }
 }
