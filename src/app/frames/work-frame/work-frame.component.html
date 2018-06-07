@@ -12,23 +12,23 @@
 
             <div class="text-cont panel-content__text-cont">
                 <mat-card class="goal text-cont__goal">
-                    <mat-card-header><h2>Goal:</h2></mat-card-header>
+                    <mat-card-header><h2>Goal</h2></mat-card-header>
                     <mat-card-content>{{  selectedProject.Details.Goal }}</mat-card-content>
                 </mat-card>
                 <mat-card class="process text-cont__process">
-                    <mat-card-header><h2>Process:</h2></mat-card-header>
+                    <mat-card-header><h2>Process</h2></mat-card-header>
                     <mat-card-content>{{ selectedProject.Details.Process }}</mat-card-content>                    
                 </mat-card>
                 <mat-card class="final text-cont__final">
-                    <mat-card-header><h2>Final Product:</h2></mat-card-header>
+                    <mat-card-header><h2>Final Product</h2></mat-card-header>
                     <mat-card-content>{{ selectedProject.Details.Final }}</mat-card-content>
                 </mat-card>
                 <mat-card *ngIf="selectedProject.Details.Outcome" class="outcome text-cont__outcome">
-                    <mat-card-header><h2>Outcome:</h2></mat-card-header>
+                    <mat-card-header><h2>Outcome</h2></mat-card-header>
                     <mat-card-content>{{ selectedProject.Details.Outcome }}</mat-card-content>
                 </mat-card>
                 <mat-card *ngIf="selectedProject.Details.Notes" class="notes text-cont__notes">
-                    <mat-card-header><h2>Notes:</h2></mat-card-header>
+                    <mat-card-header><h2>Notes</h2></mat-card-header>
                     <mat-card-content>{{ selectedProject.Details.Notes }}</mat-card-content>
                 </mat-card>
             </div>
