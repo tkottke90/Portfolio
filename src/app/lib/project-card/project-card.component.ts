@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 
 import { Project } from '../../services/firestore.service';
+import { ProjectDisplayService } from '../../services/project.display';
 
 @Component({
   selector: 'app-project-card',
@@ -13,10 +14,14 @@ export class ProjectCardComponent implements OnInit {
 
   icons: string[] = [];
 
-  constructor() { }
+  constructor(private pds: ProjectDisplayService) { }
 
   ngOnInit() {
     this.icons = Object.keys(this.project.Icons);
+  }
+
+  selectProject() {
+    this.pds.project.next(this.project);
   }
 
 
