@@ -1,6 +1,9 @@
 import { Component, transition, trigger, state, style, animate } from '@angular/core';
 import { transformMenu } from '@angular/material';
 
+import { ProjectDisplayService } from '../../services/project.display';
+import { Project } from '../../services/firestore.service';
+
 enum States {
     active,
     inactive
@@ -43,6 +46,8 @@ export class WorkFrameComponent {
     leftPanel = 'active';
     rightPanel = 'inactive';
 
+
+    constructor(private pds: ProjectDisplayService) {}
 
     toggleView() {
         this.leftPanel = this.leftPanel === 'active' ? 'inactive' : 'active';
