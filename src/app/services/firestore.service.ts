@@ -50,6 +50,14 @@ export interface Project {
     Icons: object;
 
     Data: object;
+
+    Details: {
+        Goal: string;
+        Process: string;
+        Final: string;
+        Outcome: string;
+        Notes: string;
+    };
 }
 
 export class NewProject implements Project {
@@ -66,6 +74,14 @@ export class NewProject implements Project {
     Icons: object;
 
     Data: object;
+
+    Details: {
+        Goal: string;
+        Process: string;
+        Final: string;
+        Outcome: string;
+        Notes: string;
+    };
 
     constructor(
         name: string,
