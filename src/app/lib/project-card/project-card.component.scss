@@ -125,6 +125,12 @@ mat-card-header {
     color: mat-color($portfolio-primary, 900);
 }
 
+.desc {
+    max-height: 4rem;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
 .icon-conatiner {
     margin-top: 1rem;
     display: flex;
