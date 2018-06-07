@@ -1,4 +1,12 @@
-<div class="work-frame">
-    <app-github-feed></app-github-feed>
-    <app-project-container></app-project-container>
+<button (click)="toggleView();">Toggle</button>
+
+<div class="slide-panel">
+    <div class="left-panel slide-panel__left-panel" [@LeftPanel]="this.leftPanel">
+        <app-github-feed></app-github-feed>
+        <app-project-container></app-project-container>
+    </div>
+
+    <div class="right-panel slide-panel__right-panel" [@RightPanel]="this.rightPanel" >
+        <h1>Right Panel</h1>
+    </div>
 </div>

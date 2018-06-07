@@ -1,4 +1,19 @@
 :host {
     max-width: 975px;
     margin: 2rem auto 0 auto;
+
+    overflow: hidden;
+}
+
+.slide-panel {
+    height: 100%;
+    width: 200%;
+
+    overflow: hidden;
+
+    display: flex;
+
+    &__left-panel, &__right-panel {
+        flex: 1;
+    }
 }
