@@ -9,18 +9,10 @@ import { FirestoreService, Project } from './services/firestore.service';
 export class AppComponent implements OnInit {
   title = 'app';
 
-  projects: Project[] = [];
-
   constructor(private AF: FirestoreService) { }
 
   ngOnInit () {
 
-    this.AF.projects.subscribe(
-      (projects) => {
-        this.projects = projects;
-        console.log(projects);
-      }
-    );
    }
 
 }
