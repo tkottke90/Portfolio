@@ -55,7 +55,7 @@ export class WorkFrameComponent implements OnInit {
                 }
             },
             (error) => {
-                // TO-DO Log Error
+                // TO-DO #1 (Logging)
                 console.log(`Subscription Error: ${error}`);
             }
         );
