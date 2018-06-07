@@ -1,14 +1,8 @@
-import { Component, transition, trigger, state, style, animate } from '@angular/core';
+import { Component, OnInit, transition, trigger, state, style, animate } from '@angular/core';
 import { transformMenu } from '@angular/material';
 
 import { ProjectDisplayService } from '../../services/project.display';
 import { Project } from '../../services/firestore.service';
-
-enum States {
-    active,
-    inactive
-}
-
 
 @Component({
     selector: 'app-work-frame',
@@ -41,17 +35,45 @@ enum States {
         ])
     ]
 })
-export class WorkFrameComponent {
+export class WorkFrameComponent implements OnInit {
 
     leftPanel = 'active';
     rightPanel = 'inactive';
 
+    selectedProject: Project = null;
 
     constructor(private pds: ProjectDisplayService) {}
+
+    ngOnInit() {
+        this.pds.project.subscribe(
+            (project) => {
+                this.selectedProject = project;
+                if (this.selectedProject !== null) {
+                    this.viewRight();
+                } else {
+                    this.viewLeft();
+                }
+            },
+            (error) => {
+                // TO-DO Log Error
+                console.log(`Subscription Error: ${error}`);
+            }
+        );
+    }
 
     toggleView() {
         this.leftPanel = this.leftPanel === 'active' ? 'inactive' : 'active';
         this.rightPanel = this.rightPanel === 'active' ? 'inactive' : 'active';
+    }
+
+    viewLeft() {
+        this.leftPanel = 'active';
+        this.rightPanel = 'inactive';
+    }
+
+    viewRight() {
+        this.leftPanel = 'inactive';
+        this.rightPanel = 'active';
     }
 
 }

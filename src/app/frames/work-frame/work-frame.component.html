@@ -7,6 +7,8 @@
     </div>
 
     <div class="right-panel slide-panel__right-panel" [@RightPanel]="this.rightPanel" >
-        <h1>Right Panel</h1>
+        <div *ngIf="selectedProject" class="panel-content">
+            <h1 class="name">{{selectedProject.Name}}</h1>
+        </div>
     </div>
 </div>
