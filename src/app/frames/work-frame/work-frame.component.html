@@ -11,8 +11,18 @@
             <h1 class="name panel-content__name">{{selectedProject.Name}}</h1>
 
             <div class="quick panel-content__quick">
-                    <mat-card class="links quick__links">Project Links</mat-card>
-                    <mat-card class="skills quick__skills">Skills</mat-card>
+                    <mat-card class="links quick__links">
+                        <mat-card-header><h4>Project Links</h4></mat-card-header>
+                    </mat-card>
+                    <mat-card class="skills quick__skills">
+                        <mat-card-header><h4>Skills</h4></mat-card-header>
+                        <mat-card-content>
+                            <div class="icons" *ngFor="let icon of iconKeys" >
+                                <mat-icon svgIcon="{{ this.selectedProject.Icons[icon] }}"></mat-icon>
+                                <h5>{{ icon }}</h5>
+                            </div>
+                        </mat-card-content>
+                    </mat-card>
             </div>
 
             <div class="text-cont panel-content__text-cont">

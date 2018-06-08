@@ -31,8 +31,9 @@
     grid-template-rows: 2rem 1fr;
 
     @include media($breakpoint-phone){
-        grid-template-columns: 100%;
-        grid-template-rows: 2rem 2rem 1fr 1fr;
+        display: flex;
+        flex-direction: column;
+
 
         padding-right: 4rem;
     }
@@ -83,14 +84,38 @@
     display: grid;
     grid-template-columns: 15% 30% 10% 30% 15%;
 
+    @include media($breakpoint-phone) {
+        grid-template-columns: 45% 10% 45%;
+    }
+
     margin: 1rem 0;
 
     &__links {
         grid-column: 2;
+
+        @include media($breakpoint-phone){
+            grid-column: 1;
+        }
     }
 
     &__skills {
         grid-column: 4;
+
+        @include media($breakpoint-phone){
+            grid-column: 3;
+        }
+    }
+}
+
+.skills {}
+
+.icons {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+
+    & h5 {
+        margin-left: 0.5rem;
     }
 }
 

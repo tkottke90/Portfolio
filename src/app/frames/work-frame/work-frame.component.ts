@@ -42,7 +42,8 @@ export class WorkFrameComponent implements OnInit {
 
     selectedProject: Project = null;
     processType = '';
-    processKeys = [];
+
+    iconKeys = [];
 
     constructor(private pds: ProjectDisplayService) {}
 
@@ -53,7 +54,7 @@ export class WorkFrameComponent implements OnInit {
                 if (this.selectedProject !== null) {
                     this.viewRight();
                     this.processType = typeof this.selectedProject.Details.Process;
-                    console.log(this.selectedProject.Details.Process);
+                    this.iconKeys = Object.keys(this.selectedProject.Icons);
                 } else {
                     this.viewLeft();
                 }
