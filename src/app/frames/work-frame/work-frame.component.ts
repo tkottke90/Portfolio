@@ -41,6 +41,8 @@ export class WorkFrameComponent implements OnInit {
     rightPanel = 'inactive';
 
     selectedProject: Project = null;
+    processType = '';
+    processKeys = [];
 
     constructor(private pds: ProjectDisplayService) {}
 
@@ -50,9 +52,14 @@ export class WorkFrameComponent implements OnInit {
                 this.selectedProject = project;
                 if (this.selectedProject !== null) {
                     this.viewRight();
+                    this.processType = typeof this.selectedProject.Details.Process;
+                    if (this.processType === 'object') {
+                        this.processKeys = Object.keys(this.selectedProject.Details.Process);
+                    }
                 } else {
                     this.viewLeft();
                 }
+
             },
             (error) => {
                 // TO-DO #1 (Logging)

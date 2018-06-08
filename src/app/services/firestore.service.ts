@@ -21,8 +21,10 @@ export class FirestoreService {
 
                 const projData = doc.data() as Project;
                 projData.firebaseID = doc.id;
+
                 updatedProjects.push(projData);
-                console.log(updatedProjects.length);
+                this.projects.next(updatedProjects);
+                // console.log(updatedProjects.length);
             });
 
             console.log(updatedProjects);
@@ -53,7 +55,7 @@ export interface Project {
 
     Details: {
         Goal: string;
-        Process: string;
+        Process: string | object;
         Final: string;
         Outcome: string;
         Notes: string;

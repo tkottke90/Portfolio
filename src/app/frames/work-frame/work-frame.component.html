@@ -10,6 +10,11 @@
         <div *ngIf="selectedProject" class="panel-content">
             <h1 class="name panel-content__name">{{selectedProject.Name}}</h1>
 
+            <div class="quick panel-content__quick">
+                    <mat-card class="links quick__links">Project Links</mat-card>
+                    <mat-card class="skills quick__skills">Skills</mat-card>
+            </div>
+
             <div class="text-cont panel-content__text-cont">
                 <mat-card class="goal text-cont__goal">
                     <mat-card-header><h2>Goal</h2></mat-card-header>
@@ -17,7 +22,13 @@
                 </mat-card>
                 <mat-card class="process text-cont__process">
                     <mat-card-header><h2>Process</h2></mat-card-header>
-                    <mat-card-content>{{ selectedProject.Details.Process }}</mat-card-content>                    
+                    <mat-card-content *ngIf="processType == 'string'" ><p [innerHTML]="selectedProject.Details.Process"></p></mat-card-content>                    
+                    <mat-card-content *ngIf="processType == 'object'">
+                        <mat-expansion-panel *ngFor="let keys of processKeys">
+                            <mat-panel-title>{{ keys }}</mat-panel-title>
+                            {{ this.selectedProject.Details.Process[keys] }
+                        </mat-expansion-panel>
+                    </mat-card-content>
                 </mat-card>
                 <mat-card class="final text-cont__final">
                     <mat-card-header><h2>Final Product</h2></mat-card-header>
@@ -25,7 +36,7 @@
                 </mat-card>
                 <mat-card *ngIf="selectedProject.Details.Outcome" class="outcome text-cont__outcome">
                     <mat-card-header><h2>Outcome</h2></mat-card-header>
-                    <mat-card-content>{{ selectedProject.Details.Outcome }}</mat-card-content>
+                    <mat-card-content><p [innerHTML]="selectedProject.Details.Outcome"></p></mat-card-content>
                 </mat-card>
                 <mat-card *ngIf="selectedProject.Details.Notes" class="notes text-cont__notes">
                     <mat-card-header><h2>Notes</h2></mat-card-header>
@@ -33,8 +44,6 @@
                 </mat-card>
             </div>
             <div class="extra-cont panel-content__extra-cont">
-                <mat-card class="links extra-cont__links">Project Links</mat-card>
-                <mat-card class="skills extra-cont__skills">Skills</mat-card>
                 <mat-card class="images extra-cont__images">Images</mat-card>
             </div>
         </div>

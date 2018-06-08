@@ -20,6 +20,7 @@ import {
   MatCardModule,
   MatDatepickerModule,
   MatDialogModule,
+  MatExpansionModule,
   MatFormFieldModule,
   MatIconModule,
   MatIconRegistry,
@@ -52,6 +53,7 @@ import { GithubApiService } from './services/github-api.service';
 import { FirestoreService } from './services/firestore.service';
 import { ProjectDisplayService } from './services/project.display';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -77,6 +79,7 @@ import { ProjectDisplayService } from './services/project.display';
     MatCheckboxModule,
     MatDatepickerModule,
     MatDialogModule,
+    MatExpansionModule,
     MatFormFieldModule,
     MatIconModule,
     MatInputModule,

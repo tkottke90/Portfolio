@@ -21,11 +21,6 @@
 }
 
 
-.right-panel {
-    @include media($breakpoint-phone) {
-        margin-right: 4rem;
-    }
-}
 
 .panel-content {
     width: 100%;
@@ -37,8 +32,9 @@
 
     @include media($breakpoint-phone){
         grid-template-columns: 100%;
+        grid-template-rows: 2rem 2rem 1fr 1fr;
 
-        grid-template-rows: 2rem 1fr 1fr;
+        padding-right: 4rem;
     }
 
     &__name {
@@ -54,9 +50,18 @@
 
     }
 
+    &__quick {
+        grid-column: 1/3;
+        grid-row: 2;
+
+        @include media($breakpoint-phone) {
+            grid-column: 1;
+        }
+    }
+
     &__text-cont {
         grid-column: 1;
-        grid-row: 2;
+        grid-row: 3;
 
         @include media($breakpoint-phone){
             grid-column: 1;
@@ -65,12 +70,26 @@
 
     &__extra-cont {
         grid-column: 2;
-        grid-row: 2;
+        grid-row: 3;
 
         @include media($breakpoint-phone){
             grid-column: 1;
-            grid-row: 3;
+            grid-row: 4;
          }
     }
 }
 
+.quick {
+    display: grid;
+    grid-template-columns: 15% 30% 10% 30% 15%;
+
+    margin: 1rem 0;
+
+    &__links {
+        grid-column: 2;
+    }
+
+    &__skills {
+        grid-column: 4;
+    }
+}
