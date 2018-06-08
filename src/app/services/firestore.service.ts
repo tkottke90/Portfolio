@@ -55,7 +55,7 @@ export interface Project {
 
     Details: {
         Goal: string;
-        Process: string | object;
+        Process: object[];
         Final: string;
         Outcome: string;
         Notes: string;
@@ -79,7 +79,7 @@ export class NewProject implements Project {
 
     Details: {
         Goal: string;
-        Process: string;
+        Process: object[];
         Final: string;
         Outcome: string;
         Notes: string;

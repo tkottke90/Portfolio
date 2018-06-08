@@ -93,3 +93,9 @@
         grid-column: 4;
     }
 }
+
+.text-cont {
+    & mat-card {
+        margin: 1rem 0;
+    }
+}

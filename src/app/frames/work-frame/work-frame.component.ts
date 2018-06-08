@@ -53,9 +53,7 @@ export class WorkFrameComponent implements OnInit {
                 if (this.selectedProject !== null) {
                     this.viewRight();
                     this.processType = typeof this.selectedProject.Details.Process;
-                    if (this.processType === 'object') {
-                        this.processKeys = Object.keys(this.selectedProject.Details.Process);
-                    }
+                    console.log(this.selectedProject.Details.Process);
                 } else {
                     this.viewLeft();
                 }
