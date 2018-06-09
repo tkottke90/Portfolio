@@ -107,7 +107,32 @@
     }
 }
 
-.skills {}
+.links {
+    padding: 0;
+}
+
+.link-header {
+    background-color: mat-color($portfolio-primary);
+
+    height: 2rem;
+    display: flex;
+    align-items: center;    
+    
+}
+
+.link-actions {
+
+
+    @include media($breakpoint-phone) {
+        
+    }
+   
+
+}
+
+.source {
+     
+}
 
 .icons {
     display: flex;

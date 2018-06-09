@@ -7,12 +7,26 @@
     </div>
 
     <div class="right-panel slide-panel__right-panel" [@RightPanel]="this.rightPanel" >
-        <div *ngIf="selectedProject" class="panel-content">
+        <div *ngIf="selectedProject" class="panel-content right-panel__panel-content">
             <h1 class="name panel-content__name">{{selectedProject.Name}}</h1>
 
             <div class="quick panel-content__quick">
                     <mat-card class="links quick__links">
-                        <mat-card-header><h4>Project Links</h4></mat-card-header>
+                        <mat-card-header class="link-header links__link-header">Project Links</mat-card-header>
+                        <mat-card-actions class="link-actions links__link-actions">
+                            <a mat-button 
+                                class="source link-actions__source"  
+                                *ngIf="selectedProject.URLs.source" 
+                                href="{{ selectedProject.URLs.source }}">
+                                Source
+                            </a>
+                            <a mat-button 
+                                class="project link-actions__project" 
+                                *ngIf="selectedProject.URLs.project" 
+                                href="{{ selectedProject.URLs.project }}">
+                                Live Project
+                            </a>
+                        </mat-card-actions>
                     </mat-card>
                     <mat-card class="skills quick__skills">
                         <mat-card-header><h4>Skills</h4></mat-card-header>
