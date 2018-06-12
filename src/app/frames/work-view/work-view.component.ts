@@ -5,9 +5,9 @@ import { ProjectDisplayService } from '../../services/project.display';
 import { Project } from '../../services/firestore.service';
 
 @Component({
-    selector: 'app-work-frame',
-    templateUrl: './work-frame.component.html',
-    styleUrls: [ './work-frame.component.scss' ],
+    selector: 'app-work-view',
+    templateUrl: './work-view.component.html',
+    styleUrls: [ './work-view.component.scss' ],
     animations: [
         trigger('LeftPanel', [
             state('active', style({
@@ -35,7 +35,7 @@ import { Project } from '../../services/firestore.service';
         ])
     ]
 })
-export class WorkFrameComponent implements OnInit {
+export class WorkViewComponent implements OnInit {
 
     leftPanel = 'active';
     rightPanel = 'inactive';

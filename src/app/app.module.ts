@@ -46,7 +46,7 @@ import { ProjectContainerComponent } from './lib/project-container/project-conta
 import { ProjectCardComponent } from './lib/project-card/project-card.component';
 
 // Frames
-import { WorkFrameComponent } from './frames/work-frame/work-frame.component';
+import { WorkViewComponent } from './frames/work-view/work-view.component';
 
 // Custom Services
 import { GithubApiService } from './services/github-api.service';
@@ -63,7 +63,7 @@ import { ProjectDisplayService } from './services/project.display';
     GithubFeedComponent,
     ProjectContainerComponent,
     ProjectCardComponent,
-    WorkFrameComponent
+    WorkViewComponent
   ],
   imports: [
     BrowserModule,

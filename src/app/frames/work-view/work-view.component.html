@@ -49,9 +49,12 @@
                 <mat-card class="process text-cont__process">
                     <mat-card-header><h2>Process</h2></mat-card-header>
                     <mat-card-content>
-                        <mat-expansion-panel *ngFor="let step of this.selectedProject.Details.Process">
+                        <mat-expansion-panel 
+                            *ngFor="let step of this.selectedProject.Details.Process"
+                            class="details process__details"
+                            >
                             <mat-expansion-panel-header>
-                                <mat-panel-title>{{ step['name'] }}</mat-panel-title>
+                                <mat-panel-title class="detail-header detail__detail-header">{{ step['name'] }}</mat-panel-title>
                             </mat-expansion-panel-header>
 
                             <p [innerHTML]="step['text']"></p>

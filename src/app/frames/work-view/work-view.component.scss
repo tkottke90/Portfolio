@@ -176,5 +176,10 @@
 .notes {
     & mat-card-header {
         color: mat-color($portfolio-primary, 900);
+        margin-bottom: 1rem;
     }
+}
+
+.detail-header {
+    color: mat-color($portfolio-accent, 900);
 }
