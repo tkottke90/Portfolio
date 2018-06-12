@@ -1,5 +1,6 @@
 @import '../../styles/base.scss';
 
+
 :host {
     max-width: 975px;
     margin: 2rem auto 0 auto;
@@ -81,6 +82,11 @@
     }
 }
 
+.name {
+    color: mat-color($portfolio-primary, 900);
+}
+
+
 .quick {
     display: grid;
     grid-template-columns: 15% 30% 10% 30% 15%;
@@ -93,12 +99,12 @@
 
     &__links {
         grid-column: 2;
-
+        height: 8rem;
 
 
         @include media($breakpoint-phone){
             grid-column: 1;
-            height: 8rem;
+            
         }
     }
 
@@ -160,5 +166,15 @@
 .text-cont {
     & mat-card {
         margin: 1rem 0;
+    }
+}
+
+.goal, 
+.process,
+.final,
+.outcome,
+.notes {
+    & mat-card-header {
+        color: mat-color($portfolio-primary, 900);
     }
 }
