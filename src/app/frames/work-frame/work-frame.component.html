@@ -12,25 +12,27 @@
 
             <div class="quick panel-content__quick">
                     <mat-card class="links quick__links">
-                        <mat-card-header class="link-header links__link-header">Project Links</mat-card-header>
+                        <mat-card-header class="link-header links__link-header">
+                            <h4>Project Links</h4></mat-card-header>
                         <mat-card-actions class="link-actions links__link-actions">
                             <a mat-button 
                                 class="source link-actions__source"  
-                                *ngIf="selectedProject.URLs.source" 
+                                [disabled]="!selectedProject.URLs.source" 
                                 href="{{ selectedProject.URLs.source }}">
                                 Source
                             </a>
                             <a mat-button 
                                 class="project link-actions__project" 
-                                *ngIf="selectedProject.URLs.project" 
+      
+                                [disabled]="!selectedProject.URLs.project"
                                 href="{{ selectedProject.URLs.project }}">
                                 Live Project
                             </a>
                         </mat-card-actions>
                     </mat-card>
                     <mat-card class="skills quick__skills">
-                        <mat-card-header><h4>Skills</h4></mat-card-header>
-                        <mat-card-content>
+                        <mat-card-header class="skills-header skills__skills-header" ><h4>Skills</h4></mat-card-header>
+                        <mat-card-content class="icon-container skills__icon-container">
                             <div class="icons" *ngFor="let icon of iconKeys" >
                                 <mat-icon svgIcon="{{ this.selectedProject.Icons[icon] }}"></mat-icon>
                                 <h5>{{ icon }}</h5>

@@ -7,6 +7,7 @@
     overflow: hidden;
 }
 
+
 .slide-panel {
     height: 100%;
     width: 200%;
@@ -93,8 +94,11 @@
     &__links {
         grid-column: 2;
 
+
+
         @include media($breakpoint-phone){
             grid-column: 1;
+            height: 8rem;
         }
     }
 
@@ -107,24 +111,26 @@
     }
 }
 
-.links {
+.links, .skills {
     padding: 0;
 }
 
-.link-header {
-    background-color: mat-color($portfolio-primary);
-
+.link-header, .skills-header{
+    background-color: mat-color($portfolio-accent);
+    color: #fff;
     height: 2rem;
     display: flex;
     align-items: center;    
     
 }
 
-.link-actions {
 
+.link-actions {
+    display: flex;
+    flex-direction: column;
 
     @include media($breakpoint-phone) {
-        
+
     }
    
 
@@ -132,6 +138,13 @@
 
 .source {
      
+}
+
+.skills {
+
+    &__icon-container {
+        margin: 0.5rem 1rem !important;
+    }
 }
 
 .icons {
