@@ -52,6 +52,7 @@ import { WorkViewComponent } from './frames/work-view/work-view.component';
 import { GithubApiService } from './services/github-api.service';
 import { FirestoreService } from './services/firestore.service';
 import { ProjectDisplayService } from './services/project.display';
+import { ProjectDetailsComponent } from './lib/project-details/project-details.component';
 
 
 @NgModule({
@@ -63,7 +64,8 @@ import { ProjectDisplayService } from './services/project.display';
     GithubFeedComponent,
     ProjectContainerComponent,
     ProjectCardComponent,
-    WorkViewComponent
+    WorkViewComponent,
+    ProjectDetailsComponent
   ],
   imports: [
     BrowserModule,
