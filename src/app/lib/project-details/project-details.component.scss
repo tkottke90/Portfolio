@@ -144,3 +144,21 @@
 .detail-header {
     color: mat-color($portfolio-accent, 900);
 }
+
+.imgCarrossel {
+    // overflow: hidden;
+    position: relative;
+
+}
+
+.imgPanelA,
+.imgPanelB,
+.imgPanelC {
+    width: 100%;
+    min-height: 3rem;
+    position: absolute;
+}
+
+.imgPanelA { background-color: red; }
+.imgPanelB { background-color: blue; }
+.imgPanelC { background-color: green; }

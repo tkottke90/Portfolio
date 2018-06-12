@@ -67,5 +67,20 @@
     </mat-card>
 </div>
 <div class="extra-cont panel-content__extra-cont">
-    <mat-card class="images extra-cont__images">Images</mat-card>
+    <mat-card class="images extra-cont__images">
+      <mat-card-header><h2>Images</h2></mat-card-header>
+      
+      <mat-card-content>
+          <div class="imgCarrossel">
+            <div [@ImageCarrossel]="imgStates[imgPanelA]" class="imgPanelA"></div>
+            <div [@ImageCarrossel]="imgStates[imgPanelB]" class="imgPanelB"></div>
+            <div [@ImageCarrossel]="imgStates[imgPanelC]" class="imgPanelC"></div>
+          </div>
+      </mat-card-content>
+      
+      <mat-card-actions>
+        <button mat-button (click)="imgScroll(false)">Prev</button>
+        <button mat-button (click)="imgScroll(true)">Next</button>
+      </mat-card-actions>
+    </mat-card>
 </div>
