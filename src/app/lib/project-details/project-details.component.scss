@@ -134,7 +134,8 @@
 .process,
 .final,
 .outcome,
-.notes {
+.notes,
+.images {
     & mat-card-header {
         color: mat-color($portfolio-primary, 900);
         margin-bottom: 1rem;
@@ -145,22 +146,25 @@
     color: mat-color($portfolio-accent, 900);
 }
 
-.imgCarrossel {
+.img-carrossel {
     // overflow: hidden;
     position: relative;
 
+    height: auto;
 }
 
-.imgPanelA,
-.imgPanelB,
-.imgPanelC {
-    width: 100%;
-    min-height: 3rem;
+.img-panel-A,
+.img-Panel-B,
+.img-panel-C {
+    &__project-image {
+        max-width: 100%;
+        height: auto;
+        position: absolute;
+    }
+}
+
+.project-image {
+    max-width: 100%;
+    height: auto;
     position: absolute;
 }
-
-.red { background-color: red; }
-.yellow { background-color: yellow; }
-.green { background-color: green; }
-.blue { background-color: blue; }
-.purple { background-color: purple; }
