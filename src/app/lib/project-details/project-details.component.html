@@ -72,9 +72,9 @@
       
       <mat-card-content>
           <div class="imgCarrossel">
-            <div [@ImageCarrossel]="imgStates[imgPanelA]" class="imgPanelA" [style.background-color]="colorIndex[ColorA]"><h1>A</h1></div>
-            <div [@ImageCarrossel]="imgStates[imgPanelB]" class="imgPanelB" [style.background-color]="colorIndex[ColorB]"><h1>B</h1></div>
-            <div [@ImageCarrossel]="imgStates[imgPanelC]" class="imgPanelC" [style.background-color]="colorIndex[ColorC]"><h1>C</h1></div>
+            <div [@ImageCarrossel]="imgStates[imgPanelA]" class="imgPanelA"><img src="{{ selectedProject.Images[ColorA] }}" alt=""></div>
+            <div [@ImageCarrossel]="imgStates[imgPanelB]" class="imgPanelB"><img src="{{ selectedProject.Images[ColorB] }}" alt=""></div>
+            <div [@ImageCarrossel]="imgStates[imgPanelC]" class="imgPanelC"><img src="{{ selectedProject.Images[ColorC] }}" alt=""></div>
           </div>
       </mat-card-content>
       

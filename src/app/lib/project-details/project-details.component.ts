@@ -43,19 +43,16 @@ export class ProjectDetailsComponent implements OnInit, OnChanges {
   ColorB = 1;
   ColorC = 4;
 
-  colorIndex = [ 'red', 'yellow', 'green', 'blue', 'purple' ];
-
   iconKeys = [];
 
   constructor() { }
 
   ngOnInit() {
 
-    console.log(`Color Index Count: ${this.colorIndex.length - 1}`);
 
     this.ColorA = this.imgIndex;
     this.ColorB = this.imgIndex + 1;
-    this.ColorC = this.colorIndex.length - 1;
+    this.ColorC = this.selectedProject.Images.length - 1;
 
   }
 
@@ -65,48 +62,48 @@ export class ProjectDetailsComponent implements OnInit, OnChanges {
 
   imgScroll(moveNext: boolean) {
     if (moveNext) {
-      this.imgIndex = this.imgIndex >= (this.colorIndex.length - 1) ? 0 : this.imgIndex + 1;
+      this.imgIndex = this.imgIndex >= (this.selectedProject.Images.length - 1) ? 0 : this.imgIndex + 1;
 
       if (this.imgPanelA <= 0) {
         this.imgPanelA = 2;
-        this.ColorA = (this.imgIndex + 1) >= (this.colorIndex.length) ? 0 : this.imgIndex + 1;
+        this.ColorA = (this.imgIndex + 1) >= (this.selectedProject.Images.length) ? 0 : this.imgIndex + 1;
       } else {
         this.imgPanelA--;
       }
 
       if (this.imgPanelB <= 0) {
         this.imgPanelB = 2;
-        this.ColorB = (this.imgIndex + 1) >= (this.colorIndex.length) ? 0 : this.imgIndex + 1;
+        this.ColorB = (this.imgIndex + 1) >= (this.selectedProject.Images.length) ? 0 : this.imgIndex + 1;
       } else {
         this.imgPanelB--;
       }
 
       if (this.imgPanelC <= 0) {
         this.imgPanelC = 2;
-        this.ColorC = (this.imgIndex + 1) >= (this.colorIndex.length) ? 0 : this.imgIndex + 1;
+        this.ColorC = (this.imgIndex + 1) >= (this.selectedProject.Images.length) ? 0 : this.imgIndex + 1;
       } else {
         this.imgPanelC--;
       }
     } else {
-      this.imgIndex = this.imgIndex <= 0 ? (this.colorIndex.length - 1) : this.imgIndex - 1;
+      this.imgIndex = this.imgIndex <= 0 ? (this.selectedProject.Images.length - 1) : this.imgIndex - 1;
 
       if (this.imgPanelA >= 2) {
         this.imgPanelA = 0;
-        this.ColorA = (this.imgIndex - 1) <= -1 ? (this.colorIndex.length - 1) : this.imgIndex - 1;
+        this.ColorA = (this.imgIndex - 1) <= -1 ? (this.selectedProject.Images.length - 1) : this.imgIndex - 1;
       } else {
         this.imgPanelA++;
       }
 
       if (this.imgPanelB >= 2) {
         this.imgPanelB = 0;
-        this.ColorB = (this.imgIndex - 1) <= -1 ? (this.colorIndex.length - 1) : this.imgIndex - 1;
+        this.ColorB = (this.imgIndex - 1) <= -1 ? (this.selectedProject.Images.length - 1) : this.imgIndex - 1;
       } else {
         this.imgPanelB++;
       }
 
       if (this.imgPanelC >= 2) {
         this.imgPanelC = 0;
-        this.ColorC = (this.imgIndex - 1) <= -1 ? (this.colorIndex.length - 1) : this.imgIndex - 1;
+        this.ColorC = (this.imgIndex - 1) <= -1 ? (this.selectedProject.Images.length - 1) : this.imgIndex - 1;
       } else {
         this.imgPanelC++;
       }
