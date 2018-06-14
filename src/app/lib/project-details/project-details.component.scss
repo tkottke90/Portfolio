@@ -47,7 +47,7 @@
     color: mat-color($portfolio-primary, 900);
 }
 
-
+// Quick Links Cards
 .quick {
     display: grid;
     grid-template-columns: 15% 30% 10% 30% 15%;
@@ -78,6 +78,7 @@
     }
 }
 
+// Project Links Card
 .links, .skills {
     padding: 0;
 }
@@ -103,10 +104,7 @@
 
 }
 
-.source {
-     
-}
-
+// Skill Icon Card
 .skills {
 
     &__icon-container {
@@ -124,12 +122,14 @@
     }
 }
 
+// Text Context Cards
 .text-cont {
     & mat-card {
         margin: 1rem 0;
     }
 }
 
+// Text Context Card Headers
 .goal, 
 .process,
 .final,
@@ -142,29 +142,56 @@
     }
 }
 
-.detail-header {
-    color: mat-color($portfolio-accent, 900);
+
+
+
+// Image Carrossel Card
+.images {
+
+    background-color: mat-color($portfolio-primary,200);
+
+    overflow: hidden;
+
+    & mat-card-actions {
+        display: flex;
+        justify-content: space-around;
+    }
 }
 
 .img-carrossel {
-    // overflow: hidden;
+    overflow: hidden;
     position: relative;
 
-    height: auto;
+    width: 100%;
+    padding-top: 9/16 * 100%;
+
+    &__img-panel-A,
+    &__img-Panel-B,
+    &__img-panel-C {
+        transform: translateY(-100%);
+    }
 }
 
 .img-panel-A,
 .img-Panel-B,
 .img-panel-C {
     &__project-image {
-        max-width: 100%;
-        height: auto;
+        width: 100%;
+        height: 100%;
         position: absolute;
     }
 }
 
 .project-image {
     max-width: 100%;
-    height: auto;
+    
     position: absolute;
+   //top: -200px;
+}
+
+.no-img {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    height: 30rem;
 }

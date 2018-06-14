@@ -48,12 +48,9 @@ export class ProjectDetailsComponent implements OnInit, OnChanges {
   constructor() { }
 
   ngOnInit() {
-
-
     this.ColorA = this.imgIndex;
     this.ColorB = this.imgIndex + 1;
-    this.ColorC = this.selectedProject.Images.length - 1;
-
+    this.ColorC = this.selectedProject.Images ? this.selectedProject.Images.length - 1 : -1;
   }
 
   ngOnChanges() {

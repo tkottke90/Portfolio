@@ -70,16 +70,18 @@
     <mat-card class="images extra-cont__images">
       <mat-card-header><h2>Images</h2></mat-card-header>
       <mat-card-content class="images-content images__images-content">
-          <div class="img-carrossel images-content__img-carrossel">
+          <div *ngIf="selectedProject.Images" class="img-carrossel images-content__img-carrossel">
             <div [@ImageCarrossel]="imgStates[imgPanelA]" class="img-panel-A img-carrossel__img-panel-A"><img class="project-image img-panel-A_project-image" src="{{ selectedProject.Images[ColorA] }}" alt=""></div>
             <div [@ImageCarrossel]="imgStates[imgPanelB]" class="img-panel-B img-carrossel__img-panel-B"><img class="project-image img-panel-B_project-image" src="{{ selectedProject.Images[ColorB] }}" alt=""></div>
             <div [@ImageCarrossel]="imgStates[imgPanelC]" class="img-panel-C img-carrossel__img-panel-C"><img class="project-image img-panel-C_project-image" src="{{ selectedProject.Images[ColorC] }}" alt=""></div>
           </div>
+
+          <div class="no-img img-carrossel__no-img" *ngIf="!selectedProject.Images">No Images Available</div>
       </mat-card-content>
       
       <mat-card-actions>
-        <button mat-button (click)="imgScroll(false)">Prev</button>
-        <button mat-button (click)="imgScroll(true)">Next</button>
+        <button mat-button [disabled]="!selectedProject.Images" (click)="imgScroll(false)">Prev</button>
+        <button mat-button [disabled]="!selectedProject.Images" (click)="imgScroll(true)">Next</button>
       </mat-card-actions>
     </mat-card>
 </div>
