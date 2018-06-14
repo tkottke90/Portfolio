@@ -18,7 +18,7 @@
         grid-column: 1;
         grid-row: 2;
 
-        
+        margin-top: 1rem;
 
         @include media($breakpoint-phone) {
             grid-column: 1;
@@ -29,6 +29,10 @@
         grid-column: 1;
         grid-row: 3;
 
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
         @include media($breakpoint-phone){
             grid-column: 1;
          }
@@ -36,7 +40,9 @@
 
     &__extra-cont {
         grid-column: 2;
-        grid-row: 3;
+        grid-row: 2/4;
+
+        margin-top: 1rem;
 
         @include media($breakpoint-phone){
             grid-column: 1;
@@ -48,6 +54,20 @@
 .name {
     color: mat-color($portfolio-primary, 900);
 
+    border-top: $line-outline;
+
+    @extend %node-before;
+    @extend %node-after;
+
+    &::before {
+        top: -0.75rem;
+        left: 0rem;
+    }
+
+    &::after {
+        top: -0.75rem;
+        right: 0rem;
+    }
 
     padding: 1rem;
 }
@@ -133,6 +153,7 @@
 .text-cont {
     & mat-card {
         margin: 1rem 0;
+        min-width: 400px;
     }
 }
 
@@ -141,8 +162,7 @@
 .process,
 .final,
 .outcome,
-.notes,
-.images {
+.notes {
     & mat-card-header {
         color: mat-color($portfolio-primary, 900);
         margin-bottom: 1rem;
@@ -157,7 +177,13 @@
 
     overflow: hidden;
 
-    & mat-card-actions {
+    & h2 {
+        color: mat-color($portfolio-primary, 900);
+        margin-bottom: 1rem;
+    }
+    
+
+    &__actions {
         display: flex;
         justify-content: space-around;
     }
