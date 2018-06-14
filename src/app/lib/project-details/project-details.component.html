@@ -71,9 +71,9 @@
       <mat-card-header><h2>Images</h2></mat-card-header>
       <mat-card-content class="images-content images__images-content">
           <div *ngIf="selectedProject.Images" class="img-carrossel images-content__img-carrossel">
-            <img [@ImageCarrossel]="imgStates[imgPanelA]" class="project-image img-panel-A img-carrossel__img-panel-A" src="{{ selectedProject.Images[ColorA] }}" alt="">
-            <img [@ImageCarrossel]="imgStates[imgPanelB]" class="project-image img-panel-B img-carrossel__img-panel-B" src="{{ selectedProject.Images[ColorB] }}" alt="">
-            <img [@ImageCarrossel]="imgStates[imgPanelC]" class="project-image img-panel-C img-carrossel__img-panel-C" src="{{ selectedProject.Images[ColorC] }}" alt="">
+            <img [@ImageCarrossel]="imgStates[imgPanelA]" class="project-image img-panel-A img-carrossel__img-panel-A" src="{{ selectedProject.Images[ColorA]['img'] }}" alt="">
+            <img [@ImageCarrossel]="imgStates[imgPanelB]" class="project-image img-panel-B img-carrossel__img-panel-B" src="{{ selectedProject.Images[ColorB]['img'] }}" alt="">
+            <img [@ImageCarrossel]="imgStates[imgPanelC]" class="project-image img-panel-C img-carrossel__img-panel-C" src="{{ selectedProject.Images[ColorC]['img'] }}" alt="">
           </div>
 
           <div class="no-img img-carrossel__no-img" *ngIf="!selectedProject.Images">No Images Available</div>
