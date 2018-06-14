@@ -10,7 +10,8 @@ export class OverlayManagerService {
   constructor() { }
 
 
-  showOverlay() {
+  showOverlay(strs: string[]) {
+    this.displayImages.next(strs);
     if (this.displayImages) {
       this.displayOverlay.next(true);
     }

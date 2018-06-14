@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, OnChanges, trigger, state, transition, style, animate } from '@angular/core';
 import { Project } from '../../services/firestore.service';
+import { OverlayManagerService } from '../../services/overlay-manager.service';
 
 @Component({
   selector: 'app-project-details',
@@ -45,7 +46,7 @@ export class ProjectDetailsComponent implements OnInit, OnChanges {
 
   iconKeys = [];
 
-  constructor() { }
+  constructor(private oms: OverlayManagerService) { }
 
   ngOnInit() {
     this.ColorA = this.imgIndex;
@@ -55,7 +56,7 @@ export class ProjectDetailsComponent implements OnInit, OnChanges {
 
   ngOnChanges() {
     this.iconKeys = Object.keys(this.selectedProject.Icons);
-}
+  }
 
   imgScroll(moveNext: boolean) {
     if (moveNext) {
@@ -105,5 +106,10 @@ export class ProjectDetailsComponent implements OnInit, OnChanges {
         this.imgPanelC++;
       }
     }
+  }
+
+  openOverlay() {
+    console.log(`Clicked Open Overlay`);
+    this.oms.showOverlay(this.selectedProject.Images);
   }
 }

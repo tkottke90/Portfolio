@@ -1,4 +1,4 @@
-import { Component, OnInit, trigger, state, style, transition, animate } from '@angular/core';
+import { Component, OnInit, OnChanges, trigger, state, style, transition, animate } from '@angular/core';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 import { OverlayManagerService } from '../../services/overlay-manager.service';
@@ -30,7 +30,7 @@ import { OverlayManagerService } from '../../services/overlay-manager.service';
     ])
   ]
 })
-export class ImageOverlayComponent implements OnInit {
+export class ImageOverlayComponent implements OnInit, OnChanges {
 
   images: string[];
 
@@ -41,21 +41,30 @@ export class ImageOverlayComponent implements OnInit {
 
   imgIndex = 0;
 
-  ColorA;
-  ColorB;
-  ColorC;
+  ColorA = 0;
+  ColorB = 0;
+  ColorC = 0;
 
 
-  constructor(private oms: OverlayManagerService) { }
+  constructor(public oms: OverlayManagerService) { }
 
   ngOnInit() {
 
+    this.oms.displayImages.subscribe(
+      next => { 
+        this.images = next;
+        this.imgIndex = 0;
+        this.ColorA = this.imgIndex;
+        this.ColorB = this.imgIndex + 1;
+        this.ColorC = this.images ? this.images.length - 1 : 0;
+      }
+    );
+  }
 
-
+  ngOnChanges() {
     this.ColorA = this.imgIndex;
     this.ColorB = this.imgIndex + 1;
-    this.ColorC = this.images ? this.images.length - 1 : -1;
-
+    this.ColorC = this.images ? this.images.length - 1 : 0;
   }
 
 

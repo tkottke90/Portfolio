@@ -16,7 +16,10 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit () {
-
+    this.oms.displayOverlay.subscribe(
+      next => { this.overlayEnabled = next; },
+      error => { /* TO-DO #1 (Logging) */ }
+    );
   }
 
 }
