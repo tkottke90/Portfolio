@@ -18,6 +18,8 @@
         grid-column: 1/3;
         grid-row: 2;
 
+        
+
         @include media($breakpoint-phone) {
             grid-column: 1;
         }
@@ -45,6 +47,17 @@
 
 .name {
     color: mat-color($portfolio-primary, 900);
+
+    border-left: $line-outline;
+
+    padding: 1rem;
+
+    @extend %node-before;
+
+    &::before {
+        top: -1rem;
+        left: -0.75rem;
+    }
 }
 
 // Quick Links Cards
@@ -56,7 +69,25 @@
         grid-template-columns: 45% 10% 45%;
     }
 
-    margin: 1rem 0;
+    @extend %node-before;
+
+    &::before {
+        top: 0.1rem;
+        left: -0.75rem;
+        
+    }
+
+    &::after {
+        content: '';
+        width: 66%;
+        border-top: $line-outline;
+        position: absolute;
+        z-index: -5;
+        
+        top: 0.7rem;
+    }
+
+    border-left: $line-outline;
 
     &__links {
         grid-column: 2;
@@ -81,6 +112,22 @@
 // Project Links Card
 .links, .skills {
     padding: 0;
+}
+
+.links {
+    @extend %node-before;
+
+    &::before {
+        top: 0rem;
+        left: 0rem;    
+    }
+
+    @extend %node-after;
+
+    &::after {
+        top: 0rem;
+        left: 0rem;
+    }
 }
 
 .link-header, .skills-header{
