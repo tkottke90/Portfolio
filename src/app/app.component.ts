@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FirestoreService, Project } from './services/firestore.service';
+import { OverlayManagerService } from './services/overlay-manager.service';
 
 @Component({
   selector: 'app-root',
@@ -9,10 +10,16 @@ import { FirestoreService, Project } from './services/firestore.service';
 export class AppComponent implements OnInit {
   title = 'app';
 
-  constructor(private AF: FirestoreService) { }
+  overlayEnabled = false;
+
+  constructor(private AF: FirestoreService, private oms: OverlayManagerService ) {
+  }
 
   ngOnInit () {
-
-   }
+    this.oms.displayOverlay.subscribe(
+      next => { this.overlayEnabled = next; },
+      error => { /* TO-DO #1 (Logging) */ }
+    );
+  }
 
 }

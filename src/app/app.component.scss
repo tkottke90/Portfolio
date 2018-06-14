@@ -2,8 +2,39 @@
 
 // $line-outline: 3px solid mat-color($portfolio-primary, 900);    
 
+body {
+    position: relative;
+    z-index: 1;
+}
+
+.toolbar,
+.content {
+    position: relative;
+    z-index: 1;
+}
+
+.img-overlay {
+    position: fixed;
+    z-index: 100;
+    width: 100%;
+    height: 100%;
+
+    top: 0;
+    left: 0;
+
+    display: none;
+    
+}
+
+
+.overlay-enabled {
+    display: grid;
+}
+
+
 .work-view {
     max-width: 975px;
     margin: 2rem auto 0 auto;
     overflow: hidden;
+    
 }

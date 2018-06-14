@@ -1,4 +1,4 @@
-<mat-toolbar color="primary">
+<mat-toolbar class="toolbar" color="primary">
     <h1>Thomas Kottke</h1>
 
     <h2>Work</h2>
@@ -14,3 +14,5 @@
 
   
 </div>
+
+<app-image-overlay [ngClass]="{ 'overlay-enabled' : overlayEnabled }" class="img-overlay"></app-image-overlay>
