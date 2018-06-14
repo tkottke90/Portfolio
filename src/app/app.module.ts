@@ -54,9 +54,7 @@ import { WorkViewComponent } from './frames/work-view/work-view.component';
 import { GithubApiService } from './services/github-api.service';
 import { FirestoreService } from './services/firestore.service';
 import { ProjectDisplayService } from './services/project.display';
-
-
-
+import { OverlayManagerService } from './services/overlay-manager.service';
 
 @NgModule({
   declarations: [
@@ -119,7 +117,7 @@ import { ProjectDisplayService } from './services/project.display';
     MatProgressSpinnerModule,
     MatNativeDateModule
   ],
-  providers: [ GithubApiService, FirestoreService, ProjectDisplayService ],
+  providers: [ GithubApiService, FirestoreService, ProjectDisplayService, OverlayManagerService ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

@@ -1,3 +1,14 @@
-<p>
-  image-overlay works!
-</p>
+<div class="close img-overlay__close">
+  <button mat-button>X</button>
+</div>
+<div class="prev img-overlay__prev">
+  <button mat-button><</button>
+</div>
+<div *ngIf="this.images" class="image img-overlay__image">
+  <img [@ImageCarrossel]="imgStates[imgPanelA]" class="project-image img-panel-A img-carrossel__img-panel-A" src="{{ images[ColorA]['img'] }}" alt="">
+  <img [@ImageCarrossel]="imgStates[imgPanelB]" class="project-image img-panel-B img-carrossel__img-panel-B" src="{{ images[ColorB]['img'] }}" alt="">
+  <img [@ImageCarrossel]="imgStates[imgPanelC]" class="project-image img-panel-C img-carrossel__img-panel-C" src="{{ images[ColorC]['img'] }}" alt="">
+</div>
+<div class="next img-overlay__next">
+  <button mat-button>></button>
+</div>
