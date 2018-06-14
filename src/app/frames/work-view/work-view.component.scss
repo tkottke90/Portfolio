@@ -25,9 +25,6 @@
 .right-panel {
     &__back {
         color: mat-color($portfolio-accent);
-
-        margin-bottom: 2rem;
-        margin-left: 0;
     }
 }
 
@@ -43,7 +40,7 @@
     grid-template-rows: 4rem 1fr;
 
     
-    @include media($breakpoint-tablet){
+    @include media($breakpoint-phone){
         display: flex;
         flex-direction: column;
 
