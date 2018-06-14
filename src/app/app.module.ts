@@ -45,7 +45,6 @@ import { GithubFeedComponent } from './lib/github-feed/github-feed.component';
 import { ProjectContainerComponent } from './lib/project-container/project-container.component';
 import { ProjectCardComponent } from './lib/project-card/project-card.component';
 import { ProjectDetailsComponent } from './lib/project-details/project-details.component';
-import { ImageOverlayComponent } from './frames/image-overlay/image-overlay.component';
 
 // Frames
 import { WorkViewComponent } from './frames/work-view/work-view.component';
@@ -54,7 +53,6 @@ import { WorkViewComponent } from './frames/work-view/work-view.component';
 import { GithubApiService } from './services/github-api.service';
 import { FirestoreService } from './services/firestore.service';
 import { ProjectDisplayService } from './services/project.display';
-import { OverlayManagerService } from './services/overlay-manager.service';
 
 @NgModule({
   declarations: [
@@ -66,8 +64,7 @@ import { OverlayManagerService } from './services/overlay-manager.service';
     ProjectContainerComponent,
     ProjectCardComponent,
     WorkViewComponent,
-    ProjectDetailsComponent,
-    ImageOverlayComponent
+    ProjectDetailsComponent
   ],
   imports: [
     BrowserModule,
@@ -117,7 +114,7 @@ import { OverlayManagerService } from './services/overlay-manager.service';
     MatProgressSpinnerModule,
     MatNativeDateModule
   ],
-  providers: [ GithubApiService, FirestoreService, ProjectDisplayService, OverlayManagerService ],
+  providers: [ GithubApiService, FirestoreService, ProjectDisplayService ],
   bootstrap: [AppComponent]
 })
 export class AppModule {
