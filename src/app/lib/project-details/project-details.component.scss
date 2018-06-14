@@ -148,8 +148,6 @@
 // Image Carrossel Card
 .images {
 
-    background-color: mat-color($portfolio-primary,200);
-
     overflow: hidden;
 
     & mat-card-actions {
@@ -166,14 +164,15 @@
     padding-top: 9/16 * 100%;
 
     &__img-panel-A,
-    &__img-Panel-B,
+    &__img-panel-B,
     &__img-panel-C {
-        transform: translateY(-100%);
+        top:0;
+        left: 0;
     }
 }
 
 .img-panel-A,
-.img-Panel-B,
+.img-panel-B,
 .img-panel-C {
     &__project-image {
         width: 100%;
