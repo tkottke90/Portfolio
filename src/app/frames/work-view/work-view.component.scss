@@ -22,6 +22,11 @@
     }
 }
 
+.right-panel {
+    &__back {
+        color: mat-color($portfolio-accent);
+    }
+}
 
 
 .panel-content {
@@ -29,7 +34,7 @@
 
     display: grid;
 
-    margin-left: 1rem;
+    
 
     grid-template-columns: 50% 50%;
     grid-template-rows: 4rem 1fr;

@@ -1,4 +1,4 @@
-<button (click)="toggleView();">Toggle</button>
+
 
 <div class="slide-panel">
     <div class="left-panel slide-panel__left-panel" [@LeftPanel]="this.leftPanel">
@@ -7,6 +7,12 @@
     </div>
 
     <div class="right-panel slide-panel__right-panel" [@RightPanel]="this.rightPanel" >
+        <button
+        class="back right-panel__back"
+        mat-button (click)="viewLeft();">
+            <mat-icon svgIcon="arrow-left-thick"></mat-icon>
+            Back
+        </button>
         <app-project-details 
             class="panel-content right-panel__panel-content" 
             *ngIf="selectedProject"
