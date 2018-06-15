@@ -21,7 +21,10 @@ export class FirestoreService {
 
                 const projData = doc.data() as Project;
                 projData.firebaseID = doc.id;
+
                 updatedProjects.push(projData);
+                this.projects.next(updatedProjects);
+                // console.log(updatedProjects.length);
             });
 
             this.projects.next(updatedProjects);
@@ -48,6 +51,14 @@ export interface Project {
     Icons: object;
 
     Data: object;
+
+    Details: {
+        Goal: string;
+        Process: object[];
+        Final: string;
+        Outcome: string;
+        Notes: string;
+    };
 }
 
 export class NewProject implements Project {
@@ -64,6 +75,14 @@ export class NewProject implements Project {
     Icons: object;
 
     Data: object;
+
+    Details: {
+        Goal: string;
+        Process: object[];
+        Final: string;
+        Outcome: string;
+        Notes: string;
+    };
 
     constructor(
         name: string,

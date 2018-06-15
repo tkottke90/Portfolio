@@ -16,7 +16,6 @@ export class ProjectContainerComponent implements OnInit {
     this.AF.projects.subscribe(
       (projects) => {
         this.projects = projects;
-        console.log(projects);
       }
     );
    }

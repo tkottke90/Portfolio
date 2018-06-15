@@ -1,0 +1,203 @@
+@import '../../styles/base.scss';
+
+.panel-content {
+    &__name {
+
+        display: block;
+
+        grid-column: 1/3;
+        grid-row: 1;
+
+        @include media($breakpoint-phone){ 
+            grid-column: 1;
+        }
+
+    }
+
+    &__quick {
+        grid-column: 1;
+        grid-row: 2;
+
+        
+
+        @include media($breakpoint-phone) {
+            grid-column: 1;
+        }
+    }
+
+    &__text-cont {
+        grid-column: 1;
+        grid-row: 3;
+
+        @include media($breakpoint-phone){
+            grid-column: 1;
+         }
+    }
+
+    &__extra-cont {
+        grid-column: 2;
+        grid-row: 3;
+
+        @include media($breakpoint-phone){
+            grid-column: 1;
+            grid-row: 4;
+         }
+    }
+}
+
+.name {
+    color: mat-color($portfolio-primary, 900);
+
+
+    padding: 1rem;
+}
+
+// Quick Links Cards
+.quick {
+    display: grid;
+    grid-template-columns: 15% 30% 10% 30% 15%;
+
+    @include media($breakpoint-phone) {
+        grid-template-columns: 45% 10% 45%;
+    }
+
+    &__links {
+        grid-column: 2;
+        height: 8rem;
+
+
+        @include media($breakpoint-phone){
+            grid-column: 1;
+            
+        }
+    }
+
+    &__skills {
+        grid-column: 4;
+
+        @include media($breakpoint-phone){
+            grid-column: 3;
+        }
+    }
+}
+
+// Project Links Card
+.links, .skills {
+    padding: 0;
+}
+
+.links {
+
+}
+
+.link-header, .skills-header{
+    background-color: mat-color($portfolio-accent);
+    color: #fff;
+    height: 2rem;
+    display: flex;
+    align-items: center;    
+    
+}
+
+
+.link-actions {
+    display: flex;
+    flex-direction: column;
+
+    @include media($breakpoint-phone) {
+
+    }
+   
+
+}
+
+// Skill Icon Card
+.skills {
+
+    &__icon-container {
+        margin: 0.5rem 1rem !important;
+    }
+}
+
+.icons {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+
+    & h5 {
+        margin-left: 0.5rem;
+    }
+}
+
+// Text Context Cards
+.text-cont {
+    & mat-card {
+        margin: 1rem 0;
+    }
+}
+
+// Text Context Card Headers
+.goal, 
+.process,
+.final,
+.outcome,
+.notes,
+.images {
+    & mat-card-header {
+        color: mat-color($portfolio-primary, 900);
+        margin-bottom: 1rem;
+    }
+}
+
+
+
+
+// Image Carrossel Card
+.images {
+
+    overflow: hidden;
+
+    & mat-card-actions {
+        display: flex;
+        justify-content: space-around;
+    }
+}
+
+.img-carrossel {
+    overflow: hidden;
+    position: relative;
+
+    width: 100%;
+    padding-top: 9/16 * 100%;
+
+    &__img-panel-A,
+    &__img-panel-B,
+    &__img-panel-C {
+        top:0;
+        left: 0;
+    }
+}
+
+.img-panel-A,
+.img-panel-B,
+.img-panel-C {
+    &__project-image {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+    }
+}
+
+.project-image {
+    max-width: 100%;
+    
+    position: absolute;
+   //top: -200px;
+}
+
+.no-img {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    height: 30rem;
+}
