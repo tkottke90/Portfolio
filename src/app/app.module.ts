@@ -44,11 +44,8 @@ import { CommentComponent } from './lib/github-comment.component/github-comment.
 import { GithubFeedComponent } from './lib/github-feed/github-feed.component';
 import { ProjectContainerComponent } from './lib/project-container/project-container.component';
 import { ProjectCardComponent } from './lib/project-card/project-card.component';
-<<<<<<< HEAD
-import { WorkFrameComponent } from './frames/work.frame.component/work.frame.component';
-=======
 import { ProjectDetailsComponent } from './lib/project-details/project-details.component';
->>>>>>> 691c224b284afe12eb3b3d1d9c712df576835de4
+
 
 // Frames
 import { WorkViewComponent } from './frames/work-view/work-view.component';
@@ -67,12 +64,8 @@ import { ProjectDisplayService } from './services/project.display';
     GithubFeedComponent,
     ProjectContainerComponent,
     ProjectCardComponent,
-<<<<<<< HEAD
-    WorkFrameComponent
-=======
     WorkViewComponent,
     ProjectDetailsComponent
->>>>>>> 691c224b284afe12eb3b3d1d9c712df576835de4
   ],
   imports: [
     BrowserModule,

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FirestoreService, Project } from './services/firestore.service';
-import { OverlayManagerService } from './services/overlay-manager.service';
 
 @Component({
   selector: 'app-root',

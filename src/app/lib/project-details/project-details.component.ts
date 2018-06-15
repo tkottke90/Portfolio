@@ -1,6 +1,5 @@
 import { Component, OnInit, Input, OnChanges, trigger, state, transition, style, animate } from '@angular/core';
 import { Project } from '../../services/firestore.service';
-import { OverlayManagerService } from '../../services/overlay-manager.service';
 
 @Component({
   selector: 'app-project-details',
@@ -46,7 +45,7 @@ export class ProjectDetailsComponent implements OnInit, OnChanges {
 
   iconKeys = [];
 
-  constructor(private oms: OverlayManagerService) { }
+  constructor() { }
 
   ngOnInit() {
     this.ColorA = this.imgIndex;
