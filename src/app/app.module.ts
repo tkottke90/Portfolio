@@ -49,6 +49,7 @@ import { ProjectDetailsComponent } from './lib/project-details/project-details.c
 
 // Frames
 import { WorkViewComponent } from './frames/work-view/work-view.component';
+import { OverlayViewComponent } from './frames/overlay-view/overlay-view.component';
 
 // Custom Services
 import { GithubApiService } from './services/github-api.service';
@@ -65,7 +66,8 @@ import { ProjectDisplayService } from './services/project.display';
     ProjectContainerComponent,
     ProjectCardComponent,
     WorkViewComponent,
-    ProjectDetailsComponent
+    ProjectDetailsComponent,
+    OverlayViewComponent
   ],
   imports: [
     BrowserModule,
