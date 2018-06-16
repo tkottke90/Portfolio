@@ -17,6 +17,5 @@ import {
 })
 export class OverlayViewComponent {
 
-    
 
 }

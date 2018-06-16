@@ -1,0 +1,33 @@
+:host {
+    background: rgba(0, 0, 0, 0.9);
+
+    display: grid;
+    grid-template-columns: 10% 1fr 10%;
+    grid-template-rows: 10% 1fr 10% 1fr;
+}
+
+.overlay {
+
+    &__close {
+        grid-column: 3;
+        grid-row: 1;
+    }
+
+    &__prev {
+        grid-column: 1;
+        grid-row: 3;
+    }
+
+    &__next {
+        grid-column: 3;
+        grid-row: 3;
+    }
+}
+
+.icon-size3x {
+    transform: scale(3);
+}
+
+.close,
+.prev,
+.next { color: #fff; }
