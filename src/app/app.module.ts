@@ -55,6 +55,7 @@ import { OverlayViewComponent } from './frames/overlay-view/overlay-view.compone
 import { GithubApiService } from './services/github-api.service';
 import { FirestoreService } from './services/firestore.service';
 import { ProjectDisplayService } from './services/project.display';
+import { CarouselDirective } from './directives/carousel.directive';
 
 @NgModule({
   declarations: [
@@ -67,7 +68,8 @@ import { ProjectDisplayService } from './services/project.display';
     ProjectCardComponent,
     WorkViewComponent,
     ProjectDetailsComponent,
-    OverlayViewComponent
+    OverlayViewComponent,
+    CarouselDirective
   ],
   imports: [
     BrowserModule,
