@@ -4,8 +4,8 @@
     background: rgba(0, 0, 0, 0.9);
 
     display: grid;
-    grid-template-columns: 10% 1fr 10%;
-    grid-template-rows: 10% 1fr 10% 1fr;
+    grid-template-columns: 10% 80% 10%;
+    grid-template-rows: 10% 80% 10%;
 
     @include media($breakpoint-phone){
         grid-template-columns: 20% 60% 20%;
@@ -19,19 +19,40 @@
         grid-row: 1;
     }
 
-    &__prev {
-        grid-column: 1;
-        grid-row: 3;
+    &__image-cont {
+        grid-column: 1/4;
+        grid-row: 2;
+    }
+}
+
+.img-cont  {
+
+    display: grid;
+    grid-template-columns: 10% 80% 10%;
+
+    &__image {
+        grid-column: 2;
+        width: 100%;
+        height: 100%;
     }
 
     &__next {
         grid-column: 3;
-        grid-row: 3;
+
+    }
+
+    &__prev {
+        grid-column: 1;
+        grid-row: 1;
     }
 }
 
 .icon-size3x {
     transform: scale(3);
+
+    @include media($breakpoint-phone) {
+        transform: scale(1.5);
+    }
 }
 
 .close,
