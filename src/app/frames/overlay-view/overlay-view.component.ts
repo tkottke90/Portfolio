@@ -1,13 +1,8 @@
 import {
     Component,
-    trigger,
-    state,
-    style,
-    transition,
-    animate
+    OnInit
 } from '@angular/core';
-
-
+import { ProjectDisplayService } from '../../services/project.display';
 
 @Component({
     selector: 'app-overlay-view',
@@ -15,7 +10,23 @@ import {
     styleUrls: [ './overlay-view.component.scss' ],
     animations: []
 })
-export class OverlayViewComponent {
+export class OverlayViewComponent implements OnInit {
 
+    images: string[];
+
+    constructor(
+        private pd: ProjectDisplayService
+    ) {}
+
+    ngOnInit() {
+        this.pd.project.subscribe({
+            next: (project) => {
+                this.images = project.Images;
+            },
+            error: (error) => {
+                // TO-DO #1 (Logging)
+            }
+        });
+    }
 
 }

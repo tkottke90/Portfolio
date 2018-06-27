@@ -7,4 +7,5 @@
 <button mat-button class="next overlay__next">
     <mat-icon class="icon-size3x" svgIcon="chevron-right"></mat-icon>
 </button>
-<div class="img-cont overlay__image-cont"></div>
+<div class="img-cont overlay__image-cont" 
+    *appCarousel="let img from images; let ctrl = controller"></div>
