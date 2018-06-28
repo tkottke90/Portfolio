@@ -12,12 +12,7 @@ import { ProjectDisplayService } from '../../services/project.display';
 })
 export class OverlayViewComponent implements OnInit {
 
-    // images: string[];
-
-    images = [
-        '../../../assets/a-computer-on-a-white-desk-in-a-forest-sweden-BAAR61.jpg'
-        ,'../../../assets/discord.png'
-    ];
+    images: string[];
 
     constructor(
         private pd: ProjectDisplayService

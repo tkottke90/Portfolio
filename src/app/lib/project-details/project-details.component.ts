@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, OnChanges, trigger, state, transition, style, animate } from '@angular/core';
 import { Project } from '../../services/firestore.service';
+import { ProjectDisplayService } from '../../services/project.display';
 
 @Component({
   selector: 'app-project-details',
@@ -45,7 +46,9 @@ export class ProjectDetailsComponent implements OnInit, OnChanges {
 
   iconKeys = [];
 
-  constructor() { }
+  constructor(
+    private pd: ProjectDisplayService
+  ) { }
 
   ngOnInit() {
     this.ColorA = this.imgIndex;
@@ -55,6 +58,10 @@ export class ProjectDetailsComponent implements OnInit, OnChanges {
 
   ngOnChanges() {
     this.iconKeys = Object.keys(this.selectedProject.Icons);
+  }
+
+  showOverlay() {
+    this.pd.imageOverlayEnabled.next(true);
   }
 
   imgScroll(moveNext: boolean) {
