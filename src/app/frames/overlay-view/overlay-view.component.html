@@ -3,7 +3,7 @@
 </button>
 <div class="img-cont overlay__image-cont" 
     *appCarousel="let img from images; let ctrl = controller">
-    <img [src]="img.img" class="image img-cont__image">
+    <img [src]="img['img']" class="image img-cont__image">
     <button mat-button class="prev img-cont__prev" (click)="ctrl.prev()">
         <mat-icon class="icon-size3x" svgIcon="chevron-left"></mat-icon>
     </button>
