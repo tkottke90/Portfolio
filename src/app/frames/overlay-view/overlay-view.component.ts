@@ -22,6 +22,7 @@ export class OverlayViewComponent implements OnInit {
         this.pd.project.subscribe({
             next: (project) => {
                 this.images = project.Images;
+                console.log(this.images);
             },
             error: (error) => {
                 // TO-DO #1 (Logging)

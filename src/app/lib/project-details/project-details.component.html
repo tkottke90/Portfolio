@@ -76,18 +76,21 @@
                 class="project-image img-panel-A img-carrossel__img-panel-A" 
                 src="{{ selectedProject.Images[ColorA]['img'] }}" 
                 alt=""
+                (click)="showOverlay()"
                 >
             <img 
                 [@ImageCarrossel]="imgStates[imgPanelB]" 
                 class="project-image img-panel-B img-carrossel__img-panel-B" 
                 src="{{ selectedProject.Images[ColorB]['img'] }}" 
                 alt=""
+                (click)="showOverlay()"
                 >
             <img 
                 [@ImageCarrossel]="imgStates[imgPanelC]" 
                 class="project-image img-panel-C img-carrossel__img-panel-C" 
                 src="{{ selectedProject.Images[ColorC]['img'] }}" 
                 alt=""
+                (click)="showOverlay()"
                 >
           </div>
 
