@@ -8,13 +8,13 @@
     
 }
 
-html {
-    font-size: 16px;
+body {
+    width: 100%;
+    overflow-x: hidden;
 }
 
-.example-header-image {
-    background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
-    background-size: cover;
+html {
+    font-size: 16px;
 }
 
 .example-icon {

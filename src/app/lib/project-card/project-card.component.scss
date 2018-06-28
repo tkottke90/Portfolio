@@ -1,0 +1,153 @@
+@import '../../styles/base.scss';
+
+.project2 {
+    
+    width: 75%;
+
+    margin: 1rem;
+    position: relative;
+
+    &:hover {
+        
+        &::before {
+            background-color: mat-color($portfolio-accent);
+            border-color: mat-color($portfolio-accent, 900);
+        }
+
+        & mat-card-header {
+            
+            &::before, 
+            &::after {
+                background-color: mat-color($portfolio-accent);
+                border-color: mat-color($portfolio-accent, 900);
+            }
+        }
+    }
+
+    &::before {
+        content: '';
+        position: absolute;
+        width: 1rem;
+        height: 1rem;
+        background-color: mat-color($portfolio-primary, 200);
+        opacity: 25%;
+        border: $line-outline;
+        border-radius: 50%;
+        
+        top: -0.75rem;
+        left: -0.75rem;
+    
+        @include big-media($breakpoint-project-grid) {
+            :host.isEven & {
+                top: -0.75rem;
+                left: -0.75rem;
+            }
+    
+            :host.isOdd & {
+                top: -0.75rem;
+                left: 19.5rem;
+            }
+        }
+
+        
+        transition: 500ms ease-out;
+
+    }
+
+    & mat-card-header::before {
+        content: '';
+        position: absolute;
+
+        width: 3em;
+
+        border: 2px solid mat-color($portfolio-primary, 900);
+        border-radius: 5%;
+        background-color: mat-color($portfolio-primary, 900);
+
+        transform: rotate(-45deg);
+
+        left: -2.5rem;
+        top: 0.5rem;
+
+        @include big-media($breakpoint-project-grid) {
+            :host.isEven & {
+                left: -2.5rem;
+            }
+    
+            :host.isOdd & {
+                left: 19.25rem;
+                transform: rotate(45deg);
+            }
+        }
+        transition: 500ms ease-out;
+
+        z-index: -2;
+    }
+
+    & mat-card-header::after {
+        content: '';
+        position: absolute;
+
+        width: 0.9rem;
+
+        border: 2px solid mat-color($portfolio-primary, 900);
+        border-radius: 5%;
+        background-color: mat-color($portfolio-primary, 900);
+
+        left: -3rem;
+        top: 1.575rem;
+
+        @include big-media($breakpoint-project-grid) {
+            :host.isEven & {
+                left: -3rem;
+            }
+    
+            :host.isOdd & {
+                left: 22rem;
+            }
+        }
+        transition: 500ms ease-out;
+
+        z-index: -2;
+    }
+
+}
+
+mat-card-header {
+    padding-bottom: 1rem
+}
+
+.mat-card-text {
+    display: none;
+}
+
+.title {
+    color: mat-color($portfolio-primary, 900);
+}
+
+.desc {
+    max-height: 4rem;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.icon-conatiner {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+mat-card-actions {
+    display: flex;
+    justify-content: space-evenly;
+
+    @include media($breakpoint-phone) {
+        display: flex;
+        flex-direction: column;
+        justify-content: start;
+    }
+}
+
+mat-card-actions .mat-button {
+    color: mat-color($portfolio-accent, 900);
+}

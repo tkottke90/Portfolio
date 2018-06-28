@@ -3,215 +3,26 @@
 // $line-outline: 3px solid mat-color($portfolio-primary, 900);    
 
 .content {
+    overflow: hidden;
     width: 100%;
-    display: flex;
-    //align-items: center;
-    flex-direction: column;
 
-    max-width: 750px;
+    margin-top: 1rem;
+    position: absolute;
+}
+
+.work-view {
+    max-width: 975px;
+    margin: 0 auto;
+}
+
+app-work-frame {
     margin: 1rem auto 0 auto;
-    //padding: 0 1rem 0 1rem;
-
-
 }
 
-.projects {
-
-    min-width: 400px;
-    margin: 0 0 0 2rem;
-
-    display: grid;
-    grid-template-rows: 4rem 1fr;
-
-    &__header {
-        grid-row: 1;
-    }
-
-    &__collection {
-        grid-row: 2;
-    }
-}
-
-.header {
-
-    position: relative;
-
-    border-left: $line-outline;
-    border-bottom: $line-outline;
-
-    padding: 1rem;
-
-    &::before {
-        position: absolute;
-
-        content: '';
-        width: 1rem;
-        height: 1rem;
-
-        background-color: mat-color($portfolio-primary, 200);
-        border: $line-outline;  
-        border-radius: 50%;
-
-        left: -0.75rem;
-        top: -1rem;
-        
-    }
-
-    &::after {
-        content: '';
-        position: absolute;
-        width: 1rem;
-        height: 1rem;
-        background-color: mat-color($portfolio-primary, 200);
-        border: $line-outline;
-        border-radius: 50%;
-
-        bottom: -0.6rem;
-        left: -0.75rem;
-    }
-}
-
-.collection {
-
-    display:flex;
-    justify-content: start;
-
-    flex-direction: column;
-
-    padding-top: 2.5rem;
-    padding-left: 2rem;
-
-    border-left: $line-outline;
-
-}
-
-.project {
-    
-    width: 80%;
-
-    margin: 1rem;
-    position: relative;
-
-    &:hover {
-
-
-        &::before {
-            background-color: mat-color($portfolio-accent);
-            border-color: mat-color($portfolio-primary, 200);
-        }
-
-        & mat-card-header {
-
-
-            &::before, &::after {
-                background-color: mat-color($portfolio-accent);
-                border-color: mat-color($portfolio-primary);
-            }
-    
-    
-        }
-    }
-
-    &::before {
-        content: '';
-        position: absolute;
-        width: 1.5rem;
-        height: 1.5rem;
-        background-color: mat-color($portfolio-primary, 200);
-        border: $line-outline;
-        border-radius: 50%;
-
-        top: -0.75rem;
-        left: -0.75rem;
-        z-index: -1;
-
-        transition: 1s;
-
-    }
-
-
-
-}
-
-.project2 {
-    
-    width: 75%;
-
-    margin: 1rem;
-    position: relative;
-
-    &:hover {
-        
-        &::before {
-            background-color: mat-color($portfolio-accent);
-            border-color: mat-color($portfolio-accent, 900);
-        }
-
-        & mat-card-header {
-            
-            &::before, 
-            &::after {
-                background-color: mat-color($portfolio-accent);
-                border-color: mat-color($portfolio-accent, 900);
-            }
-        }
-    }
-
-    &::before {
-        content: '';
-        position: absolute;
-        width: 1rem;
-        height: 1rem;
-        background-color: mat-color($portfolio-primary, 200);
-        opacity: 25%;
-        border: $line-outline;
-        border-radius: 50%;
-
-        top: -0.75rem;
-        left: -0.75rem;
-
-        transition: 1.5s ease-out;
-
-    }
-
-}
-
-.project,
-.project2 {
-    & mat-card-header::before {
-        content: '';
-        position: absolute;
-
-        width: 3em;
-
-        border: 2px solid mat-color($portfolio-primary, 900);
-        border-radius: 5%;
-        background-color: mat-color($portfolio-primary, 900);
-
-        transform: rotate(-45deg);
-
-        left: -2.5rem;
-        top: 0.5rem;
-        transition: 1.5s ease-out;
-
-        z-index: -2;
-    }
-
-    & mat-card-header::after {
-        content: '';
-        position: absolute;
-
-        width: 0.9rem;
-
-        border: 2px solid mat-color($portfolio-primary, 900);
-        border-radius: 5%;
-        background-color: mat-color($portfolio-primary, 900);
-
-        left: -3rem;
-        top: 1.575rem;
-        transition: 1s ease-out;
-
-        z-index: -2;
-    }
-
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
 }
