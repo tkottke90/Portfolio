@@ -1,4 +1,8 @@
-<button mat-button class="close overlay__close">
+<button 
+    mat-button 
+    class="close overlay__close"
+    (click)="hideOverlay()"
+    >
     <mat-icon class="icon-size3x" svgIcon="window-close"></mat-icon>
 </button>
 <div class="img-cont overlay__image-cont" 

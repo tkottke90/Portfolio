@@ -1,8 +1,10 @@
 import {
     Component,
-    OnInit
+    OnInit,
+    OnDestroy
 } from '@angular/core';
 import { ProjectDisplayService } from '../../services/project.display';
+import { OnDisconnect } from '@firebase/database-types';
 
 @Component({
     selector: 'app-overlay-view',
@@ -28,6 +30,14 @@ export class OverlayViewComponent implements OnInit {
                 // TO-DO #1 (Logging)
             }
         });
+    }
+
+    OnDestroy() {
+        this.pd.project.unsubscribe();
+    }
+
+    hideOverlay() {
+        this.pd.imageOverlayEnabled.next(false);
     }
 
 }
