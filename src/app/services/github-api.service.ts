@@ -12,10 +12,16 @@ export class GithubApiService {
 
     public ServiceError: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
-
-
     constructor( private http: HttpClient ) {
         this.client = Github.client();
+
+        const updatedEvents: GithubEventData[] = [];
+
+        for (let i = 0; i < 20; i++) {
+            updatedEvents.push(new LoadingEvent());
+        }
+
+        this.events.next(updatedEvents);
     }
 
     getActivity(): Promise<any> {
@@ -130,6 +136,7 @@ export class GithubCommit {
 }
 
 export enum EventTypes {
+    Loading = -1,
     Create,
     Comment,
     Delete,
@@ -156,6 +163,22 @@ export class GithubEventData {
         this.Date = o['created_at'];
         this.Repo = o['repo']['name'];
         this.type = t;
+    }
+}
+
+export class LoadingEvent extends GithubEventData {
+    constructor() {
+        const nullInstance = {
+            'created_at': new Date(),
+            'actor' : {
+                'avatar_url' : ''
+            },
+            'repo': {
+                'name': ''
+            }
+        };
+        super(nullInstance, EventTypes.Loading);
+        this.message = 'Thomas will do something in the future';
     }
 }
 

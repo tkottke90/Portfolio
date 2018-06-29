@@ -77,6 +77,10 @@
         grid-row: 1;
     }
 
+    &__loading {
+        grid-row: 1;
+    }
+
     &__commits-col {
         grid-row: 2
     }
@@ -116,6 +120,13 @@
     }
 }
 
+.blur {
+    & mat-icon, p, h4 {
+        color: transparent;
+        text-shadow: 0 0 8px #000;
+    }
+}
+
 .icon {
     color:rgba(0,0,0,0.50);
 }
@@ -127,6 +138,7 @@
     line-height: 24px;
 }
 
+.text,
 .event-text {
 
     font-size: 1rem;
