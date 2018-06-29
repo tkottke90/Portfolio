@@ -46,29 +46,34 @@ export class GithubApiService {
                     req_remaining > 10 ? console.log(`Requests Remaining: ${req_remaining}`) : console.error(`Low Requests Remaining: ${req_remaining}`);
                     console.log(`Type: ${typeof body}\nCount: ${body.length}`);
                     if (this.ServiceError.value) { this.ServiceError.next(false); }
-                        const newEvents = new Array<GithubEventData>();
-
+                        let currentEvent = 0;
 
                         for (let i = 0; (i < body.length  && i < 20 ); i++) {
+                            const updateEvent = this.events.value;
 
                             switch (body[i]['type']) {
                                 case 'CreateEvent':
                                     await this.http.get(body[i]['repo']['url']).toPromise().then( res => {
-                                        newEvents.push(new CreateEvent(body[i], res['html_url']));
+                                        updateEvent[currentEvent] = new CreateEvent(body[i], res['html_url']);
+                                        currentEvent++;
                                     }).catch( createError => {
-                                        newEvents.push(new CreateEvent(body[i], 'https://github.com/tkottke/404error'));
+                                        updateEvent[currentEvent] = new CreateEvent(body[i], 'https://github.com/tkottke/404error');
+                                        currentEvent++;
                                     });
                                     break;
                                 case 'DeleteEvent':
                                     break;
                                 case 'IssuesEvent':
-                                    newEvents.push(new IssuesEvent(body[i]));
+                                    updateEvent[currentEvent] = new IssuesEvent(body[i]);
+                                    currentEvent++;
                                     break;
                                 case 'CommitCommentEvent':
-                                    newEvents.push(new CommitCommentEvent(body[i]));
+                                    updateEvent[currentEvent] = new CommitCommentEvent(body[i]);
+                                    currentEvent++;
                                     break;
                                 case 'IssuesCommentEvent':
-                                    newEvents.push(new IssuesCommentEvent(body[i]));
+                                    updateEvent[currentEvent] = new IssuesCommentEvent(body[i]);
+                                    currentEvent++;
                                     break;
                                 case 'PushEvent':
                                     const payload = body[i]['payload'];
@@ -86,16 +91,18 @@ export class GithubApiService {
                                     }
 
                                     await this.http.get(body[i]['repo']['url']).toPromise().then( res => {
-                                        newEvents.push(new PushEvent(body[i], res['html_url'], commits));
+                                        updateEvent[currentEvent] = new PushEvent(body[i], res['html_url'], commits);
+                                        currentEvent++;
                                     });
                                     break;
                                 case 'WatchEvent':
-                                    newEvents.push(new WatchEvent(body[i]));
+                                    updateEvent[currentEvent] = new WatchEvent(body[i]);
+                                    currentEvent++;
                                     break;
                             }
-                        }
 
-                        this.events.next(newEvents);
+                            this.events.next(updateEvent);
+                        }
 
                     }
                     resolve('done');
