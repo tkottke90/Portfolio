@@ -284,11 +284,11 @@ export class IssuesEvent extends GithubEventData {
         this.action_icon = eventIcons.Issue;
         const payload = instance['payload'];
 
+        this.issueUrl = payload['issue']['html_url'];
         // tslint:disable-next-line:max-line-length
-        this.message = `Thomas ${payload['action']} an issue in <a href="https://github.com/${instance['repo']['name']}" target="_blank">${instance['repo']['name']}</a>`;
+        this.message = `Thomas ${payload['action']} an <a href="${this.issueUrl}" target="_blank">issue</a> in <a href="https://github.com/${instance['repo']['name']}" target="_blank">${instance['repo']['name']}</a>`;
         this.issueTitle = `Title: ${payload['issue']['title']}`;
         this.issueText = `Info: ${payload['issue']['body']}`;
-        this.issueUrl = payload['issue']['html_url'];
     }
 
 }
