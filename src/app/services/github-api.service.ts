@@ -169,7 +169,7 @@ export class GithubEventData {
 export class LoadingEvent extends GithubEventData {
     constructor() {
         const nullInstance = {
-            'created_at': new Date(),
+            'created_at': new Date(0, 0, 0),
             'actor' : {
                 'avatar_url' : ''
             },
