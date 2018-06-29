@@ -1,12 +1,6 @@
 import { Component, Input, SecurityContext } from '@angular/core';
 import { BrowserModule, DomSanitizer, SafeHtml } from '@angular/platform-browser';
-import { GithubApiService,
-         GithubEventData,
-         CreateEvent,
-         DeleteEvent,
-         IssuesEvent,
-         PushEvent,
-         WatchEvent,
+import { GithubEventData,
          GithubCommit} from '../../services/github-api.service';
 
 @Component({
