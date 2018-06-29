@@ -1,0 +1,79 @@
+@import '../../styles/base.scss';
+
+.about-frame {
+
+    display: flex;
+    flex-direction: column;
+
+    &__welcome {}
+
+    &__about {
+        margin: 1rem 2rem 0 2rem;
+    }
+
+}
+
+.welcome {
+    background-color: mat-color($portfolio-warn);
+}
+
+.about {
+
+    max-width: 850px;
+
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-row: repeat(4, 1fr);
+
+    &__intro {
+        grid-area: 1 / 1 / 1 / 3;
+    }
+
+    &__current {
+        grid-area: 2 / 1;
+    }
+
+    &__skills {
+        grid-area: 2 / 2;
+    }
+
+    &__glance {
+        grid-area: 3 / 1 / 3 / 3;
+    }
+
+    &__nav {
+        grid-area: 4 / 1 / 4 / 3;
+    }
+    
+
+}
+
+.intro {
+
+    & .header, .text {
+        color: mat-color($portfolio-accent);
+    }
+
+    .text {
+        font-size: 1.2rem;
+    }
+}
+
+.current {}
+
+.skills {
+    width: 100%;
+    height: 100%;
+}
+
+.graph {
+    height: calc(100% - 3rem);
+    width: calc(100% - 3rem);
+    margin: 1.5rem;
+    border-left: 2px solid mat-color($portfolio-primary, 900);
+    border-bottom: 2px solid mat-color($portfolio-primary, 900);
+}
+
+.glance {}
+
+.nav {}

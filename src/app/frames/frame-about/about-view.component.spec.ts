@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FrameAboutComponent } from './about-view.component';
+import { AboutViewComponent } from './about-view.component';
 
-describe('FrameAboutComponent', () => {
-  let component: FrameAboutComponent;
-  let fixture: ComponentFixture<FrameAboutComponent>;
+describe('AboutViewComponent', () => {
+  let component: AboutViewComponent;
+  let fixture: ComponentFixture<AboutViewComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ FrameAboutComponent ]
+      declarations: [ AboutViewComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(FrameAboutComponent);
+    fixture = TestBed.createComponent(AboutViewComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
