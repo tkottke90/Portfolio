@@ -1,7 +1,6 @@
 import { Injectable, ElementRef } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpHandler } from '@angular/common/http';
 import * as Github from 'octonode';
-import { DebuggerService } from './debugger.service';
 import { FirestoreService } from './firestore.service';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
@@ -10,7 +9,7 @@ export class GithubApiService {
     client;
     events: BehaviorSubject<Array<GithubEventData>> = new BehaviorSubject([]);
 
-    public ServiceError: BehaviorSubject<boolean> = new BehaviorSubject(false);
+    public ServiceError: BehaviorSubject<GHAPIError> = new BehaviorSubject(new GHAPIError(false));
 
     constructor( private http: HttpClient ) {
         this.client = Github.client();
@@ -28,24 +27,36 @@ export class GithubApiService {
         return new Promise((resolve, reject) => {
             this.client.get('/users/tkottke90/events', {}, async (err, status, body, headers) => {
                 if (err) {
-                    this.ServiceError.next(true);
                     // TO-DO Add Firebase Error Log
-                    switch (err['headers']['status']) {
-                        case '403 Forbidden':
+                    switch (err['statusCode']) {
+                        case 403:
+                            const d = new Date(0);
+                            d.setUTCSeconds(parseInt(err['headers']['x-ratelimit-reset'], 10));
+
+                            // tslint:disable-next-line:max-line-length
+                            this.ServiceError.next(
+                                new GHAPIError(
+                                    true,
+                                    `Github API Error: Too Many Requests Made`,
+                                    d
+                                )
+                            );
                             console.error(`${err['message']}`);
-                            this.events.next([]);
                             break;
                         default:
                             console.error(`Error: ${err}`); reject(err);
-                            this.events.next([]);
                             break;
+                    }
+                    const errorEvents = [];
+                    for (let i = 0; i < 20; i++) {
+                        errorEvents.push(new LoadingEvent());
                     }
                 } else {
                     const req_remaining = headers['x-ratelimit-remaining'];
                     // tslint:disable-next-line:max-line-length
                     req_remaining > 10 ? console.log(`Requests Remaining: ${req_remaining}`) : console.error(`Low Requests Remaining: ${req_remaining}`);
                     console.log(`Type: ${typeof body}\nCount: ${body.length}`);
-                    if (this.ServiceError.value) { this.ServiceError.next(false); }
+                    if (this.ServiceError.value) { this.ServiceError.next(new GHAPIError(false)); }
                         let currentEvent = 0;
 
                         for (let i = 0; (i < body.length  && i < 20 ); i++) {
@@ -121,6 +132,18 @@ const eventIcons = {
     Push: 'arrow-up-bold-hexagon-outline',
     Watch: 'eye'
 };
+
+export class GHAPIError {
+    hasError: boolean;
+    message: string;
+    reset: Date;
+
+    constructor(has: boolean, message?: string, reset?: Date) {
+        this.hasError = has;
+        if (message) { this.message = message; }
+        if (reset) { this.reset = reset; }
+    }
+}
 
 export class GithubCommit {
     ID: String;

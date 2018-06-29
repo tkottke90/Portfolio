@@ -67,6 +67,15 @@ $line-outline: 3px solid mat-color($portfolio-primary, 900);
         max-height: 300px;
         grid-row: 2;
     }
+
+    &__error {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 }
 
 // githubuser
@@ -102,4 +111,10 @@ $line-outline: 3px solid mat-color($portfolio-primary, 900);
 
 .user-link {
     padding-left: 0.5rem;
+}
+
+.error {
+    background-color: #fff7;
+    color: mat-color($portfolio-warn, 900);
+    border: 3px dashed;
 }

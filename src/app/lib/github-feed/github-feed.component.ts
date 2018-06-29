@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { GithubApiService, GithubEventData } from '../../services/github-api.service';
+import { GithubApiService, GithubEventData, GHAPIError } from '../../services/github-api.service';
 
 @Component({
   selector: 'app-github-feed',
@@ -9,12 +9,16 @@ import { GithubApiService, GithubEventData } from '../../services/github-api.ser
 export class GithubFeedComponent implements OnInit {
 
   events: Array<GithubEventData>;
+  apiError: GHAPIError = new GHAPIError(true);
 
   constructor(private ghapi: GithubApiService) { }
 
   async ngOnInit () {
     this.ghapi.events.subscribe({
       next: (v) => this.events = v
+    });
+    this.ghapi.ServiceError.subscribe({
+      next: (n) => this.apiError = n
     });
     await this.ghapi.getActivity().catch( err => console.error(err) );
   }
