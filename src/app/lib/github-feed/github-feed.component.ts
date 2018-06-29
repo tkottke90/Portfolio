@@ -16,7 +16,7 @@ export class GithubFeedComponent implements OnInit {
     this.ghapi.events.subscribe({
       next: (v) => this.events = v
     });
-    // await this.ghapi.getActivity().catch( err => console.error(err) );
+    await this.ghapi.getActivity().catch( err => console.error(err) );
   }
 
 }

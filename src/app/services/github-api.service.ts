@@ -49,7 +49,7 @@ export class GithubApiService {
                         const newEvents = new Array<GithubEventData>();
 
 
-                        for (let i = 0; (i < body.length  && i < 30 ); i++) {
+                        for (let i = 0; (i < body.length  && i < 20 ); i++) {
 
                             switch (body[i]['type']) {
                                 case 'CreateEvent':
