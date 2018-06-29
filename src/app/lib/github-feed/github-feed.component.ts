@@ -13,7 +13,6 @@ export class GithubFeedComponent implements OnInit {
   constructor(private ghapi: GithubApiService) { }
 
   async ngOnInit () {
-    console.log(`ngOnInit Fired`);
     await this.ghapi.getActivity().then( () => {
       this.ghapi.events.subscribe({
         next: (v) => this.events = v
