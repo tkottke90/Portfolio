@@ -1,18 +1,33 @@
-import { Component, Input, SecurityContext } from '@angular/core';
+import { Component,
+         Input,
+         SecurityContext,
+         trigger,
+         animate,
+         style,
+         state,
+         transition
+} from '@angular/core';
 import { BrowserModule, DomSanitizer, SafeHtml } from '@angular/platform-browser';
-import { GithubApiService,
-         GithubEventData,
-         CreateEvent,
-         DeleteEvent,
-         IssuesEvent,
-         PushEvent,
-         WatchEvent,
+import { GithubEventData,
          GithubCommit} from '../../services/github-api.service';
 
 @Component({
     selector: 'app-github-event',
     templateUrl: './github-event.component.html',
-    styleUrls: [ './github-event.component.scss' ]
+    styleUrls: [ './github-event.component.scss' ],
+    animations: [
+        trigger('fadeIn', [
+            state('in', style({ opacity: '1' })),
+            transition(':enter', [
+                style({opacity: '0'}),
+                animate(500)
+            ]),
+            transition(':leave', [
+                style({ opacity : '0'}),
+                animate(100)
+            ])
+        ])
+    ]
 })
 export class GithubEventComponent {
     date: string;

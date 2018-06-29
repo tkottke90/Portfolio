@@ -22,5 +22,10 @@
         }"  
         [event]="e" ></app-github-event>
     </div>
+
+    <div class="error github-events__error" *ngIf="this.apiError.hasError">
+      <h3>{{ this.apiError.message }}</h3>
+      <p>Service returns at: {{ this.apiError.reset.toUTCString() }} </p>
+    </div>
   </mat-card>
 </div>

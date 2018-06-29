@@ -1,0 +1,17 @@
+<button 
+    mat-button 
+    class="close overlay__close"
+    (click)="hideOverlay()"
+    >
+    <mat-icon class="icon-size3x" svgIcon="window-close"></mat-icon>
+</button>
+<div class="img-cont overlay__image-cont" 
+    *appCarousel="let img from images; let ctrl = controller">
+    <img [src]="img['img']" class="image img-cont__image">
+    <button mat-button class="prev img-cont__prev" (click)="ctrl.prev()">
+        <mat-icon class="icon-size3x" svgIcon="chevron-left"></mat-icon>
+    </button>
+    <button mat-button class="next img-cont__next" (click)="ctrl.next()">
+        <mat-icon class="icon-size3x" svgIcon="chevron-right"></mat-icon>
+    </button>
+</div>

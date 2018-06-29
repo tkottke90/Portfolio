@@ -1,22 +1,18 @@
 
-    <div class="header github-event__header">
+    <div *ngIf="event_type !== -1" [@fadeIn] class="header github-event__header">
         <mat-icon class="icon header__icon" svgIcon="{{ action_icon }}" #hi></mat-icon>
         <p class="time header__time" [innerHTML]="date"></p>
         <h4 class="event-text header__event-text" [innerHTML]="header"></h4>
     </div>
     
-    
-
-    <div *ngIf="event_type === 5" class="commits-col github-event__commits-col">
+    <div *ngIf="event_type === 5" [@fadeIn] class="commits-col github-event__commits-col">
         <app-github-commit  *ngFor="let c of commits"
         [avatar]='avatar'
         [commit]='c'></app-github-commit>
         <div class="more-commits commits-col__more-commits" [innerHTML]="moreCommits"></div>
     </div>
 
-    
-
-    <div *ngIf="event_type == 1" class="comments github-event__comments">
+    <div *ngIf="event_type == 1" [@fadeIn] class="comments github-event__comments">
         <app-github-comment
             [avatar]='avatar'
             [comment]='comment'></app-github-comment>
@@ -24,6 +20,12 @@
 
     <div *ngIf="event_type == 4" class="merge-info github-event__merge-info">
 
+    </div>
+
+    <div *ngIf="event_type === -1" [@fadeIn] class="loading github-event__loading">
+        <div class="icon-box loading__icon-box"></div>
+        <div class="time-box loading__time-box"></div>
+        <div class="header-box loading__header-box"></div>
     </div>
 
     <div class="connect-line"></div>

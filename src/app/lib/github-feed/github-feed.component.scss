@@ -67,13 +67,22 @@ $line-outline: 3px solid mat-color($portfolio-primary, 900);
         max-height: 300px;
         grid-row: 2;
     }
+
+    &__error {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 }
 
 // githubuser
 .githubuser {
     display: grid;
-    grid-template-rows: 2em 1fr;
-    grid-template-columns: 5em 1fr;
+    grid-template-rows: 2rem 1fr;
+    grid-template-columns: 4rem 1fr;
 
     &__github-logo {
         grid-row: 1/2;
@@ -102,4 +111,10 @@ $line-outline: 3px solid mat-color($portfolio-primary, 900);
 
 .user-link {
     padding-left: 0.5rem;
+}
+
+.error {
+    background-color: #fff7;
+    color: mat-color($portfolio-warn, 900);
+    border: 3px dashed;
 }

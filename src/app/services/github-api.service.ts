@@ -1,7 +1,6 @@
 import { Injectable, ElementRef } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpHandler } from '@angular/common/http';
 import * as Github from 'octonode';
-import { DebuggerService } from './debugger.service';
 import { FirestoreService } from './firestore.service';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
@@ -10,59 +9,82 @@ export class GithubApiService {
     client;
     events: BehaviorSubject<Array<GithubEventData>> = new BehaviorSubject([]);
 
-    public ServiceError: BehaviorSubject<boolean> = new BehaviorSubject(false);
-
-
+    public ServiceError: BehaviorSubject<GHAPIError> = new BehaviorSubject(new GHAPIError(false));
 
     constructor( private http: HttpClient ) {
         this.client = Github.client();
+
+        const updatedEvents: GithubEventData[] = [];
+
+        for (let i = 0; i < 20; i++) {
+            updatedEvents.push(new LoadingEvent());
+        }
+
+        this.events.next(updatedEvents);
     }
 
     getActivity(): Promise<any> {
         return new Promise((resolve, reject) => {
             this.client.get('/users/tkottke90/events', {}, async (err, status, body, headers) => {
                 if (err) {
-                    this.ServiceError.next(true);
                     // TO-DO Add Firebase Error Log
-                    switch (err['headers']['status']) {
-                        case '403 Forbidden':
+                    switch (err['statusCode']) {
+                        case 403:
+                            const d = new Date(0);
+                            d.setUTCSeconds(parseInt(err['headers']['x-ratelimit-reset'], 10));
+
+                            // tslint:disable-next-line:max-line-length
+                            this.ServiceError.next(
+                                new GHAPIError(
+                                    true,
+                                    `Github API Error: Too Many Requests Made`,
+                                    d
+                                )
+                            );
                             console.error(`${err['message']}`);
-                            this.events.next([]);
                             break;
                         default:
                             console.error(`Error: ${err}`); reject(err);
-                            this.events.next([]);
                             break;
+                    }
+                    const errorEvents = [];
+                    for (let i = 0; i < 20; i++) {
+                        errorEvents.push(new LoadingEvent());
                     }
                 } else {
                     const req_remaining = headers['x-ratelimit-remaining'];
                     // tslint:disable-next-line:max-line-length
                     req_remaining > 10 ? console.log(`Requests Remaining: ${req_remaining}`) : console.error(`Low Requests Remaining: ${req_remaining}`);
                     console.log(`Type: ${typeof body}\nCount: ${body.length}`);
-                    if (this.ServiceError.value) { this.ServiceError.next(false); }
-                        const newEvents = new Array<GithubEventData>();
+                    if (this.ServiceError.value) { this.ServiceError.next(new GHAPIError(false)); }
+                        let currentEvent = 0;
 
-
-                        for (let i = 0; (i < body.length  && i < 6 ); i++) {
+                        for (let i = 0; (i < body.length  && i < 20 ); i++) {
+                            const updateEvent = this.events.value;
 
                             switch (body[i]['type']) {
                                 case 'CreateEvent':
                                     await this.http.get(body[i]['repo']['url']).toPromise().then( res => {
-                                        newEvents.push(new CreateEvent(body[i], res['html_url']));
+                                        updateEvent[currentEvent] = new CreateEvent(body[i], res['html_url']);
+                                        currentEvent++;
                                     }).catch( createError => {
-                                        newEvents.push(new CreateEvent(body[i], 'https://github.com/tkottke/404error'));
+                                        updateEvent[currentEvent] = new CreateEvent(body[i], 'https://github.com/tkottke/404error');
+                                        currentEvent++;
                                     });
                                     break;
                                 case 'DeleteEvent':
                                     break;
                                 case 'IssuesEvent':
-                                    newEvents.push(new IssuesEvent(body[i]));
+                                    updateEvent[currentEvent] = new IssuesEvent(body[i]);
+                                    currentEvent++;
                                     break;
                                 case 'CommitCommentEvent':
-                                    newEvents.push(new CommitCommentEvent(body[i]));
+                                    updateEvent[currentEvent] = new CommitCommentEvent(body[i]);
+                                    currentEvent++;
                                     break;
                                 case 'IssuesCommentEvent':
-                                    newEvents.push(new IssuesCommentEvent(body[i]));
+                                    updateEvent[currentEvent] = new IssuesCommentEvent(body[i]);
+                                    currentEvent++;
                                     break;
                                 case 'PushEvent':
                                     const payload = body[i]['payload'];
@@ -80,16 +102,18 @@ export class GithubApiService {
                                     }
 
                                     await this.http.get(body[i]['repo']['url']).toPromise().then( res => {
-                                        newEvents.push(new PushEvent(body[i], res['html_url'], commits));
+                                        updateEvent[currentEvent] = new PushEvent(body[i], res['html_url'], commits);
+                                        currentEvent++;
                                     });
                                     break;
                                 case 'WatchEvent':
-                                    newEvents.push(new WatchEvent(body[i]));
+                                    updateEvent[currentEvent] = new WatchEvent(body[i]);
+                                    currentEvent++;
                                     break;
                             }
-                        }
 
-                        this.events.next(newEvents);
+                            this.events.next(updateEvent);
+                        }
 
                     }
                     resolve('done');
@@ -108,6 +132,18 @@ const eventIcons = {
     Push: 'arrow-up-bold-hexagon-outline',
     Watch: 'eye'
 };
+
+export class GHAPIError {
+    hasError: boolean;
+    message: string;
+    reset: Date;
+
+    constructor(has: boolean, message?: string, reset?: Date) {
+        this.hasError = has;
+        if (message) { this.message = message; }
+        if (reset) { this.reset = reset; }
+    }
+}
 
 export class GithubCommit {
     ID: String;
@@ -130,6 +166,7 @@ export class GithubCommit {
 }
 
 export enum EventTypes {
+    Loading = -1,
     Create,
     Comment,
     Delete,
@@ -159,6 +196,22 @@ export class GithubEventData {
     }
 }
 
+export class LoadingEvent extends GithubEventData {
+    constructor() {
+        const nullInstance = {
+            'created_at': new Date(0, 0, 0),
+            'actor' : {
+                'avatar_url' : ''
+            },
+            'repo': {
+                'name': ''
+            }
+        };
+        super(nullInstance, EventTypes.Loading);
+        this.message = 'Thomas will do something in the future';
+    }
+}
+
 export class CommitCommentEvent extends GithubEventData {
     comment: string;
     constructor (
@@ -184,10 +237,28 @@ export class CreateEvent extends GithubEventData {
     ) {
         super(instance, EventTypes.Create);
         this.action_icon = eventIcons.Create;
-        this.message = `Thomas created new repo called <a href="${gitURL}" target="_blank">${instance['repo']['name'].split('/')[1]}<a>`;
+        this.message = this.genMessage(gitURL);
         this.objectInstance = instance;
 
         // console.log(this.message);
+    }
+
+    genMessage(URL) {
+        switch (this.objectInstance['payload']['ref_type']) {
+            case 'repository':
+                // tslint:disable-next-line:max-line-length
+                return `Thomas created new repo called <a href="${URL}" target="_blank">${this.objectInstance['repo']['name'].split('/')[1]}<a>`;
+            case 'branch':
+                const branchName = this.objectInstance['payload']['ref'];
+                // tslint:disable-next-line:max-line-length
+                return `Thomas created <a href="${URL}/tree/${branchName}" target="blank">${branchName}</a> in <a href="${URL} target="_blank">${this.objectInstance['repo']['name'].split('/')[1]}<a>`;
+            case 'tag':
+                const tag = this.objectInstance['payload']['ref'];
+                // tslint:disable-next-line:max-line-length
+                return `Thomas created tag [${tag}] for <a href="${URL} target="_blank">${this.objectInstance['repo']['name'].split('/')[1]}<a>`;
+            default:
+                return `Error in CreateEvent`;
+        }
     }
 
 }
@@ -236,11 +307,11 @@ export class IssuesEvent extends GithubEventData {
         this.action_icon = eventIcons.Issue;
         const payload = instance['payload'];
 
+        this.issueUrl = payload['issue']['html_url'];
         // tslint:disable-next-line:max-line-length
-        this.message = `Thomas ${payload['action']} an issue in <a href="https://github.com/${instance['repo']['name']}" target="_blank">${instance['repo']['name']}</a>`;
+        this.message = `Thomas ${payload['action']} an <a href="${this.issueUrl}" target="_blank">issue</a> in <a href="https://github.com/${instance['repo']['name']}" target="_blank">${instance['repo']['name']}</a>`;
         this.issueTitle = `Title: ${payload['issue']['title']}`;
         this.issueText = `Info: ${payload['issue']['body']}`;
-        this.issueUrl = payload['issue']['html_url'];
     }
 
 }

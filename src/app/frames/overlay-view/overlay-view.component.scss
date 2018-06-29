@@ -1,0 +1,90 @@
+@import '../../styles/base.scss';
+
+:host {
+    background: rgba(0, 0, 0, 0.9);
+
+    display: grid;
+    grid-template-columns: 10% 80% 10%;
+    grid-template-rows: 10% 80% 10%;
+
+    @include media($breakpoint-phone){
+        grid-template-columns: 20% 60% 20%;
+    }
+}
+
+.overlay {
+
+    &__close {
+        grid-column: 3;
+        grid-row: 1;
+    }
+
+    &__image-cont {
+        grid-column: 1/4;
+        grid-row: 2;
+    }
+}
+
+.img-cont  {
+
+    overflow: hidden;
+    position: relative;
+    height: 100%;
+    width: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    @include media($breakpoint-phone) {
+        overflow: visible;
+    }
+
+    &__image {
+        overflow: hidden;
+        position: absolute;
+        height: 100%;
+
+        @include media($breakpoint-phone) {
+            width: 100%;
+            height: auto;
+        }
+    }
+
+    &__next {
+        position: absolute;
+        height: 3rem;
+        top: calc(50% - 3rem);
+        right: 0;
+
+        @include media($breakpoint-phone) {
+            top: 100%;
+        }
+    }
+
+    &__prev {
+        position: absolute;
+        height: 3rem;
+        top: calc(50% - 3rem);
+        left: 0;
+
+        @include media($breakpoint-phone) {
+            top: 100%;
+        }
+    }
+}
+
+.icon-size3x {
+    transform: scale(3);
+
+    @include media($breakpoint-phone) {
+        transform: scale(1.5);
+    }
+}
+
+.close,
+.prev,
+.next { 
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.5) 
+}

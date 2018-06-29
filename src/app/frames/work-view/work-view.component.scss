@@ -1,0 +1,51 @@
+@import '../../styles/base.scss';
+
+
+:host {
+    max-width: 975px;
+    margin: 2rem auto 0 auto;
+
+    overflow: hidden;
+}
+
+
+.slide-panel {
+    height: 100%;
+    width: 200%;
+
+    overflow: hidden;
+
+    display: flex;
+
+    &__left-panel, &__right-panel {
+        flex: 1;
+    }
+}
+
+.right-panel {
+    &__back {
+        color: mat-color($portfolio-accent);
+    }
+}
+
+
+.panel-content {
+    width: 100%;
+
+    display: grid;
+
+    
+
+    grid-template-columns: 40% 60%;
+    grid-template-rows: 4rem 1fr;
+
+    
+    @include media($breakpoint-phone){
+        display: flex;
+        flex-direction: column;
+
+
+        padding-right: 4rem;
+    }
+
+}

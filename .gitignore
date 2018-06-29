@@ -49,3 +49,4 @@ Research Resources/
 ./src/assets/data.json
 
 ./environment.ts
+debug.log

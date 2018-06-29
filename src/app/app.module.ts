@@ -20,6 +20,7 @@ import {
   MatCardModule,
   MatDatepickerModule,
   MatDialogModule,
+  MatExpansionModule,
   MatFormFieldModule,
   MatIconModule,
   MatIconRegistry,
@@ -31,6 +32,7 @@ import {
   MatSidenavModule,
   MatSlideToggleModule,
   MatStepperModule,
+  MatTooltipModule,
   MatProgressSpinnerModule,
   MatNativeDateModule} from '@angular/material';
 
@@ -39,12 +41,21 @@ import { AppComponent } from './app.component';
 import { GithubEventComponent } from './lib/github-event.component/github-event.component';
 import { CommitComponent } from './lib/github-commit.component/github-commit.component';
 import { CommentComponent } from './lib/github-comment.component/github-comment.component';
-import { FrameAboutComponent } from './frames/frame-about/frame-about.component';
+import { GithubFeedComponent } from './lib/github-feed/github-feed.component';
+import { ProjectContainerComponent } from './lib/project-container/project-container.component';
+import { ProjectCardComponent } from './lib/project-card/project-card.component';
+import { ProjectDetailsComponent } from './lib/project-details/project-details.component';
 
+
+// Frames
+import { WorkViewComponent } from './frames/work-view/work-view.component';
+import { OverlayViewComponent } from './frames/overlay-view/overlay-view.component';
 
 // Custom Services
 import { GithubApiService } from './services/github-api.service';
-import { GithubFeedComponent } from './lib/github-feed/github-feed.component';
+import { FirestoreService } from './services/firestore.service';
+import { ProjectDisplayService } from './services/project.display';
+import { CarouselDirective } from './directives/carousel.directive';
 
 @NgModule({
   declarations: [
@@ -53,7 +64,12 @@ import { GithubFeedComponent } from './lib/github-feed/github-feed.component';
     CommitComponent,
     GithubEventComponent,
     GithubFeedComponent,
-    FrameAboutComponent
+    ProjectContainerComponent,
+    ProjectCardComponent,
+    WorkViewComponent,
+    ProjectDetailsComponent,
+    OverlayViewComponent,
+    CarouselDirective
   ],
   imports: [
     BrowserModule,
@@ -69,6 +85,7 @@ import { GithubFeedComponent } from './lib/github-feed/github-feed.component';
     MatCheckboxModule,
     MatDatepickerModule,
     MatDialogModule,
+    MatExpansionModule,
     MatFormFieldModule,
     MatIconModule,
     MatInputModule,
@@ -79,6 +96,7 @@ import { GithubFeedComponent } from './lib/github-feed/github-feed.component';
     MatSidenavModule,
     MatSlideToggleModule,
     MatStepperModule,
+    MatTooltipModule,
     MatProgressSpinnerModule,
     MatNativeDateModule
   ],
@@ -101,7 +119,7 @@ import { GithubFeedComponent } from './lib/github-feed/github-feed.component';
     MatProgressSpinnerModule,
     MatNativeDateModule
   ],
-  providers: [ GithubApiService ],
+  providers: [ GithubApiService, FirestoreService, ProjectDisplayService ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

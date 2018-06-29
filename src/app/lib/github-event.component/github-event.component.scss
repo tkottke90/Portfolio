@@ -77,6 +77,10 @@
         grid-row: 1;
     }
 
+    &__loading {
+        grid-row: 1;
+    }
+
     &__commits-col {
         grid-row: 2
     }
@@ -116,6 +120,52 @@
     }
 }
 
+.loading {
+    display: grid;
+
+    grid-template-rows: 1fr 2em;
+    grid-template-columns: 2em 1fr;
+
+    &__icon-box {
+        grid-row: 1/2;
+        grid-column: 1;
+        width: 85%;
+        height: 100%;
+        border-radius: 0.5rem;
+    }
+
+    &__time-box {
+        grid-row: 1;
+        grid-column: 2;
+        height: 75%;
+        width: 30%;
+        border-radius: 1rem;
+        margin: auto 0;
+    }
+
+    &__header-box {
+        grid-row: 2;
+        grid-column: 2;
+        height: 75%;
+        width: 90%;
+        border-radius: 1rem;
+        margin: auto 0;
+    }
+}
+
+.icon-box,
+.time-box,
+.header-box {
+    background-color: mat-color($portfolio-accent, 300);
+}
+
+.blur {
+    & mat-icon, p, h4 {
+        color: transparent;
+        text-shadow: 0 0 8px #000;
+    }
+}
+
 .icon {
     color:rgba(0,0,0,0.50);
 }
@@ -127,6 +177,7 @@
     line-height: 24px;
 }
 
+.text,
 .event-text {
 
     font-size: 1rem;
