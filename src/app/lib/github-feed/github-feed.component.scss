@@ -72,8 +72,8 @@ $line-outline: 3px solid mat-color($portfolio-primary, 900);
 // githubuser
 .githubuser {
     display: grid;
-    grid-template-rows: 2em 1fr;
-    grid-template-columns: 5em 1fr;
+    grid-template-rows: 2rem 1fr;
+    grid-template-columns: 4rem 1fr;
 
     &__github-logo {
         grid-row: 1/2;
