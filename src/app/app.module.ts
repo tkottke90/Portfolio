@@ -47,9 +47,10 @@ import { ProjectCardComponent } from './lib/project-card/project-card.component'
 import { ProjectDetailsComponent } from './lib/project-details/project-details.component';
 
 
-// Frames
+// Views
 import { WorkViewComponent } from './frames/work-view/work-view.component';
 import { OverlayViewComponent } from './frames/overlay-view/overlay-view.component';
+import { AboutViewComponent } from './frames/frame-about/about-view.component';
 
 // Custom Services
 import { GithubApiService } from './services/github-api.service';
@@ -60,6 +61,7 @@ import { CarouselDirective } from './directives/carousel.directive';
 @NgModule({
   declarations: [
     AppComponent,
+    AboutViewComponent,
     CommentComponent,
     CommitComponent,
     GithubEventComponent,

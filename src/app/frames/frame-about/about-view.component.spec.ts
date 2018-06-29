@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FrameAboutComponent } from './frame-about.component';
+import { FrameAboutComponent } from './about-view.component';
 
 describe('FrameAboutComponent', () => {
   let component: FrameAboutComponent;
