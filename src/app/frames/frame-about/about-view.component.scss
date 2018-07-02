@@ -19,11 +19,16 @@
 
 .about {
 
-    max-width: 850px;
+    max-width: 900px;
 
     display: grid;
     grid-template-columns: 50% 50%;
     grid-row: repeat(4, 1fr);
+
+    @include media(970px) {
+        display: flex;
+        flex-direction: column;
+    }
 
     &__intro {
         grid-area: 1 / 1 / 1 / 3;
@@ -35,6 +40,10 @@
 
     &__skills {
         grid-area: 2 / 2;
+
+        @include media(970px) {
+            height: 14rem;
+        }
     }
 
     &__glance {
@@ -50,6 +59,8 @@
 
 .intro {
 
+    margin-bottom: 1rem;
+
     & .header, .text {
         color: mat-color($portfolio-accent);
     }
@@ -63,17 +74,266 @@
 
 .skills {
     width: 100%;
-    height: 100%;
 }
 
 .graph {
     height: calc(100% - 3rem);
     width: calc(100% - 3rem);
-    margin: 1.5rem;
-    border-left: 2px solid mat-color($portfolio-primary, 900);
-    border-bottom: 2px solid mat-color($portfolio-primary, 900);
+    margin: 1.5rem 5rem 1.5rem 1.5rem;
+    position: relative;
+    
+
+
+    & div {
+        position: absolute;
+        height: 100%;
+    }
+
+    &__data {
+        z-index: 10;
+        left: 20%;
+        width: 80%;
+    }
+
+    &__legend {
+        z-index: 5;
+        width: 100%;
+    }
 }
 
-.glance {}
+.legend {
+    display: grid;
+    grid-template-rows: repeat(7, calc(93%/5) 1% );
 
+    & div {
+        margin-top: auto;
+        font-size: 0.75rem;
+
+        width: 100%;
+
+        @include media($breakpoint-phone) {
+            font-size: 0.6rem;
+        }
+
+        &::after {
+            content: '';
+            width: 100%;
+            opacity: 0.85;
+            border-top: 1px dashed mat-color($portfolio-primary, 900);
+
+            position: absolute;
+            top: 1rem;
+            left: 0;
+
+            @include media($breakpoint-phone) {
+                top: 0.75rem;
+            }
+        }
+
+    }
+
+    &__expert {
+        grid-row: 1;
+    }
+
+    &__proficent {
+        grid-row: 3;
+    }
+
+    &__comfort {
+        grid-row: 5;
+    }
+
+    &__novice {
+        grid-row: 7;
+    }
+
+    &__rookie {
+        grid-row: 9;
+    }
+}
+
+.data {
+    display: grid;
+    grid-template-columns: 1rem repeat(8, 2rem 0.33rem);
+    grid-template-rows: 10% repeat(4, 19.5%) 12%;
+
+    border-left: 2px solid mat-color($portfolio-primary, 900);
+    border-bottom: 2px solid mat-color($portfolio-primary, 900);
+
+    @include media($breakpoint-phone) {
+        grid-template-columns: 1rem repeat(8, 1.25rem 0.33rem); 
+    }
+
+    &__bar-html { grid-column: 2; }
+
+    &__bar-css { grid-column: 4; } 
+
+    &__bar-js { grid-column: 6; }
+
+    &__bar-ts { grid-column: 8; }
+
+    &__bar-node { grid-column: 10; }
+
+    &__bar-ng { grid-column: 12; }
+
+    &__bar-redis { grid-column: 14; }
+
+    &__bar-fb { grid-column: 16; }
+}
+
+.bar {
+    background-color: mat-color($portfolio-accent);
+    color: #fff;
+    opacity: 0.85;
+
+    width: 2rem;
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    @include media($breakpoint-phone) {
+        width: 1.25rem;
+    }
+    
+    & p {
+        transform: rotate(-90deg);
+        white-space: nowrap;
+
+        font-size: 0.85rem;
+    }
+
+    &-rookie {
+        grid-row: 6;
+    }
+
+    &-novice {
+        grid-row: 5/7;
+    }
+
+    &-comfort {
+        grid-row: 4/7;
+    }
+
+    &-proficent {
+        grid-row: 3/7;
+    }
+
+    &-expert {
+        grid-row: 2/7;
+    }
+}
+
+.glance {
+
+    margin: 1rem 0;
+
+    display: grid;
+    grid-template-columns: 35% 30% 35%;
+
+    @include media($breakpoint-phone) {
+        grid-template-columns: 45% 10% 45%;
+    }
+
+    &__work {
+        grid-column: 1;
+    
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        justify-content: center;
+    
+        @include media($breakpoint-phone) {
+            position: relative;
+            z-index: 10;
+        }
+    }
+
+    &__image-cont {
+        grid-column: 2;
+
+        width: 100%;
+        height: calc((255/260)*100%);
+
+        @include media($breakpoint-phone) {
+            position: absolute;
+            grid-column: 1/4;
+            margin: 0 3rem;
+            opacity: 0.25;
+        }
+    }
+
+    &__play {
+        grid-column: 3;
+
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+        
+        @include media($breakpoint-phone) {
+            position: relative;
+            z-index: 10;
+        }
+    }
+
+    & * h4 {
+        @include media(900px) {
+            font-size: 1.8vw;
+        }
+
+        @include media($breakpoint-phone) {
+            font-size: 2.9vw;
+        }
+    }
+
+    & * p {
+        @include media(900px) {
+            font-size: 1.3vw;
+        }
+
+        @include media($breakpoint-phone) {
+            font-size: 2.1vw;
+        }
+    }
+}
+
+.work {
+
+    & h4 {
+        color: mat-color($portfolio-primary, 900);
+    } 
+
+    & p {
+        font-size: 0.84rem;
+        margin-bottom: 0.8rem;
+    }
+}
+
+.image {
+    overflow: hidden;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+
+    width: 100%;
+    height: calc((255/260)*100%);
+
+    @include media($breakpoint-phone) {
+        width: auto;
+        height: auto;
+    }
+}
+
+.play {
+    & h4 {
+        color: mat-color($portfolio-accent, 900);
+    }
+
+    & p {
+        font-size: 0.8rem;
+        margin-bottom: 0.8rem;
+    }
+}
 .nav {}
