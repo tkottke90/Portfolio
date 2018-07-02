@@ -25,7 +25,11 @@
     grid-template-columns: 50% 50%;
     grid-row: repeat(4, 1fr);
 
-    @include media(970px) {
+    @include between(750px, 970px){
+        grid-template-columns: 1fr 450px; 
+    }
+
+    @include media(750px) {
         display: flex;
         flex-direction: column;
     }
@@ -70,10 +74,18 @@
     }
 }
 
-.current {}
+.current {
+
+    
+
+}
 
 .skills {
     width: 100%;
+
+    @include media(750px) {
+        width: 450px;
+    }
 }
 
 .graph {
