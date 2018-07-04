@@ -84,7 +84,6 @@
 .skills {
     width: 100%;
     margin-left: 1rem;
-
     display: grid;
     grid-template-rows: 1rem 1fr;
 
@@ -93,14 +92,16 @@
     }
 
     &__graph {
-        grid-: 2;
+        grid: 2;
     }
 
     @include between($breakpoint-phone, 750px) {
+        margin-top: 1rem;
         width: 450px;
     }
 
     @include media(450px) {
+        margin-top: 1rem;
         width: 95%;
     }
 }
@@ -110,15 +111,7 @@
 
     position: relative;
 
-    &::before {
-        content: '';
-        width: 3rem;
-
-        position: absolute;
-        top: 1rem;
-
-        border-top: 2px solid mat-color($portfolio-primary, 900);
-    }
+    color: mat-color($portfolio-primary, 900);
 
     &::after {
         content: '*not an exhaustive list';
@@ -167,6 +160,8 @@
         font-size: 0.75rem;
 
         width: 100%;
+
+        color: mat-color($portfolio-primary, 900);
 
         @include media($breakpoint-phone) {
             font-size: 0.6rem;
@@ -218,7 +213,7 @@
     border-left: 2px solid mat-color($portfolio-primary, 900);
     border-bottom: 2px solid mat-color($portfolio-primary, 900);
 
-    @include media($breakpoint-phone) {
+    @include media(450px) {
         grid-template-columns: 1rem repeat(8, 1.25rem 0.33rem); 
     }
 
@@ -250,7 +245,7 @@
     align-items: center;
     justify-content: center;
 
-    @include media($breakpoint-phone) {
+    @include media(450px) {
         width: 1.25rem;
     }
     
