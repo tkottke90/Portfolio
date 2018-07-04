@@ -428,4 +428,32 @@
         margin-bottom: 0.8rem;
     }
 }
-.nav {}
+.nav {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.selected-works,
+.contact {
+    font-weight: bold;
+    color: mat-color($portfolio-primary, 900);
+
+    @include media($breakpoint-phone) {
+        font-size: 2.75vw;
+    }
+}
+
+.btn-works,
+.btn-contact {
+    color: #fff;
+    background-color: mat-color($portfolio-accent);
+
+    @include media($breakpoint-phone) {
+        font-size: 2.5vw;
+    }
+}
+
+.selected-works {
+    margin-bottom: 0.5rem;
+}
