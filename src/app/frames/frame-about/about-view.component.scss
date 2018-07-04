@@ -77,8 +77,31 @@
 
 .current {
 
-    
+    &__paragraph-2 {
+        margin: 1rem 0;
+    }    
 
+}
+
+.paragraph {
+    color: mat-color($portfolio-primary, 900);
+
+    @extend %node-before;
+    &::before {
+        content: none;
+    }
+
+
+    @include media(750px){
+        margin-left: 2rem;
+        &::before {
+            content: '';
+            height: 0.5rem;
+            width: 0.5rem;
+
+            left: -1.5rem;
+        }
+    }
 }
 
 .skills {
