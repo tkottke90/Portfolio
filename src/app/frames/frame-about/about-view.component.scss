@@ -95,13 +95,15 @@
         grid: 2;
     }
 
-    @include between($breakpoint-phone, 750px) {
+    @include media(750px) {
         margin-top: 1rem;
+    }
+
+    @include between($breakpoint-phone, 750px) {
         width: 450px;
     }
 
     @include media(450px) {
-        margin-top: 1rem;
         width: 95%;
     }
 }
