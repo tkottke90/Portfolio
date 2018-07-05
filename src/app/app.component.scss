@@ -3,7 +3,7 @@
 
 .toolbar {
     position: fixed;
-    z-index: 1;
+    z-index: 100;
 
     background-color: mat-color($portfolio-primary);
     transition: 1s;
