@@ -8,13 +8,17 @@
     &__welcome {}
 
     &__about {
-        margin: 1rem 2rem 0 2rem;
+        margin: 1rem auto 0 auto;
+
+        @include media(900px) {
+            margin: 1rem 2rem;
+        }
     }
 
 }
 
 .welcome {
-    @include aspect-ratio(16, 9);
+    @include aspect-ratio(2.414, 1); // aka silver ratio
 
     &__wel-img {
         width: 100%;
@@ -112,7 +116,6 @@
 }
 
 .current {
-
     &__paragraph-2 {
         margin: 1rem 0;
     }    
