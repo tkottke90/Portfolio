@@ -22,6 +22,12 @@
     }
 }
 
+.left-panel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .right-panel {
     &__back {
         color: mat-color($portfolio-accent);
