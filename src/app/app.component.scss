@@ -18,7 +18,7 @@
         transform: scaleY(0.95);
 
         @include media($breakpoint-phone) {
-            background-color: mat-color($portfolio-primary);
+            background-color: mat-color($portfolio-primary, 900);
             color: #fff;
         }
     }
