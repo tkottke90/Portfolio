@@ -25,6 +25,7 @@ import {
   MatIconModule,
   MatIconRegistry,
   MatInputModule,
+  MatMenuModule,
   MatTableModule,
   MatToolbarModule,
   MatRadioModule,
@@ -34,7 +35,8 @@ import {
   MatStepperModule,
   MatTooltipModule,
   MatProgressSpinnerModule,
-  MatNativeDateModule} from '@angular/material';
+  MatNativeDateModule,
+  MatMenu} from '@angular/material';
 
 // Custom Components
 import { AppComponent } from './app.component';
@@ -91,6 +93,7 @@ import { CarouselDirective } from './directives/carousel.directive';
     MatFormFieldModule,
     MatIconModule,
     MatInputModule,
+    MatMenuModule,
     MatTableModule,
     MatToolbarModule,
     MatRadioModule,
