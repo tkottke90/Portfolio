@@ -1,4 +1,7 @@
-<mat-toolbar class="toolbar" color="primary">
+<mat-toolbar 
+  class="toolbar body__toolbar" 
+  (window:scroll)="onScroll()"
+  [ngClass]="{ 'toolbar--at-top': scrollTop }">
   <h1>Thomas Kottke</h1>
 
   <h2>Work</h2>
@@ -6,7 +9,7 @@
   <h2>Contact</h2>
 </mat-toolbar>
 
-<div class="content">
+<div class="content body__content">
   <app-about-view></app-about-view>
   
   <div *ngIf="false" class="work-view">

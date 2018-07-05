@@ -11,6 +11,8 @@ export class AppComponent implements OnInit{
   title = 'app';
   overlay: boolean;
 
+  scrollTop = true;
+
   constructor(
     private AF: FirestoreService,
     private pd: ProjectDisplayService
@@ -22,6 +24,13 @@ export class AppComponent implements OnInit{
         this.overlay = vis;
       }
     });
+  }
+
+  onScroll() {
+    this.scrollTop = window.pageYOffset < 200;
+    console.log(window.pageYOffset < 200);
+
+    if (this.scrollTop) { console.log('At Top of Page'); }
   }
 
 }
