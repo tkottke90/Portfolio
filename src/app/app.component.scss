@@ -10,12 +10,14 @@
 
     color: #fff;
 
+    top: 0;
+
     &--at-top {
         background-color: rgba(0,0,0,0.25);
         color: mat-color($portfolio-primary);
 
         @include media($breakpoint-phone) {
-            background-color: mat-color($portfolio-primary, 900);
+            background-color: mat-color($portfolio-primary);
             color: #fff;
         }
     }
@@ -39,6 +41,55 @@
 
 app-work-frame {
     margin: 1rem auto 0 auto;
+}
+
+.footer {
+    margin-top: 2rem;
+
+    background-image: url(https://firebasestorage.googleapis.com/v0/b/op-7f877.appspot.com/o/Tree%20Image.png?alt=media&token=8317b19a-3f16-422b-a1c3-b938ab6cbdb8);
+    background-repeat: no-repeat;
+    background-color: mat-color($portfolio-primary);
+    
+    background-size: auto 80%;
+    background-position: center 10%;
+    
+    filter: grayscale(75%);
+    
+    width: 100%;
+    height: 15vh;
+    
+    display: grid;
+    
+    grid-template-rows: 10% 25% 1fr 1rem 10%;
+
+    &__contact {
+        grid-row: 2;
+    }
+
+    &__links {
+        grid-row: 3;
+    }
+
+    &__copyright {
+        grid-row: 4;
+    }
+}
+
+.contact {
+    margin-left: 2%;
+}
+
+.links {
+
+    margin-left: 2%;
+
+    & a mat-icon {
+        
+    }
+}
+.copyright {
+    
+    margin: 0 auto;
 }
 
 .overlay {
