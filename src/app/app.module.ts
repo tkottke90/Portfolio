@@ -10,6 +10,8 @@ import { AngularFireModule } from 'angularfire2';
 
 // Framework Components
 
+import { routing } from './routes/routes';
+
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireStorageModule } from 'angularfire2/storage';
 import { AngularFireAuthModule } from 'angularfire2/auth';
@@ -103,7 +105,8 @@ import { CarouselDirective } from './directives/carousel.directive';
     MatStepperModule,
     MatTooltipModule,
     MatProgressSpinnerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    routing
   ],
   exports: [
     MatButtonModule,

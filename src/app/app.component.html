@@ -4,7 +4,7 @@
   [ngClass]="{ 'toolbar--at-top': scrollTop }">
   <h1 class="name toolbar__name" >Thomas Kottke</h1>
   <div class="buttons toolbar__buttons">
-    <button mat-button class="work buttons__work">Work</button>
+    <button mat-button class="work buttons__work" routerLink="/work">Work</button>
     <button mat-button class="contact buttons__contact">Contact</button>
     <mat-menu #appMenu="matMenu">
       <button mat-menu-item>Work</button>
@@ -16,11 +16,13 @@
 </mat-toolbar>
 
 <div class="content body__content">
-  <app-about-view></app-about-view>
+  <router-outlet></router-outlet>
+
+  <!-- <app-about-view *ngIf="false"></app-about-view>
   
-  <div *ngIf="false" class="work-view">
+  <div *ngIf="true" class="work-view">
     <app-work-view></app-work-view>
-  </div>
+  </div> -->
 </div>
 
 <footer class="footer body__footer">
