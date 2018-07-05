@@ -12,6 +12,8 @@
 
     top: 0;
 
+    grid-template-columns: 25% 75%;
+
     &--at-top {
         background-color: rgba(0,0,0,0.25);
         color: mat-color($portfolio-primary);
@@ -21,6 +23,37 @@
             color: #fff;
         }
     }
+
+    &__name {
+        grid-column: 1;
+    }
+
+    &__buttons {
+        grid-column: 2;
+    }
+}
+
+.buttons {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+
+    &__work, 
+    &__contact {
+        @include media($breakpoint-phone) {
+            display: none;
+        }
+    }
+
+    &__menu {
+        display: none;
+
+        @include media($breakpoint-phone) {
+            display: block;
+        }
+    }
+
 }
 
 .content {
