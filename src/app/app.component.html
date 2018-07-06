@@ -6,7 +6,7 @@
   <div class="buttons toolbar__buttons">
     <button mat-button class="about buttons__about" routerLink="/about" (click)="setLockToolbar(false)" routerLinkActive="active">About</button>
     <button mat-button class="work buttons__work" routerLink="/work" (click)="setLockToolbar(true)" routerLinkActive="active">Work</button>
-    <button mat-button class="contact buttons__contact" (click)="setLockToolbar(true)" routerLinkActive="active">Contact</button>
+    <button mat-button class="contact buttons__contact" routerLink="/contact" (click)="setLockToolbar(true)" routerLinkActive="active">Contact</button>
     <mat-menu #appMenu="matMenu">
       <button mat-button 
               class="about menu__about" 
@@ -20,6 +20,7 @@
               routerLinkActive="active">Work</button>
       <button mat-button 
               class="contact menu__contact" 
+              routerLink="/contact"
               (click)="setLockToolbar(true)"
               routerLinkActive="active">Contact</button>
     </mat-menu>
