@@ -11,11 +11,12 @@ export class AppComponent implements OnInit {
   title = 'app';
   overlay: boolean;
 
+  lockToolbar = false;
   scrollTop = true;
 
   constructor(
     private AF: FirestoreService,
-    private pd: ProjectDisplayService
+    private pd: ProjectDisplayService,
   ) { }
 
   ngOnInit() {
@@ -24,13 +25,31 @@ export class AppComponent implements OnInit {
         this.overlay = vis;
       }
     });
+
+    this.pd.toolbarTransparent.subscribe({
+      next: (bool) => this.scrollTop = bool
+    });
+
+    this.pd.lockToolbar.subscribe({
+      next: (bool) => this.lockToolbar = bool
+    });
   }
 
   onScroll() {
-    this.scrollTop = window.pageYOffset < 200;
-    console.log(window.pageYOffset < 200);
-
-    if (this.scrollTop) { console.log('At Top of Page'); }
+    if (!this.lockToolbar) {
+      this.pd.toolbarTransparent.next(window.pageYOffset < 200);
+    }
   }
+
+  setLockToolbar(lock: boolean) {
+    this.pd.toolbarTransparent.next(!lock);
+    this.pd.lockToolbar.next(lock);
+
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  }
+
 
 }
