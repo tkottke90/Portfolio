@@ -48,7 +48,8 @@
     justify-content: flex-end;
 
     &__work, 
-    &__contact {
+    &__contact,
+    &__about {
         @include media($breakpoint-phone) {
             display: none;
         }
@@ -62,6 +63,10 @@
         }
     }
 
+}
+
+.active {
+    display: none;
 }
 
 .content {

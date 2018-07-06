@@ -4,12 +4,24 @@
   [ngClass]="{ 'toolbar--at-top': scrollTop }">
   <h1 class="name toolbar__name" >Thomas Kottke</h1>
   <div class="buttons toolbar__buttons">
-    <button mat-button class="about buttons__about" routerLink="/about" (click)="setLockToolbar(false)">About</button>
-    <button mat-button class="work buttons__work" routerLink="/work" (click)="setLockToolbar(true)">Work</button>
-    <button mat-button class="contact buttons__contact" (click)="setLockToolbar(true)">Contact</button>1
+    <button mat-button class="about buttons__about" routerLink="/about" (click)="setLockToolbar(false)" routerLinkActive="active">About</button>
+    <button mat-button class="work buttons__work" routerLink="/work" (click)="setLockToolbar(true)" routerLinkActive="active">Work</button>
+    <button mat-button class="contact buttons__contact" (click)="setLockToolbar(true)" routerLinkActive="active">Contact</button>
     <mat-menu #appMenu="matMenu">
-      <button mat-menu-item>Work</button>
-      <button mat-menu-item>Contact</button>
+      <button mat-button 
+              class="about menu__about" 
+              routerLink="/about" 
+              (click)="setLockToolbar(false)"
+              routerLinkActive="active">About</button>
+      <button mat-button 
+              class="work menu__work" 
+              routerLink="/work" 
+              (click)="setLockToolbar(true)"
+              routerLinkActive="active">Work</button>
+      <button mat-button 
+              class="contact menu__contact" 
+              (click)="setLockToolbar(true)"
+              routerLinkActive="active">Contact</button>
     </mat-menu>
 
     <button mat-button class="menu buttons__menu" [matMenuTriggerFor]="appMenu"><mat-icon svgIcon="menu"></mat-icon></button>
