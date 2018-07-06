@@ -1,5 +1,5 @@
 import { Component, OnInit, transition, trigger, state, style, animate } from '@angular/core';
-import { transformMenu } from '@angular/material';
+import { Router, NavigationStart, NavigationEnd } from '@angular/router';
 
 import { ProjectDisplayService } from '../../services/project.display';
 import { Project } from '../../services/firestore.service';
@@ -45,11 +45,11 @@ export class WorkViewComponent implements OnInit {
 
     iconKeys = [];
 
-    constructor(private pds: ProjectDisplayService) {}
-
-    ngOnInit() {
+    constructor(private pds: ProjectDisplayService, private router: Router
+    ) {
         this.pds.project.subscribe(
             (project) => {
+                console.log('Fire project subscription');
                 this.selectedProject = project;
                 if (this.selectedProject !== null) {
                     this.viewRight();
@@ -65,7 +65,16 @@ export class WorkViewComponent implements OnInit {
                 console.log(`Subscription Error: ${error}`);
             }
         );
+
+        this.router.events.subscribe(event => {
+            if (event instanceof NavigationEnd && event.url === '/work' ) {
+                this.viewLeft();
+                console.log(`Active Panel: ${ this.leftPanel === 'active' ? 'Left' : 'Right'}`);
+            }
+        });
     }
+
+    ngOnInit() { }
 
     toggleView() {
         this.leftPanel = this.leftPanel === 'active' ? 'inactive' : 'active';
