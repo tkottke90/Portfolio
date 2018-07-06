@@ -55,6 +55,10 @@ export class WorkViewComponent implements OnInit {
                     this.viewRight();
                     this.processType = typeof this.selectedProject.Details.Process;
                     this.iconKeys = Object.keys(this.selectedProject.Icons);
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
                 } else {
                     this.viewLeft();
                 }
