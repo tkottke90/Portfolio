@@ -34,6 +34,14 @@
     &__back {
         color: mat-color($portfolio-accent);
     }
+
+    &__panel-content {
+        margin-left: 5rem;
+
+        @include media($breakpoint-phone) {
+            margin-left: 0;
+        }
+    }
 }
 
 
@@ -51,7 +59,6 @@
     @include media($breakpoint-phone){
         display: flex;
         flex-direction: column;
-
 
         padding-right: 4rem;
     }
