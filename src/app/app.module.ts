@@ -61,6 +61,7 @@ import { GithubApiService } from './services/github-api.service';
 import { FirestoreService } from './services/firestore.service';
 import { ProjectDisplayService } from './services/project.display';
 import { CarouselDirective } from './directives/carousel.directive';
+import { ContactViewComponent } from './frames/contact-view/contact-view.component';
 
 @NgModule({
   declarations: [
@@ -75,7 +76,8 @@ import { CarouselDirective } from './directives/carousel.directive';
     WorkViewComponent,
     ProjectDetailsComponent,
     OverlayViewComponent,
-    CarouselDirective
+    CarouselDirective,
+    ContactViewComponent
   ],
   imports: [
     BrowserModule,
