@@ -4,6 +4,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 import { environment } from '../environments/environment';
 
 import { AngularFireModule } from 'angularfire2';
@@ -63,6 +64,7 @@ import { ProjectDisplayService } from './services/project.display';
 import { CarouselDirective } from './directives/carousel.directive';
 import { ContactViewComponent } from './frames/contact-view/contact-view.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -86,6 +88,7 @@ import { ContactViewComponent } from './frames/contact-view/contact-view.compone
     AngularFirestoreModule,
     AngularFireStorageModule,
     AngularFireAuthModule,
+    FormsModule,
     HttpModule,
     HttpClientModule,
     MatButtonModule,
