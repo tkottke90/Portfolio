@@ -3,4 +3,44 @@
 
 .contact {
     margin-top: 5rem;    
+
+    background-color: mat-color($portfolio-primary, 900);
+
+    display: grid;
+    
+    grid-template-columns: 1rem calc(50% - 1rem) 50%;
+    grid-template-rows: 1rem 4rem 1fr;
+
+    &__contact-me {
+        grid-area: 2 / 2 / 2 / 4 ;
+    }
+
+    &__form {
+        grid-area: 3 / 3;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+input.form-control {
+    padding-left: 0.25rem;
+}
+
+
+
+
+// Vaidation Styles
+
+
+
+.mat-input-element.ng-dirty {
+    &.ng-valid[required] {
+        border-left: 3px solid #42A948; /* green */
+    }
+
+    &.ng-invalid:not(form) {
+        border-left: 3px solid mat-color($portfolio-warn, 900);
+    }
 }

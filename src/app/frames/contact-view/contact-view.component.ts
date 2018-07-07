@@ -16,7 +16,7 @@ class ConactMessage {
 })
 export class ContactViewComponent implements OnInit {
 
-  model = new ConactMessage('test', 'test@example.com', '123-456-7890', 'This is my message');
+  model = new ConactMessage('', '', '', '');
   submitted = false;
 
   constructor(private fs: FirestoreService) {}
