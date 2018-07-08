@@ -2,56 +2,56 @@
   <h1 class="contact-me contact__contact-me">Contact Me</h1>
   <div class="img-cont contact__img-cont"></div>
   <div class="form contact__form">
-    <form #chatForm="ngForm">
-      <div class="form-group">
-        <label for="name">Name</label>
-        <mat-form-field>
+    <form #chatForm="ngForm" (ngSubmit)="onSubmit()">
+      <div class="custom-form-group" >
+        <label class="custom-form-label" for="name">Name</label>
+        <div class="custom-form-field">
           <input matInput type="text" class="form-control" #name="ngModel" id="name" [(ngModel)]="model.name" name="name" required>
-          <mat-icon matSuffix svgIcon="account"></mat-icon>
-          <mat-error *ngIf="name.hasError('required')" >
-            <strong>I need to know your name</strong>
-          </mat-error> 
-        </mat-form-field>
-        
+          <mat-icon svgIcon="account" class="suffix custom-form-field__suffix"></mat-icon>
+        </div>
+        <div *ngIf="name.touched && name.invalid" class="custom-form-error alert alert-danger">Name is required</div>
       </div>
 
-      <div (ngSubmit)="onSubmit()" class="form-group">
-        <label for="email">Email</label>
-        <mat-form-field>
-          <input matInput type="email" class="form-control" #email='ngModel' id="email" [(ngModel)]="model.email" name="email" email required>
-          <mat-icon matSuffix svgIcon="at"></mat-icon>
-          <mat-error *ngIf="email.hasError('email') && !email.hasError('required')" >
-            Please enter a valid email address
-          </mat-error> 
-          <mat-error *ngIf="email.hasError('required')" >
-            <strong>How will I contact you?</strong>
-          </mat-error> 
-        </mat-form-field>
+      <div class="custom-form-group" >
+        <label class="custom-form-label" for="email">Email</label>
+        <div class="custom-form-field">
+          <input matInput 
+                 inputmode="email"
+                 type="email" 
+                 class="form-control" 
+                 #emailInput="ngModel"
+                 #spy
+                 id="email" 
+                 [(ngModel)]="model.email" 
+                 name="email" 
+                 required
+                 pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$">
+          <mat-icon svgIcon="at" class="suffix custom-form-field__suffix"></mat-icon>
+        </div>
+        <div class="custom-form-error alert" *ngIf="emailInput.touched && emailInput.hasError('pattern')">Invalid Email</div> 
+        <div class="custom-form-error alert" *ngIf="emailInput.touched && emailInput.hasError('required')">How can I contact you?</div> 
       </div>
 
-      <div class="form-group">
-        <label for="phone">Phone</label>
-        <mat-form-field>
-          <span matPrefix>+1 &nbsp;</span>
-          <input matInput type="tel" class="form-control" id="phone" [(ngModel)]="model.phone" name="phone">
-          <mat-icon matSuffix svgIcon="cellphone-android"></mat-icon>
-          <mat-hint align="start">(123) 456-7890</mat-hint>
-        </mat-form-field>
+      <div class="custom-form-group" >
+        <label class="custom-form-label" for="phone">Phone</label>
+        <div class="custom-form-field">
+          <input matInput type="tel" class="form-control" #phone="ngModel" id="phone" [(ngModel)]="model.phone" name="phone">
+          <mat-icon svgIcon="cellphone-android" class="suffix custom-form-field__suffix"></mat-icon>
+        </div>
       </div>
 
-      <div class="form-group">
-        <label for="message">Message</label>
-        <mat-form-field>
-          <input matInput type="text" class="form-control" #message="ngModel" id="message" [(ngModel)]="model.message" name="message" required>
-          <mat-icon matSuffix svgIcon="lead-pencil"></mat-icon>
-          <mat-error *ngIf="message.hasError('required')" >
-            <strong>How can I help you today?</strong>
-          </mat-error>
-        </mat-form-field>
-        
+      <div class="custom-form-group" >
+        <label class="custom-form-label" for="message">Message</label>
+        <div class="custom-form-field">
+          <textarea matInput type="text" class="form-control" #formMessage="ngModel" id="message" [(ngModel)]="model.message" name="message" required></textarea>
+          <mat-icon svgIcon="lead-pencil" class="suffix custom-form-field__suffix"></mat-icon>
+        </div>
+        <div class="custom-form-error alert" *ngIf="formMessage.touched && formMessage.hasError('required')">What can I help you with?</div> 
       </div>
       
-      <button mat-button type="submit" class="submit-btn btn-success form__submit-btn" [disabled]="!chatForm.form.valid" >Lets Chat!</button>
+      <div class="custom-form-actions">
+        <button mat-button type="submit" class="submit-btn btn-success form__submit-btn" [disabled]="!chatForm.form.valid" >Lets Chat!</button>
+      </div>
     </form>
   </div>
 </div>

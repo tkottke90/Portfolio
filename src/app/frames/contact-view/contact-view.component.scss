@@ -52,47 +52,87 @@
     }
 }
 
-.form-group {
-    display: grid;
-    grid-template-rows: 1rem 1fr;
+form {
+    width: 75%;
+}
 
-    & label {
+.custom-form-group {
+    display: grid;
+    grid-template-rows: 1.5rem 1fr 1.5rem;
+    position: relative;
+
+    & .custom-form-label {
         grid-row: 1;
     }
 
-    & mat-form-field {
+    & .custom-form-field {
         grid-row: 2;
+        z-index: 10;
+        margin: 0.25rem 0;
+    }
+
+    & .custom-form-error {
+        grid-row: 3; position: absolute;
+        z-index: 1;
     }
 }
 
-.mat-form-field-flex {
-    background-color: white;
+.custom-form-label {
+    color: #fff;
 }
 
-input.form-control {
-    padding-left: 0.25rem;
+.custom-form-field {
+    background-color: #fff;
+    border-radius: 5px;
 
-    div div & {
-        background-color: #fff;
+    display: flex;
+    justify-content: space-between;
+
+    position: relative;
+
+    & textarea  {
+        height: 5rem;
     }
+
+    & input {
+        height: 1rem;
+        margin: 0.25rem 0;
+    }
+
+    & textarea, input {
+        width: 90%;    
+        border: none;
+    }
+    
+}
+
+.custom-form-error {
+    font-size: 0.75rem;
+}
+
+.alert {
+    color: red
 }
 
 mat-icon {
     color: rgba(0,0,0,0.75);
 }
 
-
+.custom-form-actions {
+    display: flex;
+    justify-content: flex-end;
+}
 
 // Vaidation Styles
 
 
 
-.mat-input-element.ng-dirty {
+.mat-input-element.ng-touched {
     &.ng-valid[required] {
         border-left: 3px solid #42A948; /* green */
     }
 
     &.ng-invalid:not(form) {
-        border-left: 3px solid mat-color($portfolio-warn, 900);
+        border-left: 3px solid red;
     }
 }
