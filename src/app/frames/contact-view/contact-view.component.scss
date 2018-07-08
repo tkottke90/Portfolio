@@ -2,7 +2,7 @@
 
 
 .contact {
-    min-height: 80vh;
+    min-height: 82vh;
     padding-top: 5rem;    
 
     background-color: mat-color($portfolio-primary, 900);
@@ -22,6 +22,22 @@
         display: flex;
         justify-content: center;
         align-items: center;
+    }
+
+    @include media(800px) {
+
+        padding-top: 1rem;
+
+        grid-template-columns: 1rem calc(100% - 2rem) 1rem;
+
+        &__contact-me {
+            grid-area: 2 / 2;
+        }
+
+        &__form {
+            grid-area: 3 / 2;
+        }
+
     }
 }
 
