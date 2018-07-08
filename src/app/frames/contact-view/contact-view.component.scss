@@ -123,6 +123,21 @@ mat-icon {
     justify-content: flex-end;
 }
 
+.submit-btn {
+    border: 2px solid #fff;
+    color: #fff;
+
+    transition: 500ms;
+
+    &:disabled {
+        border: 2px solid transparent;
+        color: darkgray;
+    }
+
+    
+
+}
+
 // Vaidation Styles
 
 
