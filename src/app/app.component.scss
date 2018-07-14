@@ -65,6 +65,14 @@
 
 }
 
+.menu {
+    &__work, 
+    &__contact,
+    &__about {
+        width: 100%;
+    }
+}
+
 .active {
     display: none;
 }
