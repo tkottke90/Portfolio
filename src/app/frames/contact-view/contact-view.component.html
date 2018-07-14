@@ -4,7 +4,7 @@
   <div class="form contact__form" >
     <form #chatForm="ngForm" (ngSubmit)="onSubmit()">
       <div class="custom-form-group" >
-        <label class="custom-form-label" for="name">Name</label>
+        <label class="custom-form-label lbl-required" for="name">Name</label>
         <div class="custom-form-field">
           <input matInput type="text" class="form-control" #name="ngModel" id="name" [(ngModel)]="model.name" name="name" required [disabled]="this.submitted">
           <mat-icon svgIcon="account" class="suffix custom-form-field__suffix"></mat-icon>
@@ -12,8 +12,8 @@
         <div *ngIf="name.touched && name.invalid" class="custom-form-error alert alert-danger">Name is required</div>
       </div>
 
-      <div class="custom-form-group" >
-        <label class="custom-form-label" for="email">Email</label>
+      <div class="custom-form-group">
+        <label class="custom-form-label lbl-required" for="email">Email</label>
         <div class="custom-form-field">
           <input matInput 
                  inputmode="email"
@@ -34,7 +34,7 @@
       </div>
 
       <div class="custom-form-group" >
-        <label class="custom-form-label" for="phone">Phone</label>
+        <label class="custom-form-label " for="phone">Phone</label>
         <div class="custom-form-field">
           <input matInput type="tel" class="form-control" #phone="ngModel" id="phone" [(ngModel)]="model.phone" name="phone" [disabled]="this.submitted">
           <mat-icon svgIcon="cellphone-android" class="suffix custom-form-field__suffix"></mat-icon>
@@ -42,7 +42,7 @@
       </div>
 
       <div class="custom-form-group" >
-        <label class="custom-form-label" for="message">Message</label>
+        <label class="custom-form-label lbl-required" for="message">Message</label>
         <div class="custom-form-field">
           <textarea matInput type="text" class="form-control" #formMessage="ngModel" id="message" [(ngModel)]="model.message" name="message" required [disabled]="this.submitted"></textarea>
           <mat-icon svgIcon="lead-pencil" class="suffix custom-form-field__suffix"></mat-icon>

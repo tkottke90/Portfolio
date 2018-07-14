@@ -80,7 +80,6 @@ form {
     & .custom-form-label {
         grid-row: 1;
     }
-
     & .custom-form-field {
         grid-row: 2;
         z-index: 10;
@@ -95,6 +94,17 @@ form {
 
 .custom-form-label {
     color: #fff;
+    position: relative;
+
+    &.lbl-required::after {
+        content: "*required";
+        position: absolute;
+        top: 0.5rem;
+        right: 0;
+        font-size: 0.75rem;
+
+        color: mat-color($portfolio-accent, 800);
+    }
 }
 
 .custom-form-field {
