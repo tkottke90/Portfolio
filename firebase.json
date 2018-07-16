@@ -5,6 +5,23 @@
       "firebase.json",
       "**/.*",
       "**/node_modules/**"
+    ],
+    "redirects" : [
+      {
+        "source" : "/about",
+        "destination" : "https://www.tdkottke.com",
+        "type" : 302
+      },
+      {
+        "source" : "/contact",
+        "destination" : "https://www.tdkottke.com",
+        "type" : 302
+      },
+      {
+        "source" : "/work",
+        "destination" : "https://www.tdkottke.com",
+        "type" : 302
+      }
     ]
   }
 }
