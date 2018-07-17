@@ -5,6 +5,10 @@
     display: flex;
     flex-direction: column;
 
+    &__welcome {
+        min-height: 400px;
+    }
+
     &__about {
         margin: 2rem auto 3rem auto;
 
