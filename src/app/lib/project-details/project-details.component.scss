@@ -9,10 +9,14 @@
         grid-row: 1;
 
         height: 3rem;
-        width: 60%;
+        width: 40%;
+
+        min-width: 350px;
 
         @include media($breakpoint-phone){ 
             grid-column: 1;
+
+            margin-bottom: 1.5rem;
         }
 
     }
