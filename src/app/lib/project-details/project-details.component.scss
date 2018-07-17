@@ -8,6 +8,9 @@
         grid-column: 1/3;
         grid-row: 1;
 
+        height: 3rem;
+        width: 60%;
+
         @include media($breakpoint-phone){ 
             grid-column: 1;
         }
@@ -48,8 +51,22 @@
 .name {
     color: mat-color($portfolio-primary, 900);
 
+    padding-left: 2rem;
 
-    padding: 1rem;
+    @extend %node-before;
+    @extend %node-after;
+
+    border-bottom: $line-outline;
+
+    &::before {
+        bottom: -0.75rem;
+        left: 0;
+    }
+
+    &::after {
+        bottom: -0.75rem;
+        right: 0;
+    }
 }
 
 // Quick Links Cards
