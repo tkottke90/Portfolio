@@ -39,7 +39,7 @@
         padding-top: 2rem;
 
         grid-template-columns: 1rem calc(100% - 2rem) 1rem;
-        grid-template-rows: 1rem 4rem calc(60vh + 100px);
+        grid-template-rows: 1rem 4rem calc(28rem + 100px);
 
         &__contact-me {
             grid-area: 2 / 2;
@@ -161,7 +161,7 @@ form {
         right: 0;
         font-size: 0.75rem;
 
-        color: mat-color($portfolio-accent, 800);
+        color: mat-color($portfolio-accent,300);
     }
 }
 
