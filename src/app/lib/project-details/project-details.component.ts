@@ -29,7 +29,7 @@ import { ProjectDisplayService } from '../../services/project.display';
     ])
   ]
 })
-export class ProjectDetailsComponent implements OnInit, OnChanges {
+export class ProjectDetailsComponent implements OnChanges {
 
   @Input() selectedProject: Project;
 
@@ -50,14 +50,12 @@ export class ProjectDetailsComponent implements OnInit, OnChanges {
     private pd: ProjectDisplayService
   ) { }
 
-  ngOnInit() {
+  ngOnChanges() {
+    this.iconKeys = Object.keys(this.selectedProject.Icons);
+    this.imgIndex = 0;
     this.ColorA = this.imgIndex;
     this.ColorB = this.imgIndex + 1;
     this.ColorC = this.selectedProject.Images ? this.selectedProject.Images.length - 1 : -1;
-  }
-
-  ngOnChanges() {
-    this.iconKeys = Object.keys(this.selectedProject.Icons);
   }
 
   showOverlay() {
