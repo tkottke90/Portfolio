@@ -28,20 +28,28 @@
         display: flex;
         justify-content: center;
         align-items: center;
+
+        @include media(960px) {
+            align-items: flex-end;
+        }
     }
 
     @include media(960px) {
 
-        padding-top: 1rem;
+        padding-top: 2rem;
 
         grid-template-columns: 1rem calc(100% - 2rem) 1rem;
+        grid-template-rows: 1rem 4rem calc(60vh + 100px);
 
         &__contact-me {
             grid-area: 2 / 2;
         }
 
         &__img-cont {
-            display: none;
+            grid-area: 3 / 2;
+            height: 100px;
+            width: 100px;
+            margin: 2rem auto;
         }
 
         &__form {
@@ -76,6 +84,12 @@
         border-color: #fff;
         background-color: mat-color($portfolio-primary, 900);
     }
+
+    @include media(960px) {
+        margin: 0 auto;
+        padding-left: 0;
+        text-align: center;
+    }
 }
 
 .img-cont {
@@ -100,10 +114,15 @@
 
     & img {
         transform: translate(-20%, -65%) scale(0.75);
+
+        @include media(960px) {
+            transform: translate(-45%, -53%) scale(0.15);
+        }
     }
 
     @include media(960px) {
-        display: none;
+        width: 100%;
+        padding-top: 100%;
     }
 }
 
