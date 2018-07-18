@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
 import { AngularFirestore } from 'angularfire2/firestore';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { WorkViewComponent } from '../frames/work-view/work-view.component';
+
 
 
 @Injectable()
@@ -13,7 +12,7 @@ export class FirestoreService {
     projects: BehaviorSubject<Project[] | null> = new BehaviorSubject<Project[] | null>(null);
     projectLinks = [];
 
-    constructor(public AFstore: AngularFirestore, private router: Router) { this.getData(); }
+    constructor(public AFstore: AngularFirestore) { this.getData(); }
 
     getData() {
         this.AFstore.collection('Projects').ref.get().then(async (snapshot) => {
@@ -27,19 +26,9 @@ export class FirestoreService {
 
                 updatedProjects.push(projData);
                 this.projects.next(updatedProjects);
-
-                const projRoute = `work/${doc.id.substring(0, 7)}`;
-
-                this.router.config.unshift(
-                    { path: projRoute, component: WorkViewComponent }
-                );
-
             });
 
             this.projects.next(updatedProjects);
-
-            console.log(this.router.config);
-
 
         });
     }
