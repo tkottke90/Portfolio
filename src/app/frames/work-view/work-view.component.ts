@@ -78,12 +78,11 @@ export class WorkViewComponent implements OnInit {
                 this.userUrl = event.url;
                 if (event.url === '/work') {
                     this.viewLeft();
-                } else if ( event.url.includes('/work/') ) {
-                    const projID = event.url.slice(6);
+                } else if ( event.url.includes('/projects/') ) {
+                    const projID = event.url.slice(10);
                     console.log(projID);
-
+                    this.viewRight();
                     await this.firestore.getData().then((data) => {
-                        this.viewRight();
                         this.pds.project.next(
                             data.find((element) => {
                                 return element.firebaseID.includes(projID);

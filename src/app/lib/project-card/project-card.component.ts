@@ -20,7 +20,7 @@ export class ProjectCardComponent implements OnInit {
 
   ngOnInit() {
     this.icons = Object.keys(this.project.Icons);
-    this.detailsUrl = `/work/${this.project.firebaseID.slice(0, 7)}`;
+    this.detailsUrl = `/projects/${this.project.firebaseID.slice(0, 7)}`;
   }
 
   onDetails() {
