@@ -1,0 +1,57 @@
+@import '../../styles/base.scss';
+
+.container {
+    height: 75vh;
+    margin-top: 5rem;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    &__header {
+        margin: 3rem 0;
+    }
+
+
+}
+
+.btn-cont {
+    margin: 1rem auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+    @include media(630px) {
+        height: 10rem;
+        justify-content: space-evenly;
+        flex-direction: column;
+    }
+}
+
+.nav-btn {
+    width: 200px;
+    position: relative;
+    overflow: hidden;
+
+    border: $line-outline;
+
+
+    &::before {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        left: 0;
+        content: 'Yeah!';
+        transform: translateY(-100%);
+        background-color: mat-color($portfolio-primary, 900);
+        color: #fff;
+
+        transition: 100ms ease-out;
+    }
+
+
+    &:hover::before {
+        transform: translateY(0);
+    }
+    
+}

@@ -64,6 +64,7 @@ import { FirestoreService } from './services/firestore.service';
 import { ProjectDisplayService } from './services/project.display';
 import { CarouselDirective } from './directives/carousel.directive';
 import { ContactViewComponent } from './frames/contact-view/contact-view.component';
+import { FourZeroFourViewComponent } from './frames/404-view/404-view.component';
 
 
 @NgModule({
@@ -80,7 +81,8 @@ import { ContactViewComponent } from './frames/contact-view/contact-view.compone
     ProjectDetailsComponent,
     OverlayViewComponent,
     CarouselDirective,
-    ContactViewComponent
+    ContactViewComponent,
+    FourZeroFourViewComponent
   ],
   imports: [
     BrowserModule,
