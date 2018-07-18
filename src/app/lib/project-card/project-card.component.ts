@@ -14,11 +14,13 @@ export class ProjectCardComponent implements OnInit {
 
 
   icons: string[] = [];
+  detailsUrl = '';
 
   constructor(private pdc: ProjectDisplayService) { }
 
   ngOnInit() {
     this.icons = Object.keys(this.project.Icons);
+    this.detailsUrl = `/work/${this.project.firebaseID.slice(0, 7)}`;
   }
 
   onDetails() {

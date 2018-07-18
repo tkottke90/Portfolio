@@ -13,7 +13,7 @@
     </div>
   </mat-card-content>
   <mat-card-actions>
-    <button mat-button class="details project__details" (click)="onDetails();">Details</button>
+    <button mat-button class="details project__details" routerLink="{{ this.detailsUrl }}" (click)="onDetails();">Details</button>
     <a *ngIf="project.URLs.source" mat-button  href="{{ project.URLs.source }}" target="_blank" class="source-link project__source-link">Source Code</a>
     <a *ngIf="project.URLs.project" mat-button href="{{ project.URLs.project }}" target="_blank" class="project-link project__project-link">Project</a>
   </mat-card-actions>

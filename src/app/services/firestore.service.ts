@@ -14,22 +14,25 @@ export class FirestoreService {
 
     constructor(public AFstore: AngularFirestore) { this.getData(); }
 
-    getData() {
-        this.AFstore.collection('Projects').ref.get().then(async (snapshot) => {
-            this.projects.next(null);
+    getData(): Promise<Project[]> {
+        return new Promise<Project[]>((resolve, reject) => {
+            this.AFstore.collection('Projects').ref.get().then(async (snapshot) => {
+                this.projects.next(null);
 
-            const updatedProjects: Project[] = [];
-            await snapshot.forEach( doc => {
+                const updatedProjects: Project[] = [];
+                await snapshot.forEach( doc => {
 
-                const projData = doc.data() as Project;
-                projData.firebaseID = doc.id;
+                    const projData = doc.data() as Project;
+                    projData.firebaseID = doc.id;
 
-                updatedProjects.push(projData);
+                    updatedProjects.push(projData);
+                    this.projects.next(updatedProjects);
+                });
+
                 this.projects.next(updatedProjects);
+                resolve(updatedProjects);
+                console.log(`Get Data Complete`);
             });
-
-            this.projects.next(updatedProjects);
-
         });
     }
 

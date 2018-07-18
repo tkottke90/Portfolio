@@ -1,8 +1,7 @@
 import { Component, OnInit, transition, trigger, state, style, animate } from '@angular/core';
 import { Router, NavigationStart, NavigationEnd } from '@angular/router';
-
 import { ProjectDisplayService } from '../../services/project.display';
-import { Project } from '../../services/firestore.service';
+import { Project, FirestoreService } from '../../services/firestore.service';
 
 @Component({
     selector: 'app-work-view',
@@ -45,11 +44,15 @@ export class WorkViewComponent implements OnInit {
 
     iconKeys = [];
 
-    constructor(private pds: ProjectDisplayService, private router: Router
+    userUrl = '';
+
+    constructor(
+        private pds: ProjectDisplayService,
+        private router: Router,
+        private firestore: FirestoreService
     ) {
         this.pds.project.subscribe(
             (project) => {
-                console.log('Fire project subscription');
                 this.selectedProject = project;
                 if (this.selectedProject !== null) {
                     this.viewRight();
@@ -70,10 +73,24 @@ export class WorkViewComponent implements OnInit {
             }
         );
 
-        this.router.events.subscribe(event => {
-            if (event instanceof NavigationEnd && event.url === '/work' ) {
-                this.viewLeft();
-                console.log(`Active Panel: ${ this.leftPanel === 'active' ? 'Left' : 'Right'}`);
+        this.router.events.subscribe(async (event) => {
+            if (event instanceof NavigationEnd ) {
+                this.userUrl = event.url;
+                if (event.url === '/work') {
+                    this.viewLeft();
+                } else if ( event.url.includes('/work/') ) {
+                    const projID = event.url.slice(6);
+                    console.log(projID);
+
+                    await this.firestore.getData().then((data) => {
+                        this.viewRight();
+                        this.pds.project.next(
+                            data.find((element) => {
+                                return element.firebaseID.includes(projID);
+                            })
+                        );
+                    });
+                }
             }
         });
     }
