@@ -113,10 +113,10 @@
     position: relative;
 
     & img {
-        transform: translate(-20%, -65%) scale(0.75);
+        transform: translate(-33%, -60%) scale(0.4);
 
         @include media(960px) {
-            transform: translate(-45%, -53%) scale(0.15);
+            transform: translate(-47%, -51.5%) scale(0.1);
         }
     }
 
