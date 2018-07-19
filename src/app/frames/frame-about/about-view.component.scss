@@ -24,7 +24,7 @@
 }
 
 .welcome {
-    @include aspect-ratio(2.414, 1); // aka silver ratio
+    @include aspect-ratio(16, 9); // aka silver ratio
 
     &__wel-img {
         width: 100%;
@@ -33,22 +33,34 @@
     }
 
     &__text-overlay {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
+        display: grid;
+        grid-template-rows: 20vw 5rem 22% 20%;
+
+        @include media($breakpoint-phone) {
+            grid-template-rows: 33vw 5rem 22% 20%;
+        }
     }
 }
 
 .text-overlay {
     background-color: rgba(0,0,0,0.5);
+
+    &__name { grid-row: 2; }
+    &__blerb { 
+        grid-row: 4; 
+        width: 85%;
+        margin: 0 auto;
+    } 
 }
 
 .name {
     color: #fff;
 
-    @include media($breakpoint-phone){
-        font-size: 1rem;
+    text-align: center;
+    font-size: 7vw;
+
+    @include media($breakpoint-phone) {
+        font-size: 3rem;
     }
 }
 
@@ -56,9 +68,11 @@
     text-align: center;
     color: #fff;
 
-    width: 75%;
+    font-size: 2.25vw;
+    line-height: 2.75vw;
 
-    @include media($breakpoint-phone){
+    @include media($breakpoint-phone) {
+        line-height: normal;
         font-size: 1rem;
     }
 }
