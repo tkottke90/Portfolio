@@ -20,9 +20,8 @@ export class TreemotifComponent implements OnInit {
 
   constructor() {
     this.season = Seasons.Winter;
-    this.festiveLights();
-    // this.getDates();
-    // this.setSeason();
+    this.getDates();
+    this.setSeason();
   }
 
   ngOnInit() {
@@ -43,6 +42,10 @@ export class TreemotifComponent implements OnInit {
         this.season = i;
         break;
       }
+    }
+
+    if (this.season === 3) {
+      this.festiveLights();
     }
   }
 
