@@ -19,10 +19,10 @@ export class TreemotifComponent implements OnInit {
   season: Seasons;
 
   constructor() {
-    this.season = Seasons.Spring;
-    this.getDates();
-    console.log(this.sdates);
-    this.setSeason();
+    this.season = Seasons.Winter;
+    this.festiveLights();
+    // this.getDates();
+    // this.setSeason();
   }
 
   ngOnInit() {
@@ -37,11 +37,8 @@ export class TreemotifComponent implements OnInit {
   }
 
   setSeason() {
-
     const now = new Date();
     for (let i = 3; i > 0; i--) {
-      console.log(now.getTime());
-      console.log(this.sdates[i].getTime());
       if (now.getTime() > this.sdates[i].getTime()) {
         this.season = i;
         break;
@@ -49,4 +46,20 @@ export class TreemotifComponent implements OnInit {
     }
   }
 
+
+  festiveLights() {
+    setInterval(() => {
+      const node = document.querySelectorAll('circle');
+      const rndNode = Math.round(Math.random() * node.length) % node.length;
+      node[rndNode].classList.toggle('blink-green');
+      setTimeout(() => { node[rndNode].classList.toggle('blink-green'); }, 1500);
+    }, 500);
+
+    setInterval(() => {
+        const node = document.querySelectorAll('circle');
+        const rndNode = Math.round(Math.random() * node.length) % node.length;
+        node[rndNode].classList.toggle('blink-red');
+        setTimeout(() => { node[rndNode].classList.toggle('blink-red'); }, 1450);
+    }, 525);
+  }
 }
