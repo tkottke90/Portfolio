@@ -1,3 +1,5 @@
+@import '../../styles/base.scss';
+
 * {
     box-sizing: border-box;
     margin: 0;
@@ -24,7 +26,20 @@
    
     }
   }
-  
+
+  figure {
+    @include media($breakpoint-phone) {
+      display: flex;
+      justify-content: center;
+    }
+  }
+
+  svg {
+    @include media($breakpoint-phone) {
+      height: 200px;
+    }
+  }
+
   .toggle {
     height: 3rem;
     margin-top: 1rem;
@@ -32,7 +47,7 @@
     border: 3px solid black;
   }
   
-  tree {
+  .tree {
     background-color: white;
     &.winter {
       background-color: gray;

@@ -426,11 +426,8 @@
         width: 100%;
 
         @include media($breakpoint-phone) {
-            grid-column: unset;
+            grid-column: 1/4;
             opacity: 0.2;
-            height: 43vw;
-            margin-left: -173%;
-
         }
     }
 
