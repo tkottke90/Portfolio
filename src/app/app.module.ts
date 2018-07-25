@@ -65,6 +65,7 @@ import { ProjectDisplayService } from './services/project.display';
 import { CarouselDirective } from './directives/carousel.directive';
 import { ContactViewComponent } from './frames/contact-view/contact-view.component';
 import { FourZeroFourViewComponent } from './frames/404-view/404-view.component';
+import { TreemotifComponent } from './lib/treemotif/treemotif.component';
 
 
 @NgModule({
@@ -82,7 +83,8 @@ import { FourZeroFourViewComponent } from './frames/404-view/404-view.component'
     OverlayViewComponent,
     CarouselDirective,
     ContactViewComponent,
-    FourZeroFourViewComponent
+    FourZeroFourViewComponent,
+    TreemotifComponent
   ],
   imports: [
     BrowserModule,
