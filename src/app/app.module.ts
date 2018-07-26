@@ -51,7 +51,7 @@ import { GithubFeedComponent } from './lib/github-feed/github-feed.component';
 import { ProjectContainerComponent } from './lib/project-container/project-container.component';
 import { ProjectCardComponent } from './lib/project-card/project-card.component';
 import { ProjectDetailsComponent } from './lib/project-details/project-details.component';
-
+import { TreemotifComponent } from './lib/treemotif/treemotif.component';
 
 // Views
 import { WorkViewComponent } from './frames/work-view/work-view.component';
@@ -65,7 +65,7 @@ import { ProjectDisplayService } from './services/project.display';
 import { CarouselDirective } from './directives/carousel.directive';
 import { ContactViewComponent } from './frames/contact-view/contact-view.component';
 import { FourZeroFourViewComponent } from './frames/404-view/404-view.component';
-import { TreemotifComponent } from './lib/treemotif/treemotif.component';
+
 
 
 @NgModule({
